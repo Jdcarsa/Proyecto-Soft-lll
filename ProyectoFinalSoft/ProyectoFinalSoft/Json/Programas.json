@@ -2,19 +2,19 @@
   "programas": [
     {
       "id": 1,
-      "nombre": "Ingeniería de Sistemas",
+      "nombre": "Ingenieria de Sistemas",
       "estado": "activo",
       "competencias": [
         {
           "id": 1,
-          "nombre": "Matemáticas",
-          "tipo": "Genérica",
+          "nombre": "Matemï¿½ticas",
+          "tipo": "Generica",
           "estado": "activo"
         },
         {
           "id": 2,
           "nombre": "Base de Datos 1",
-          "tipo": "Específica",
+          "tipo": "Especifica",
           "estado": "activo"
         }
       ]
@@ -26,13 +26,13 @@
       "competencias": [
         {
           "id": 3,
-          "nombre": "Histórica",
-          "tipo": "Específica",
+          "nombre": "Historica",
+          "tipo": "Especefica",
           "estado": "activo"
         },
         {
           "id": 4,
-          "nombre": "Lectura Crítica",
+          "nombre": "Lectura Critica",
           "tipo": "Generica",
           "estado": "activo"
         }
