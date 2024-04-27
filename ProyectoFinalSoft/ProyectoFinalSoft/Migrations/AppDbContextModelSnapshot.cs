@@ -18,9 +18,9 @@ namespace ProyectoFinalSoft.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.4")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("ProyectoFinalSoft.Models.Ambiente", b =>
                 {
@@ -28,7 +28,7 @@ namespace ProyectoFinalSoft.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ambienteId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ambienteId"));
 
                     b.Property<decimal>("ambienteCapacidad")
                         .HasColumnType("numeric(3,0)")
@@ -61,7 +61,7 @@ namespace ProyectoFinalSoft.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("docenteId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("docenteId"));
 
                     b.Property<string>("docenteApellido")
                         .HasColumnType("varchar(30)")
@@ -106,7 +106,7 @@ namespace ProyectoFinalSoft.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("horarioId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("horarioId"));
 
                     b.Property<int>("CompetenciaId")
                         .HasColumnType("int");
@@ -160,7 +160,7 @@ namespace ProyectoFinalSoft.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("periodoId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("periodoId"));
 
                     b.Property<decimal>("periodoEstado")
                         .HasColumnType("numeric(1,0)")
@@ -187,7 +187,7 @@ namespace ProyectoFinalSoft.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("usuarioId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("usuarioId"));
 
                     b.Property<int?>("docenteId")
                         .HasColumnType("int");
@@ -207,8 +207,7 @@ namespace ProyectoFinalSoft.Migrations
                     b.HasKey("usuarioId");
 
                     b.HasIndex("docenteId")
-                        .IsUnique()
-                        .HasFilter("[docenteId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Usuarios");
                 });
