@@ -13,7 +13,7 @@ namespace ProyectoFinalSoft.Models
 		public string? ambienteUbicacion { get; set;}
 		[Column("Ambiente_tipo", TypeName = "varchar(30)")]
 		public string? ambienteTipo {  get; set;}
-		[Column("Ambiente_capacidad", TypeName = "numeric(3,0")]
+		[Column("Ambiente_capacidad", TypeName = "numeric(3,0)")]
 		public int ambienteCapacidad { get; set;}
 		[Column("Ambiente_estado", TypeName = "numeric(1,0)")]
 		public int ambienteEstado { get; set;}

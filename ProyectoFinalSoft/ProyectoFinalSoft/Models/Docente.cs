@@ -24,7 +24,6 @@ namespace ProyectoFinalSoft.Models
 		[Column("Docente_estado", TypeName = "numeric(1,0)")]
 		public int docenteEstado { get; set; }
 
-		public int? usuarioId { get; set; }
 		public Usuario? usuario { get; set; }
 
 		//relacion 0 a muchos , un docente puede tener muchos horarios

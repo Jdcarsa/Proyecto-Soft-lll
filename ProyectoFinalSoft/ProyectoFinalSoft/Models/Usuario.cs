@@ -13,7 +13,6 @@ namespace ProyectoFinalSoft.Models
 		public string? usuarioPassword { get; set; }
 		[Column("usuario_estado", TypeName = "numeric(1,0)")]
 		public int usuarioEstado {  get; set; }
-		
 		public int? docenteId { get; set; }
 		public Docente? docente { get; set; }
 	}
