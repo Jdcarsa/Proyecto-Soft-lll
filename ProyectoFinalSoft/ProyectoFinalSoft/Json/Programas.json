@@ -1,0 +1,42 @@
+{
+  "programas": [
+    {
+      "id": 1,
+      "nombre": "Ingeniería de Sistemas",
+      "estado": "activo",
+      "competencias": [
+        {
+          "id": 1,
+          "nombre": "Matemáticas",
+          "tipo": "Genérica",
+          "estado": "activo"
+        },
+        {
+          "id": 2,
+          "nombre": "Base de Datos 1",
+          "tipo": "Específica",
+          "estado": "activo"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Ciencias Sociales",
+      "estado": "activo",
+      "competencias": [
+        {
+          "id": 3,
+          "nombre": "Histórica",
+          "tipo": "Específica",
+          "estado": "activo"
+        },
+        {
+          "id": 4,
+          "nombre": "Lectura Crítica",
+          "tipo": "Generica",
+          "estado": "activo"
+        }
+      ]
+    }
+  ]
+}
