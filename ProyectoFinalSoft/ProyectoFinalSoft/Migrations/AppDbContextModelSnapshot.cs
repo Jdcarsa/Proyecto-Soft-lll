@@ -22,6 +22,21 @@ namespace ProyectoFinalSoft.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
+            modelBuilder.Entity("CompetenciaPrograma", b =>
+                {
+                    b.Property<int>("CompetenciascompetenciaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProgramasprogramaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CompetenciascompetenciaId", "ProgramasprogramaId");
+
+                    b.HasIndex("ProgramasprogramaId");
+
+                    b.ToTable("CompetenciaPrograma");
+                });
+
             modelBuilder.Entity("ProyectoFinalSoft.Models.Ambiente", b =>
                 {
                     b.Property<int>("ambienteId")
@@ -53,6 +68,52 @@ namespace ProyectoFinalSoft.Migrations
                     b.HasKey("ambienteId");
 
                     b.ToTable("Ambientes");
+                });
+
+            modelBuilder.Entity("ProyectoFinalSoft.Models.Competencia", b =>
+                {
+                    b.Property<int>("competenciaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("competenciaId"));
+
+                    b.Property<decimal>("competenciaEstado")
+                        .HasColumnType("numeric(1,0)")
+                        .HasColumnName("Competencia_Estado");
+
+                    b.Property<string>("competenciaNombre")
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("Competencia_Nombre");
+
+                    b.Property<string>("competenciaTipo")
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("Competencia_Tipo");
+
+                    b.HasKey("competenciaId");
+
+                    b.ToTable("Competencias");
+                });
+
+            modelBuilder.Entity("ProyectoFinalSoft.Models.Coordinador", b =>
+                {
+                    b.Property<int>("coordinadorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("coordinadorId"));
+
+                    b.Property<decimal>("coordinadorEstado")
+                        .HasColumnType("numeric(1,0)")
+                        .HasColumnName("Coordinador_Estado");
+
+                    b.Property<string>("coordinadorNombre")
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("Coordinador_Nombre");
+
+                    b.HasKey("coordinadorId");
+
+                    b.ToTable("Coordinador");
                 });
 
             modelBuilder.Entity("ProyectoFinalSoft.Models.Docente", b =>
@@ -145,6 +206,10 @@ namespace ProyectoFinalSoft.Migrations
 
                     b.HasKey("horarioId");
 
+                    b.HasIndex("CompetenciaId");
+
+                    b.HasIndex("ProgramaId");
+
                     b.HasIndex("ambienteId");
 
                     b.HasIndex("docenteId");
@@ -181,6 +246,27 @@ namespace ProyectoFinalSoft.Migrations
                     b.ToTable("PeriodosAcademicos");
                 });
 
+            modelBuilder.Entity("ProyectoFinalSoft.Models.Programa", b =>
+                {
+                    b.Property<int>("programaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("programaId"));
+
+                    b.Property<decimal>("programaEstado")
+                        .HasColumnType("numeric(1,0)")
+                        .HasColumnName("Programa_Estado");
+
+                    b.Property<string>("programaNombre")
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("Programa_Nombre");
+
+                    b.HasKey("programaId");
+
+                    b.ToTable("Programas");
+                });
+
             modelBuilder.Entity("ProyectoFinalSoft.Models.Usuario", b =>
                 {
                     b.Property<int>("usuarioId")
@@ -188,6 +274,9 @@ namespace ProyectoFinalSoft.Migrations
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("usuarioId"));
+
+                    b.Property<int?>("coordinadorId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("docenteId")
                         .HasColumnType("int");
@@ -206,14 +295,44 @@ namespace ProyectoFinalSoft.Migrations
 
                     b.HasKey("usuarioId");
 
+                    b.HasIndex("coordinadorId")
+                        .IsUnique();
+
                     b.HasIndex("docenteId")
                         .IsUnique();
 
                     b.ToTable("Usuarios");
                 });
 
+            modelBuilder.Entity("CompetenciaPrograma", b =>
+                {
+                    b.HasOne("ProyectoFinalSoft.Models.Competencia", null)
+                        .WithMany()
+                        .HasForeignKey("CompetenciascompetenciaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProyectoFinalSoft.Models.Programa", null)
+                        .WithMany()
+                        .HasForeignKey("ProgramasprogramaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ProyectoFinalSoft.Models.Horario", b =>
                 {
+                    b.HasOne("ProyectoFinalSoft.Models.Competencia", "competencia")
+                        .WithMany("Horarios")
+                        .HasForeignKey("CompetenciaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProyectoFinalSoft.Models.Programa", "programa")
+                        .WithMany("Horarios")
+                        .HasForeignKey("ProgramaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ProyectoFinalSoft.Models.Ambiente", "ambiente")
                         .WithMany("Horarios")
                         .HasForeignKey("ambienteId");
@@ -228,16 +347,26 @@ namespace ProyectoFinalSoft.Migrations
 
                     b.Navigation("ambiente");
 
+                    b.Navigation("competencia");
+
                     b.Navigation("docente");
 
                     b.Navigation("periodoAcademico");
+
+                    b.Navigation("programa");
                 });
 
             modelBuilder.Entity("ProyectoFinalSoft.Models.Usuario", b =>
                 {
+                    b.HasOne("ProyectoFinalSoft.Models.Coordinador", "coordinador")
+                        .WithOne("usuario")
+                        .HasForeignKey("ProyectoFinalSoft.Models.Usuario", "coordinadorId");
+
                     b.HasOne("ProyectoFinalSoft.Models.Docente", "docente")
                         .WithOne("usuario")
                         .HasForeignKey("ProyectoFinalSoft.Models.Usuario", "docenteId");
+
+                    b.Navigation("coordinador");
 
                     b.Navigation("docente");
                 });
@@ -245,6 +374,16 @@ namespace ProyectoFinalSoft.Migrations
             modelBuilder.Entity("ProyectoFinalSoft.Models.Ambiente", b =>
                 {
                     b.Navigation("Horarios");
+                });
+
+            modelBuilder.Entity("ProyectoFinalSoft.Models.Competencia", b =>
+                {
+                    b.Navigation("Horarios");
+                });
+
+            modelBuilder.Entity("ProyectoFinalSoft.Models.Coordinador", b =>
+                {
+                    b.Navigation("usuario");
                 });
 
             modelBuilder.Entity("ProyectoFinalSoft.Models.Docente", b =>
@@ -255,6 +394,11 @@ namespace ProyectoFinalSoft.Migrations
                 });
 
             modelBuilder.Entity("ProyectoFinalSoft.Models.PeriodoAcademico", b =>
+                {
+                    b.Navigation("Horarios");
+                });
+
+            modelBuilder.Entity("ProyectoFinalSoft.Models.Programa", b =>
                 {
                     b.Navigation("Horarios");
                 });

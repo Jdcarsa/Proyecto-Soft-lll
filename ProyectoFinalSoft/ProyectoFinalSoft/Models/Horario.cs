@@ -17,9 +17,6 @@ namespace ProyectoFinalSoft.Models
 		public int horarioDuracion { get; set; }
 		[Column("Horario_estado", TypeName = "numeric(1,0)")]
 		public int horarioEstado { get; set; }
-		//relaciones simuladas
-		public int ProgramaId { get; set; }
-		public int CompetenciaId { get; set; }
 		//relaciones existentes
 		public int? ambienteId { get; set; }
 		public Ambiente? ambiente { get; set; }
@@ -27,5 +24,11 @@ namespace ProyectoFinalSoft.Models
 		public Docente? docente { get; set; }
 		public int? periodoAcademicoId {  get; set; }
 		public PeriodoAcademico? periodoAcademico { get; set; }
-	}
+
+        //relaciones simuladas
+        public int ProgramaId { get; set; }
+        public Programa? programa { get; set; }
+        public int CompetenciaId { get; set; }
+		public Competencia? competencia { get; set; }
+    }
 }

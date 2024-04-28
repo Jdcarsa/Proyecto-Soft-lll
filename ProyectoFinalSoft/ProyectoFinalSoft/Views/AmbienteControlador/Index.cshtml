@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProyectoFinalSoft.Models.Ambiente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ambienteNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ambienteUbicacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ambienteTipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ambienteCapacidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ambienteEstado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ambienteNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ambienteUbicacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ambienteTipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ambienteCapacidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ambienteEstado)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ambienteId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ambienteId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ambienteId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

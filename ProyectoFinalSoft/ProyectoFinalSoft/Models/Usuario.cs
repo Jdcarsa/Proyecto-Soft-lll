@@ -15,5 +15,8 @@ namespace ProyectoFinalSoft.Models
 		public int usuarioEstado {  get; set; }
 		public int? docenteId { get; set; }
 		public Docente? docente { get; set; }
-	}
+
+        public int? coordinadorId { get; set; }
+        public Coordinador? coordinador { get; set; }
+    }
 }

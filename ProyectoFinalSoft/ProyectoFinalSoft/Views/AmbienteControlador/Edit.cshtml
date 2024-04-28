@@ -1,0 +1,54 @@
+﻿@model ProyectoFinalSoft.Models.Ambiente
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Ambiente</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ambienteId" />
+            <div class="form-group">
+                <label asp-for="ambienteNombre" class="control-label"></label>
+                <input asp-for="ambienteNombre" class="form-control" />
+                <span asp-validation-for="ambienteNombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ambienteUbicacion" class="control-label"></label>
+                <input asp-for="ambienteUbicacion" class="form-control" />
+                <span asp-validation-for="ambienteUbicacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ambienteTipo" class="control-label"></label>
+                <input asp-for="ambienteTipo" class="form-control" />
+                <span asp-validation-for="ambienteTipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ambienteCapacidad" class="control-label"></label>
+                <input asp-for="ambienteCapacidad" class="form-control" />
+                <span asp-validation-for="ambienteCapacidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ambienteEstado" class="control-label"></label>
+                <input asp-for="ambienteEstado" class="form-control" />
+                <span asp-validation-for="ambienteEstado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

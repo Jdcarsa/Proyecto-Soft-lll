@@ -1,0 +1,78 @@
+﻿@model ProyectoFinalSoft.Models.Horario
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Horario</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.horarioDia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.horarioDia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.horarioHoraInicio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.horarioHoraInicio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.horarioHoraFin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.horarioHoraFin)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.horarioDuracion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.horarioDuracion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.horarioEstado)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.horarioEstado)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ambiente)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ambiente.ambienteId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.docente)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.docente.docenteId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.periodoAcademico)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.periodoAcademico.periodoId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.programa)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.programa.programaId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.competencia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.competencia.competenciaId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.horarioId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

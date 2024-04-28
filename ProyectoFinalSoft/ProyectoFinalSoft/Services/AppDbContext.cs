@@ -13,5 +13,7 @@ namespace ProyectoFinalSoft.Services
 		public DbSet<Horario> Horarios { get; set; }
 		public DbSet<PeriodoAcademico> PeriodosAcademicos { get; set; }
 		public DbSet<Usuario> Usuarios { get; set; }
+		public DbSet<Programa> Programas { get; set; }
+		public DbSet<Competencia> Competencias { get; set; }
 	}
 }
