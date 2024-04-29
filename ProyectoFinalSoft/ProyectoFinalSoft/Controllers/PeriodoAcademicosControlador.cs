@@ -10,22 +10,22 @@ using ProyectoFinalSoft.Services;
 
 namespace ProyectoFinalSoft.Controllers
 {
-    public class AmbienteControlador : Controller
+    public class PeriodoAcademicosControlador : Controller
     {
         private readonly AppDbContext _context;
 
-        public AmbienteControlador(AppDbContext context)
+        public PeriodoAcademicosControlador(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: AmbienteControlador
+        // GET: PeriodoAcademicosControlador
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Ambientes.ToListAsync());
+            return View(await _context.PeriodosAcademicos.ToListAsync());
         }
 
-        // GET: AmbienteControlador/Details/5
+        // GET: PeriodoAcademicosControlador/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace ProyectoFinalSoft.Controllers
                 return NotFound();
             }
 
-            var ambiente = await _context.Ambientes
-                .FirstOrDefaultAsync(m => m.ambienteId == id);
-            if (ambiente == null)
+            var periodoAcademico = await _context.PeriodosAcademicos
+                .FirstOrDefaultAsync(m => m.periodoId == id);
+            if (periodoAcademico == null)
             {
                 return NotFound();
             }
 
-            return View(ambiente);
+            return View(periodoAcademico);
         }
 
-        // GET: AmbienteControlador/Create
+        // GET: PeriodoAcademicosControlador/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: AmbienteControlador/Create
+        // POST: PeriodoAcademicosControlador/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ambienteId,ambienteNombre,ambienteUbicacion,ambienteTipo,ambienteCapacidad,ambienteEstado")] Ambiente ambiente)
+        public async Task<IActionResult> Create([Bind("periodoId,periodoFechaInicio,periodoFechaFin,periodoNombre,periodoEstado")] PeriodoAcademico periodoAcademico)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ambiente);
+                _context.Add(periodoAcademico);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ambiente);
+            return View(periodoAcademico);
         }
 
-        // GET: AmbienteControlador/Edit/5
+        // GET: PeriodoAcademicosControlador/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace ProyectoFinalSoft.Controllers
                 return NotFound();
             }
 
-            var ambiente = await _context.Ambientes.FindAsync(id);
-            if (ambiente == null)
+            var periodoAcademico = await _context.PeriodosAcademicos.FindAsync(id);
+            if (periodoAcademico == null)
             {
                 return NotFound();
             }
-            return View(ambiente);
+            return View(periodoAcademico);
         }
 
-        // POST: AmbienteControlador/Edit/5
+        // POST: PeriodoAcademicosControlador/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ambienteId,ambienteNombre,ambienteUbicacion,ambienteTipo,ambienteCapacidad,ambienteEstado")] Ambiente ambiente)
+        public async Task<IActionResult> Edit(int id, [Bind("periodoId,periodoFechaInicio,periodoFechaFin,periodoNombre,periodoEstado")] PeriodoAcademico periodoAcademico)
         {
-            if (id != ambiente.ambienteId)
+            if (id != periodoAcademico.periodoId)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace ProyectoFinalSoft.Controllers
             {
                 try
                 {
-                    _context.Update(ambiente);
+                    _context.Update(periodoAcademico);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AmbienteExists(ambiente.ambienteId))
+                    if (!PeriodoAcademicoExists(periodoAcademico.periodoId))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace ProyectoFinalSoft.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(ambiente);
+            return View(periodoAcademico);
         }
 
-        // GET: AmbienteControlador/Delete/5
+        // GET: PeriodoAcademicosControlador/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace ProyectoFinalSoft.Controllers
                 return NotFound();
             }
 
-            var ambiente = await _context.Ambientes
-                .FirstOrDefaultAsync(m => m.ambienteId == id);
-            if (ambiente == null)
+            var periodoAcademico = await _context.PeriodosAcademicos
+                .FirstOrDefaultAsync(m => m.periodoId == id);
+            if (periodoAcademico == null)
             {
                 return NotFound();
             }
 
-            return View(ambiente);
+            return View(periodoAcademico);
         }
 
-        // POST: AmbienteControlador/Delete/5
+        // POST: PeriodoAcademicosControlador/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ambiente = await _context.Ambientes.FindAsync(id);
-            if (ambiente != null)
+            var periodoAcademico = await _context.PeriodosAcademicos.FindAsync(id);
+            if (periodoAcademico != null)
             {
-                _context.Ambientes.Remove(ambiente);
+                _context.PeriodosAcademicos.Remove(periodoAcademico);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AmbienteExists(int id)
+        private bool PeriodoAcademicoExists(int id)
         {
-            return _context.Ambientes.Any(e => e.ambienteId == id);
+            return _context.PeriodosAcademicos.Any(e => e.periodoId == id);
         }
     }
 }

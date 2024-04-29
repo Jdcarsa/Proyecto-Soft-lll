@@ -1,68 +1,79 @@
 ﻿@model ProyectoFinalSoft.Models.Docente
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear";
 }
 
-<h1>Create</h1>
-
-<h4>Docente</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="docenteNombre" class="control-label"></label>
-                <input asp-for="docenteNombre" class="form-control" />
-                <span asp-validation-for="docenteNombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="docenteApellido" class="control-label"></label>
-                <input asp-for="docenteApellido" class="form-control" />
-                <span asp-validation-for="docenteApellido" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="docenteTipoId" class="control-label"></label>
-                <input asp-for="docenteTipoId" class="form-control" />
-                <span asp-validation-for="docenteTipoId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="docenteNumId" class="control-label"></label>
-                <input asp-for="docenteNumId" class="form-control" />
-                <span asp-validation-for="docenteNumId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="docenteTipo" class="control-label"></label>
-                <input asp-for="docenteTipo" class="form-control" />
-                <span asp-validation-for="docenteTipo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="docenteTipoContrato" class="control-label"></label>
-                <input asp-for="docenteTipoContrato" class="form-control" />
-                <span asp-validation-for="docenteTipoContrato" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="docenteArea" class="control-label"></label>
-                <input asp-for="docenteArea" class="form-control" />
-                <span asp-validation-for="docenteArea" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="docenteEstado" class="control-label"></label>
-                <input asp-for="docenteEstado" class="form-control" />
-                <span asp-validation-for="docenteEstado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container mt-5">
+    <h1 class="text-center mb-6">Crear Docente</h1>
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <form class="row mb-3" asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mb-3 form-group">
+                    <label asp-for="docenteNombre" class="control-label"></label>
+                    <div class="col-md-10">
+                    <input asp-for="docenteNombre" class="form-control"/>
+                    </div>
+                    <span asp-validation-for="docenteNombre" class="text-danger"></span>
+                </div>
+                <div class="mb-3 form-group">
+                    <label asp-for="docenteApellido" class="control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="docenteApellido" class="form-control"/>
+                    </div>
+                    <span asp-validation-for="docenteApellido" class="text-danger"></span>
+                </div>
+                <div class="mb-3 form-group">
+                    <label asp-for="docenteTipoId" class="control-label"></label>
+                    <div class="col-md-10">
+                    <input asp-for="docenteTipoId" class="form-control" />
+                    </div>
+                    <span asp-validation-for="docenteTipoId" class="text-danger"></span>
+                </div>
+                <div class="mb-3 form-group">
+                    <label asp-for="docenteNumId" class="control-label"></label>
+                    <div class="col-md-10">
+                    <input asp-for="docenteNumId" class="form-control" />
+                    </div>
+                    <span asp-validation-for="docenteNumId" class="text-danger"></span>
+                </div>
+                <div class="mb-3 form-group">
+                    <label asp-for="docenteTipo" class="control-label"></label>
+                    <div class="col-md-10">
+                    <input asp-for="docenteTipo" class="form-control" />
+                    </div>
+                    <span asp-validation-for="docenteTipo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="docenteTipoContrato" class="control-label"></label>
+                    <div class="col-md-10">
+                    <input asp-for="docenteTipoContrato" class="form-control" />
+                    </div>
+                    <span asp-validation-for="docenteTipoContrato" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="docenteArea" class="control-label"></label>
+                    <div class="col-md-10">
+                    <input asp-for="docenteArea" class="form-control" />
+                    </div>
+                    <span asp-validation-for="docenteArea" class="text-danger"></span>
+                </div>
+                <!--
+                <div class="form-group">
+                    <label asp-for="docenteEstado" class="control-label"></label>
+                    <input asp-for="docenteEstado" class="form-control" />
+                    <span asp-validation-for="docenteEstado" class="text-danger"></span>
+                </div>-->
+                <div class="form-group">
+                    <br>
+                    <a class="col-md-4 btn btn-danger me-5" asp-action="Index">Cancelar</a>
+                    <button type="submit" value="Create" class="btn btn-primary col-md-4">Guardar</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

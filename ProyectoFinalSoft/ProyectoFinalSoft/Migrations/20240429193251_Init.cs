@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProyectoFinalSoft.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,11 +21,13 @@ namespace ProyectoFinalSoft.Migrations
                 {
                     ambienteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Ambiente_Nombre = table.Column<string>(type: "varchar(30)", nullable: true)
+                    Ambiente_Codigo = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Ambiente_ubicacion = table.Column<string>(type: "varchar(100)", nullable: true)
+                    Ambiente_Nombre = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Ambiente_tipo = table.Column<string>(type: "varchar(30)", nullable: true)
+                    Ambiente_ubicacion = table.Column<string>(type: "varchar(100)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Ambiente_tipo = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Ambiente_capacidad = table.Column<decimal>(type: "numeric(3,0)", nullable: false),
                     Ambiente_estado = table.Column<decimal>(type: "numeric(1,0)", nullable: false)
@@ -76,19 +78,19 @@ namespace ProyectoFinalSoft.Migrations
                 {
                     docenteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Docente_Nombre = table.Column<string>(type: "varchar(30)", nullable: true)
+                    Docente_Nombre = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Docente_Apellido = table.Column<string>(type: "varchar(30)", nullable: true)
+                    Docente_Apellido = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Docente_TipoId = table.Column<string>(type: "varchar(20)", nullable: true)
+                    Docente_TipoId = table.Column<string>(type: "varchar(20)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Docente_NumId = table.Column<string>(type: "varchar(15)", nullable: true)
+                    Docente_NumId = table.Column<string>(type: "varchar(15)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Docente_Tipo = table.Column<string>(type: "varchar(15)", nullable: true)
+                    Docente_Tipo = table.Column<string>(type: "varchar(15)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Docente_TipoContraro = table.Column<string>(type: "varchar(5)", nullable: true)
+                    Docente_TipoContraro = table.Column<string>(type: "varchar(5)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Docente_Area = table.Column<string>(type: "varchar(100)", nullable: true)
+                    Docente_Area = table.Column<string>(type: "varchar(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Docente_estado = table.Column<decimal>(type: "numeric(1,0)", nullable: false)
                 },
@@ -104,9 +106,9 @@ namespace ProyectoFinalSoft.Migrations
                 {
                     periodoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    periodoFechaInicio = table.Column<DateOnly>(type: "date", nullable: false),
-                    periodoFechaFin = table.Column<DateOnly>(type: "date", nullable: false),
-                    Periodo_Nombre = table.Column<string>(type: "varchar(100)", nullable: true)
+                    Periodo_Fecha_Inicio = table.Column<DateOnly>(type: "date", nullable: false),
+                    Periodo_Fecha_Fin = table.Column<DateOnly>(type: "date", nullable: false),
+                    Periodo_Nombre = table.Column<string>(type: "varchar(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Periodo_estado = table.Column<decimal>(type: "numeric(1,0)", nullable: false)
                 },
@@ -193,7 +195,7 @@ namespace ProyectoFinalSoft.Migrations
                 {
                     horarioId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Horario_dia = table.Column<string>(type: "varchar(15)", nullable: true)
+                    Horario_dia = table.Column<string>(type: "varchar(15)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Horario_hora_inicio = table.Column<decimal>(type: "numeric(2,0)", nullable: false),
                     Horario_hora_fin = table.Column<decimal>(type: "numeric(2,0)", nullable: false),

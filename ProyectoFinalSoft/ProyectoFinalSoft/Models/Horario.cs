@@ -5,17 +5,31 @@ namespace ProyectoFinalSoft.Models
 {
 	public class Horario
 	{
-		[Key] 
+		[Key]
 		public int horarioId { get; set; }
-		[Column("Horario_dia", TypeName = "varchar(15)")]
+
+        [Display(Name = "Dia")]
+        [Required]
+        [Column("Horario_dia", TypeName = "varchar(15)")]
 		public string? horarioDia { get; set; }
+
+        [Display(Name = "Hora de inicio")]
+        [Required]
 		[Column("Horario_hora_inicio", TypeName = "numeric(2,0)")]
 		public int horarioHoraInicio { get; set; }
-		[Column("Horario_hora_fin", TypeName = "numeric(2,0)")]
+
+        [Display(Name = "Hora fin")]
+        [Required]
+        [Column("Horario_hora_fin", TypeName = "numeric(2,0)")]
 		public int horarioHoraFin { get; set; }
-		[Column("Horario_duracion", TypeName = "numeric(1,0)")]
+
+        [Display(Name = "Duracion")]
+        [Required]
+        [Column("Horario_duracion", TypeName = "numeric(1,0)")]
 		public int horarioDuracion { get; set; }
-		[Column("Horario_estado", TypeName = "numeric(1,0)")]
+
+        [Required]
+        [Column("Horario_estado", TypeName = "numeric(1,0)")]
 		public int horarioEstado { get; set; }
 		//relaciones existentes
 		public int? ambienteId { get; set; }

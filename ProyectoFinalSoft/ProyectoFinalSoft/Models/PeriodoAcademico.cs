@@ -7,10 +7,21 @@ namespace ProyectoFinalSoft.Models
 	{
 		[Key]
 		public int periodoId { get; set; }
-		public DateOnly periodoFechaInicio { get; set; }
-		public DateOnly periodoFechaFin {  get; set; }
-		[Column("Periodo_Nombre", TypeName = "varchar(100)")]
-		public string? periodoNombre { get; set; }
+
+        [Display(Name = "Fecha de inicio")]
+        [Required]
+        [Column("Periodo_Fecha_Inicio")]
+        public DateOnly periodoFechaInicio { get; set; }
+
+        [Display(Name = "Fecha de fin")]
+        [Column("Periodo_Fecha_Fin")]
+        [Required]
+        public DateOnly periodoFechaFin {  get; set; }
+
+        [Display(Name = "Nombre")]
+        [Column("Periodo_Nombre", TypeName = "varchar(100)")]
+        [Required]
+        public string? periodoNombre { get; set; }
 		[Column("Periodo_estado", TypeName = "numeric(1,0)")]
 		public int periodoEstado { get; set; }
 

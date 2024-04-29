@@ -10,22 +10,22 @@ using ProyectoFinalSoft.Services;
 
 namespace ProyectoFinalSoft.Controllers
 {
-    public class CompetenciaControlador : Controller
+    public class CompetenciasControllador : Controller
     {
         private readonly AppDbContext _context;
 
-        public CompetenciaControlador(AppDbContext context)
+        public CompetenciasControllador(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: CompetenciaControlador
+        // GET: CompetenciasControllador
         public async Task<IActionResult> Index()
         {
             return View(await _context.Competencias.ToListAsync());
         }
 
-        // GET: CompetenciaControlador/Details/5
+        // GET: CompetenciasControllador/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,13 +43,13 @@ namespace ProyectoFinalSoft.Controllers
             return View(competencia);
         }
 
-        // GET: CompetenciaControlador/Create
+        // GET: CompetenciasControllador/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: CompetenciaControlador/Create
+        // POST: CompetenciasControllador/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,7 +65,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(competencia);
         }
 
-        // GET: CompetenciaControlador/Edit/5
+        // GET: CompetenciasControllador/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,7 +81,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(competencia);
         }
 
-        // POST: CompetenciaControlador/Edit/5
+        // POST: CompetenciasControllador/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +116,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(competencia);
         }
 
-        // GET: CompetenciaControlador/Delete/5
+        // GET: CompetenciasControllador/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +134,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(competencia);
         }
 
-        // POST: CompetenciaControlador/Delete/5
+        // POST: CompetenciasControllador/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

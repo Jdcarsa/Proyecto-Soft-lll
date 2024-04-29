@@ -58,11 +58,20 @@ namespace ProyectoFinalSoft.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(docente);
+                docente.docenteEstado = 1;
+                _context.Docentes.Add(docente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(docente);
+        }
+
+        public async Task<IActionResult> CreateUser(string nombre , string apellido)
+        {
+
+           // _context.Usuarios.Add();
+            await _context.SaveChangesAsync();
+            return Ok();
         }
 
         // GET: DocenteControlador/Edit/5

@@ -12,8 +12,8 @@ using ProyectoFinalSoft.Services;
 namespace ProyectoFinalSoft.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240428184432_init")]
-    partial class init
+    [Migration("20240429193251_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,19 +52,27 @@ namespace ProyectoFinalSoft.Migrations
                         .HasColumnType("numeric(3,0)")
                         .HasColumnName("Ambiente_capacidad");
 
+                    b.Property<string>("ambienteCodigo")
+                        .IsRequired()
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("Ambiente_Codigo");
+
                     b.Property<decimal>("ambienteEstado")
                         .HasColumnType("numeric(1,0)")
                         .HasColumnName("Ambiente_estado");
 
                     b.Property<string>("ambienteNombre")
+                        .IsRequired()
                         .HasColumnType("varchar(30)")
                         .HasColumnName("Ambiente_Nombre");
 
                     b.Property<string>("ambienteTipo")
+                        .IsRequired()
                         .HasColumnType("varchar(30)")
                         .HasColumnName("Ambiente_tipo");
 
                     b.Property<string>("ambienteUbicacion")
+                        .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasColumnName("Ambiente_ubicacion");
 
@@ -128,10 +136,12 @@ namespace ProyectoFinalSoft.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("docenteId"));
 
                     b.Property<string>("docenteApellido")
+                        .IsRequired()
                         .HasColumnType("varchar(30)")
                         .HasColumnName("Docente_Apellido");
 
                     b.Property<string>("docenteArea")
+                        .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasColumnName("Docente_Area");
 
@@ -140,22 +150,27 @@ namespace ProyectoFinalSoft.Migrations
                         .HasColumnName("Docente_estado");
 
                     b.Property<string>("docenteNombre")
+                        .IsRequired()
                         .HasColumnType("varchar(30)")
                         .HasColumnName("Docente_Nombre");
 
                     b.Property<string>("docenteNumId")
+                        .IsRequired()
                         .HasColumnType("varchar(15)")
                         .HasColumnName("Docente_NumId");
 
                     b.Property<string>("docenteTipo")
+                        .IsRequired()
                         .HasColumnType("varchar(15)")
                         .HasColumnName("Docente_Tipo");
 
                     b.Property<string>("docenteTipoContrato")
+                        .IsRequired()
                         .HasColumnType("varchar(5)")
                         .HasColumnName("Docente_TipoContraro");
 
                     b.Property<string>("docenteTipoId")
+                        .IsRequired()
                         .HasColumnType("varchar(20)")
                         .HasColumnName("Docente_TipoId");
 
@@ -185,6 +200,7 @@ namespace ProyectoFinalSoft.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("horarioDia")
+                        .IsRequired()
                         .HasColumnType("varchar(15)")
                         .HasColumnName("Horario_dia");
 
@@ -235,12 +251,15 @@ namespace ProyectoFinalSoft.Migrations
                         .HasColumnName("Periodo_estado");
 
                     b.Property<DateOnly>("periodoFechaFin")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasColumnName("Periodo_Fecha_Fin");
 
                     b.Property<DateOnly>("periodoFechaInicio")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasColumnName("Periodo_Fecha_Inicio");
 
                     b.Property<string>("periodoNombre")
+                        .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasColumnName("Periodo_Nombre");
 

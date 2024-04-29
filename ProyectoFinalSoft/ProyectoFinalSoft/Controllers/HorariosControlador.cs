@@ -10,23 +10,23 @@ using ProyectoFinalSoft.Services;
 
 namespace ProyectoFinalSoft.Controllers
 {
-    public class HorarioControlador : Controller
+    public class HorariosControlador : Controller
     {
         private readonly AppDbContext _context;
 
-        public HorarioControlador(AppDbContext context)
+        public HorariosControlador(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: HorarioControlador
+        // GET: HorariosControlador
         public async Task<IActionResult> Index()
         {
             var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico).Include(h => h.programa);
             return View(await appDbContext.ToListAsync());
         }
 
-        // GET: HorarioControlador/Details/5
+        // GET: HorariosControlador/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,18 +49,18 @@ namespace ProyectoFinalSoft.Controllers
             return View(horario);
         }
 
-        // GET: HorarioControlador/Create
+        // GET: HorariosControlador/Create
         public IActionResult Create()
         {
-            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteId");
+            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo");
             ViewData["CompetenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaId");
-            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "docenteId");
-            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoId");
+            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "docenteApellido");
+            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre");
             ViewData["ProgramaId"] = new SelectList(_context.Programas, "programaId", "programaId");
             return View();
         }
 
-        // POST: HorarioControlador/Create
+        // POST: HorariosControlador/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -73,15 +73,15 @@ namespace ProyectoFinalSoft.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteId", horario.ambienteId);
+            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo", horario.ambienteId);
             ViewData["CompetenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaId", horario.CompetenciaId);
-            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "docenteId", horario.docenteId);
-            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoId", horario.periodoAcademicoId);
+            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "docenteApellido", horario.docenteId);
+            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre", horario.periodoAcademicoId);
             ViewData["ProgramaId"] = new SelectList(_context.Programas, "programaId", "programaId", horario.ProgramaId);
             return View(horario);
         }
 
-        // GET: HorarioControlador/Edit/5
+        // GET: HorariosControlador/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -94,15 +94,15 @@ namespace ProyectoFinalSoft.Controllers
             {
                 return NotFound();
             }
-            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteId", horario.ambienteId);
+            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo", horario.ambienteId);
             ViewData["CompetenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaId", horario.CompetenciaId);
-            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "docenteId", horario.docenteId);
-            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoId", horario.periodoAcademicoId);
+            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "docenteApellido", horario.docenteId);
+            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre", horario.periodoAcademicoId);
             ViewData["ProgramaId"] = new SelectList(_context.Programas, "programaId", "programaId", horario.ProgramaId);
             return View(horario);
         }
 
-        // POST: HorarioControlador/Edit/5
+        // POST: HorariosControlador/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -134,15 +134,15 @@ namespace ProyectoFinalSoft.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteId", horario.ambienteId);
+            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo", horario.ambienteId);
             ViewData["CompetenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaId", horario.CompetenciaId);
-            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "docenteId", horario.docenteId);
-            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoId", horario.periodoAcademicoId);
+            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "docenteApellido", horario.docenteId);
+            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre", horario.periodoAcademicoId);
             ViewData["ProgramaId"] = new SelectList(_context.Programas, "programaId", "programaId", horario.ProgramaId);
             return View(horario);
         }
 
-        // GET: HorarioControlador/Delete/5
+        // GET: HorariosControlador/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -165,7 +165,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(horario);
         }
 
-        // POST: HorarioControlador/Delete/5
+        // POST: HorariosControlador/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
