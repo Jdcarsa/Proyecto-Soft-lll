@@ -1,66 +1,72 @@
 ﻿@model ProyectoFinalSoft.Models.Docente
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Información Detalla del Docente";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Docente</h4>
+<div class="container mt-5 text-center mb-6">
+    <h1>Información Detallada del Docente</h1>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
+    <dl class="row mb-3">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.docenteNombre)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-5">
             @Html.DisplayFor(model => model.docenteNombre)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.docenteApellido)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-5">
             @Html.DisplayFor(model => model.docenteApellido)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.docenteTipoId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-5">
             @Html.DisplayFor(model => model.docenteTipoId)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.docenteNumId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-5">
             @Html.DisplayFor(model => model.docenteNumId)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.docenteTipo)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-5">
             @Html.DisplayFor(model => model.docenteTipo)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.docenteTipoContrato)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-5">
             @Html.DisplayFor(model => model.docenteTipoContrato)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.docenteArea)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-5">
             @Html.DisplayFor(model => model.docenteArea)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.docenteEstado)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.docenteEstado)
+        <dd class = "col-sm-5">
+            @if (Model.docenteEstado == 1)
+            {
+                <text>Activo</text>
+            }
+            else if (Model.docenteEstado == 0)
+            {
+                <text>Retirado</text>
+            }
         </dd>
+        <div class="row mb-3">
+            <!--<a asp-action="Edit" asp-route-id="@Model?.docenteId">Edit</a>-->
+            <a asp-action="Index" class="btn btn-secondary">Volver a la pagina principal</a>
+        </div>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.docenteId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+

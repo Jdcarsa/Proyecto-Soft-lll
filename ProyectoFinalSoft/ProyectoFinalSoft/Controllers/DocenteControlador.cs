@@ -61,20 +61,55 @@ namespace ProyectoFinalSoft.Controllers
                 docente.docenteEstado = 1;
                 _context.Docentes.Add(docente);
                 await _context.SaveChangesAsync();
+                await CreateUser(docente);
                 return RedirectToAction(nameof(Index));
             }
             return View(docente);
         }
 
-        public async Task<IActionResult> CreateUser(string nombre , string apellido)
+        public async Task<IActionResult> CreateUser(Docente docente)
         {
-
-           // _context.Usuarios.Add();
-            await _context.SaveChangesAsync();
-            return Ok();
+            try
+            {
+                Usuario user = new Usuario();
+                user.docenteId = docente.docenteId;
+                user.docente = docente;
+                user.usuarioEstado = 1;
+                user.usuarioLogin = GenerarNombreUsuario(docente.docenteNombre, docente.docenteApellido);
+                user.usuarioPassword = GenerarContrasena();
+                _context.Usuarios.Add(user);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Hubo un error al crear el usuario", error = ex.Message });
+            }
         }
 
-        // GET: DocenteControlador/Edit/5
+        private string GenerarNombreUsuario(string? nombre, string? apellido)
+        {
+            int i = 1;
+            string nombreUsuarioBase = nombre?.Substring(0, 3) + apellido?.Substring(0, 3);
+            string nombreUsuario = nombreUsuarioBase;
+            while (_context.Usuarios.Any(u => u.usuarioLogin == nombreUsuario))
+            {
+                nombreUsuario = nombreUsuarioBase + i.ToString();
+                i++;
+            }
+            return nombreUsuario;
+        }
+
+        private string GenerarContrasena()
+        {
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, 8)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+    
+
+    // GET: DocenteControlador/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -151,7 +186,16 @@ namespace ProyectoFinalSoft.Controllers
             var docente = await _context.Docentes.FindAsync(id);
             if (docente != null)
             {
-                _context.Docentes.Remove(docente);
+                if(docente.docenteEstado == 0)
+                {
+                    docente.docenteEstado = 1;
+                    _context.Docentes.Update(docente);
+                }else
+                {
+                    docente.docenteEstado = 0;
+                    _context.Docentes.Update(docente);
+                }
+               
             }
 
             await _context.SaveChangesAsync();

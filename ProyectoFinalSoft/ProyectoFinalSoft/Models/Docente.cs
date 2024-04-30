@@ -43,7 +43,8 @@ namespace ProyectoFinalSoft.Models
         [Column("Docente_Area", TypeName = "varchar(100)")]
 		public string? docenteArea { get; set; }
 
-		[Column("Docente_estado", TypeName = "numeric(1,0)")]
+        [Display(Name = "Estado")]
+        [Column("Docente_estado", TypeName = "numeric(1,0)")]
 		public int docenteEstado { get; set; }
 
 		public Usuario? usuario { get; set; }

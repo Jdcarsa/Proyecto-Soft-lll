@@ -53,10 +53,18 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.docenteArea)
                     </td>
-                    <td>
-                        <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.docenteId">Editar</a>
-                        <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.docenteId">Details</a>
-                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.docenteId">Desactivar</a>
+                        <td class="d-flex justify-content-evenly">
+                        <a class="btn btn-warning btn-sm mx-2" asp-action="Edit" asp-route-id="@item.docenteId">Editar</a>
+                            <a class="btn btn-info btn-sm mx-2" asp-action="Details" asp-route-id="@item.docenteId">Detalles</a>
+                            @if(item.docenteEstado == 0)
+                            {
+                                <a class="btn btn-success btn-sm mx-2" asp-action="Delete" asp-route-id="@item.docenteId">Activar</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-danger btn-sm mx-2" asp-action="Delete" asp-route-id="@item.docenteId">Desactivar</a>
+                            }
+
                     </td>
                 </tr>
         }
