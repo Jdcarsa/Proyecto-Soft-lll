@@ -20,9 +20,16 @@ namespace ProyectoFinalSoft.Controllers
         }
 
         // GET: DocenteControlador
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string parametroBusqueda)
         {
-            return View(await _context.Docentes.ToListAsync());
+
+            var docentes = from docente in _context.Docentes select docente;
+
+            if (!String.IsNullOrEmpty(parametroBusqueda))
+            {
+                docentes = docentes.Where(d => d.docenteNombre!.Contains(parametroBusqueda));
+            }
+            return View(await docentes.ToListAsync());
         }
 
         // GET: DocenteControlador/Details/5
@@ -141,6 +148,7 @@ namespace ProyectoFinalSoft.Controllers
             {
                 try
                 {
+                    docente.docenteEstado = 1;
                     _context.Update(docente);
                     await _context.SaveChangesAsync();
                 }
@@ -190,16 +198,34 @@ namespace ProyectoFinalSoft.Controllers
                 {
                     docente.docenteEstado = 1;
                     _context.Docentes.Update(docente);
-                }else
+                }
+                else
                 {
                     docente.docenteEstado = 0;
                     _context.Docentes.Update(docente);
                 }
-               
             }
-
+            DisableUser(docente.docenteId, docente.docenteEstado);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        private void DisableUser(int docenteId, int docenteEstado)
+        {
+            var usuario = _context.Usuarios.FirstOrDefault(u => u.docenteId == docenteId);
+            if (usuario != null)
+            {
+                if (docenteEstado == 1)
+                {
+                    usuario.usuarioEstado = 1;
+                    _context.Usuarios.Update(usuario);
+                }
+                else
+                {
+                    usuario.usuarioEstado = 0;
+                    _context.Usuarios.Update(usuario);
+                }
+            }
         }
 
         private bool DocenteExists(int id)
