@@ -27,7 +27,7 @@ namespace ProyectoFinalSoft.Controllers
 
             if (!String.IsNullOrEmpty(parametroBusqueda))
             {
-                docentes = docentes.Where(d => d.docenteNombre!.Contains(parametroBusqueda));
+                docentes = docentes.Where(d => (d.docenteNombre + " " + d.docenteApellido)!.Contains(parametroBusqueda));
             }
             return View(await docentes.ToListAsync());
         }
