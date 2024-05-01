@@ -4,8 +4,15 @@
     ViewData["Title"] = "Delete";
 }
 <div class="container mt-5 text-center mb-6">
-    <h1 class="text-center mb-6">Desactivar</h1>
-    <h3 class ="text-center mb-6">¿Esta seguro que desea desactivar a este Docente?</h3>
+    @if(Model.docenteEstado ==1)
+    {
+        <h1 class="text-center mb-6">Desactivar</h1>
+        <h3 class="text-center mb-6">¿Esta seguro que desea desactivar a este Docente?</h3>
+    } else{
+        <h1 class="text-center mb-6">Activar</h1>
+        <h3 class="text-center mb-6">¿Esta seguro que desea Activar a este Docente?</h3>
+    }
+
     <hr />
     <div class="container-fluid">
         <dl class="row mb-3">
@@ -51,6 +58,14 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="docenteId" />
         <a asp-action="Index" class="col-md-4 btn btn-secondary me-5">Cancelar</a>
-        <input type="submit" value="Desactivar" class="col-md-4 btn btn-danger" />
+        @if (Model.docenteEstado == 1)
+        {
+            <input type="submit" value="Desactivar" class="col-md-4 btn btn-danger" />
+        }
+        else
+        {
+            <input type="submit" value="Activar" class="col-md-4 btn btn-success" />
+        }
+
     </form>
 </div>

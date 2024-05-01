@@ -14,6 +14,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 */
 
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+
 var connectionString = builder.Configuration.GetConnectionString("MySql");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString,
     ServerVersion.AutoDetect(connectionString)));

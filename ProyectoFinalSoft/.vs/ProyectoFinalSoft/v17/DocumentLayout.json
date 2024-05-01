@@ -3,36 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\controllers\\docentecontrolador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\controllers\\docentecontrolador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\views\\docentecontrolador\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\views\\docentecontrolador\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\views\\docentecontrolador\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\views\\docentecontrolador\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\models\\docente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\models\\docente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\views\\docentecontrolador\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\views\\docentecontrolador\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\views\\docentecontrolador\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\views\\docentecontrolador\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\views\\docentecontrolador\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\views\\docentecontrolador\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\services\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\services\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,22 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 235,
-          "SelectedChildIndex": 22,
+          "SelectedChildIndex": 17,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Index.cshtml",
-              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Views\\DocenteControlador\\Index.cshtml",
-              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Index.cshtml",
-              "RelativeToolTip": "ProyectoFinalSoft\\Views\\DocenteControlador\\Index.cshtml",
-              "ViewState": "AQIAADMAAAAAAAAAAAAAAEAAAABEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-29T19:28:48.048Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -124,93 +86,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Docente.cs",
-              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Models\\Docente.cs",
-              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Models\\Docente.cs",
-              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Models\\Docente.cs",
-              "RelativeToolTip": "ProyectoFinalSoft\\Models\\Docente.cs",
-              "ViewState": "AQIAAB8AAAAAAAAAAAAuwC0AAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T20:20:41.386Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Details.cshtml",
-              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Views\\DocenteControlador\\Details.cshtml",
-              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Details.cshtml",
-              "RelativeToolTip": "ProyectoFinalSoft\\Views\\DocenteControlador\\Details.cshtml",
-              "ViewState": "AQIAADkAAAAAAAAAAAAAAEMAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-30T20:08:57.765Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Delete.cshtml",
-              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Delete.cshtml",
-              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Views\\DocenteControlador\\Delete.cshtml",
-              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Delete.cshtml",
-              "RelativeToolTip": "ProyectoFinalSoft\\Views\\DocenteControlador\\Delete.cshtml",
-              "ViewState": "AQIAACwAAAAAAAAAAAAAADQAAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-30T19:35:29.426Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Usuario.cs",
-              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Models\\Usuario.cs",
-              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Models\\Usuario.cs",
-              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Models\\Usuario.cs",
-              "RelativeToolTip": "ProyectoFinalSoft\\Models\\Usuario.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T16:27:13.908Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Services\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Services\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Services\\AppDbContext.cs",
-              "RelativeToolTip": "ProyectoFinalSoft\\Services\\AppDbContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T16:25:09.869Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DocenteControlador.cs",
-              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Controllers\\DocenteControlador.cs",
-              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Controllers\\DocenteControlador.cs",
-              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Controllers\\DocenteControlador.cs",
-              "RelativeToolTip": "ProyectoFinalSoft\\Controllers\\DocenteControlador.cs",
-              "ViewState": "AQIAAEUAAAAAAAAAAAAYwFQAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T15:33:33.613Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Create.cshtml",
               "RelativeDocumentMoniker": "ProyectoFinalSoft\\Views\\DocenteControlador\\Create.cshtml",
               "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Create.cshtml",
               "RelativeToolTip": "ProyectoFinalSoft\\Views\\DocenteControlador\\Create.cshtml",
-              "ViewState": "AQIAADkAAAAAAAAAAAAAAEUAAAAeAAAA",
+              "ViewState": "AQIAADwAAAAAAAAAAAAAAEYAAABYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-29T19:44:56.339Z",
+              "WhenOpened": "2024-05-01T04:32:16.845Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Edit.cshtml",
+              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Views\\DocenteControlador\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Edit.cshtml",
+              "RelativeToolTip": "ProyectoFinalSoft\\Views\\DocenteControlador\\Edit.cshtml",
+              "ViewState": "AQIAACoAAAAAAAAAAAAAADEAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-01T04:31:50.114Z",
               "EditorCaption": ""
             }
           ]
