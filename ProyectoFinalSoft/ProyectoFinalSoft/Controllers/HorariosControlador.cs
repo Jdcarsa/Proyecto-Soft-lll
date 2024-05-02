@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ProyectoFinalSoft.Fachada;
 using ProyectoFinalSoft.Models;
 using ProyectoFinalSoft.Services;
 
 namespace ProyectoFinalSoft.Controllers
 {
-    public class HorariosControlador : Controller
+    public class HorariosControlador : Controller, IFachada
     {
         private readonly AppDbContext _context;
 
@@ -183,6 +184,31 @@ namespace ProyectoFinalSoft.Controllers
         private bool HorarioExists(int id)
         {
             return _context.Horarios.Any(e => e.horarioId == id);
+        }
+
+        public Task<IActionResult> obtenerCompetencias()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IActionResult> obtenerProgramas()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IActionResult> obtenerDocentes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IActionResult> obtenerPeridosAcademicos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IActionResult> obtenerAmbientes()
+        {
+            throw new NotImplementedException();
         }
     }
 }

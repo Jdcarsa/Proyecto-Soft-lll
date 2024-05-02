@@ -45,7 +45,7 @@
         "ASPNETCORE_HTTPS_PORT": "7186"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7155;http://localhost:5274"
+      "applicationUrl": "https://localhost:7155;http://localhost:5179"
     }
   }
 }
