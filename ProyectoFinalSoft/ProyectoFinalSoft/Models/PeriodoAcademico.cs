@@ -20,7 +20,7 @@ namespace ProyectoFinalSoft.Models
 
         [Display(Name = "Nombre")]
         [Column("Periodo_Nombre", TypeName = "varchar(100)")]
-        [Required]
+        [Required(ErrorMessage = "El nombre es obligatorio.")]
         public string? periodoNombre { get; set; }
 		[Column("Periodo_estado", TypeName = "numeric(1,0)")]
 		public int periodoEstado { get; set; }

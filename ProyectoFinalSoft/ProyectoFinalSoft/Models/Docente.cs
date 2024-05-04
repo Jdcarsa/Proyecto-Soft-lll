@@ -9,12 +9,14 @@ namespace ProyectoFinalSoft.Models
 		public int docenteId {  get; set; }
 
         [Display(Name = "Nombre")]
-        [Required]
+        [Required(ErrorMessage = "El nombre es obligatorio.")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Solo se permiten caracteres alfabéticos.")]
         [Column("Docente_Nombre", TypeName = "varchar(30)")]
 		public string? docenteNombre { get; set; }
 
         [Display(Name = "Apellido")]
-        [Required]
+        [Required(ErrorMessage = "El apellido es obligatorio.")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Solo se permiten caracteres alfabéticos.")]
         [Column("Docente_Apellido", TypeName = "varchar(30)")]
 		public string? docenteApellido { get; set; }
 
@@ -24,7 +26,8 @@ namespace ProyectoFinalSoft.Models
 		public string? docenteTipoId { get; set; }
 
         [Display(Name = "Número de Identificación")]
-        [Required]
+        [Required(ErrorMessage = "El número de identificación es obligatorio.")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "Solo se permiten números.")]
         [Column("Docente_NumId", TypeName = "varchar(15)")]
 		public string? docenteNumId { get; set; }
 
@@ -39,7 +42,8 @@ namespace ProyectoFinalSoft.Models
 		public string? docenteTipoContrato { get; set; }
 
         [Display(Name = "Area")]
-        [Required]
+        [Required(ErrorMessage = "El area es obligatorio.")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Solo se permiten caracteres alfabéticos.")]
         [Column("Docente_Area", TypeName = "varchar(100)")]
 		public string? docenteArea { get; set; }
 

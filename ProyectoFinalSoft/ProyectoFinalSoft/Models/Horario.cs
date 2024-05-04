@@ -9,17 +9,18 @@ namespace ProyectoFinalSoft.Models
 		public int horarioId { get; set; }
 
         [Display(Name = "Dia")]
-        [Required]
+        [Required(ErrorMessage = "El día es obligatorio.")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Solo se permiten caracteres alfabéticos.")]
         [Column("Horario_dia", TypeName = "varchar(15)")]
 		public string? horarioDia { get; set; }
 
         [Display(Name = "Hora de inicio")]
-        [Required]
-		[Column("Horario_hora_inicio", TypeName = "numeric(2,0)")]
+        [Required(ErrorMessage = "La hora de inicio es obligatoria.")]
+        [Column("Horario_hora_inicio", TypeName = "numeric(2,0)")]
 		public int horarioHoraInicio { get; set; }
 
         [Display(Name = "Hora fin")]
-        [Required]
+        [Required(ErrorMessage = "La hora de fin es obligatoria.")]
         [Column("Horario_hora_fin", TypeName = "numeric(2,0)")]
 		public int horarioHoraFin { get; set; }
 

@@ -9,13 +9,13 @@ namespace ProyectoFinalSoft.Models
 		[Key]
         public int ambienteId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El codigo es obligatorio.")]
         [Display(Name = "Codigo")]
         [Column("Ambiente_Codigo", TypeName = "varchar(30)")]
         public string? ambienteCodigo { get; set; }
 
         [Display(Name = "Nombre")]
-        [Required]
+        [Required(ErrorMessage = "El nombre es obligatorio.")]
         [Column("Ambiente_Nombre", TypeName = "varchar(30)")]
 		public string? ambienteNombre { get; set;}
 
@@ -30,7 +30,8 @@ namespace ProyectoFinalSoft.Models
 		public string? ambienteTipo {  get; set;}
 
         [Display(Name = "Capacidad")]
-        [Required]
+        [Required(ErrorMessage = "La capacidad es obligatoria.")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "Solo se permiten números.")]
         [Column("Ambiente_capacidad", TypeName = "numeric(3,0)")]
 		public int ambienteCapacidad { get; set;}
 
