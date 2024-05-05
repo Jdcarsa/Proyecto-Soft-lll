@@ -12,7 +12,6 @@ namespace ProyectoFinalSoft.Models
         [Column("Programa_Estado", TypeName = "numeric(1,0)")]
         public int programaEstado { get; set; }
         public ICollection<Competencia>? Competencias { get; set; }
-        public ICollection<Horario> Horarios { get; } = new List<Horario>();
     }
 }
 

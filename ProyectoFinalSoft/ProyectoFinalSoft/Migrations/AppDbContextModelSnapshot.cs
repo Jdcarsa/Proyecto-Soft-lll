@@ -187,9 +187,6 @@ namespace ProyectoFinalSoft.Migrations
                     b.Property<int>("CompetenciaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProgramaId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ambienteId")
                         .HasColumnType("int");
 
@@ -223,8 +220,6 @@ namespace ProyectoFinalSoft.Migrations
                     b.HasKey("horarioId");
 
                     b.HasIndex("CompetenciaId");
-
-                    b.HasIndex("ProgramaId");
 
                     b.HasIndex("ambienteId");
 
@@ -346,12 +341,6 @@ namespace ProyectoFinalSoft.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProyectoFinalSoft.Models.Programa", "programa")
-                        .WithMany("Horarios")
-                        .HasForeignKey("ProgramaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ProyectoFinalSoft.Models.Ambiente", "ambiente")
                         .WithMany("Horarios")
                         .HasForeignKey("ambienteId");
@@ -371,8 +360,6 @@ namespace ProyectoFinalSoft.Migrations
                     b.Navigation("docente");
 
                     b.Navigation("periodoAcademico");
-
-                    b.Navigation("programa");
                 });
 
             modelBuilder.Entity("ProyectoFinalSoft.Models.Usuario", b =>
@@ -413,11 +400,6 @@ namespace ProyectoFinalSoft.Migrations
                 });
 
             modelBuilder.Entity("ProyectoFinalSoft.Models.PeriodoAcademico", b =>
-                {
-                    b.Navigation("Horarios");
-                });
-
-            modelBuilder.Entity("ProyectoFinalSoft.Models.Programa", b =>
                 {
                     b.Navigation("Horarios");
                 });

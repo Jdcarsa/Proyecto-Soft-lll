@@ -16,16 +16,24 @@ namespace ProyectoFinalSoft.Controllers
     public class HorariosControlador : Controller, IFachada
     {
         private readonly AppDbContext _context;
+        private readonly DocenteServicio _docenteServicio;
 
-        public HorariosControlador(AppDbContext context)
+        public HorariosControlador(AppDbContext context, DocenteServicio docenteServicio)
         {
             _context = context;
+            _docenteServicio = docenteServicio;
         }
 
         // GET: HorariosControlador
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico).Include(h => h.programa);
+            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico);
+            return View(await appDbContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> List()
+        {
+            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico);
             return View(await appDbContext.ToListAsync());
         }
 
@@ -42,7 +50,6 @@ namespace ProyectoFinalSoft.Controllers
                 .Include(h => h.competencia)
                 .Include(h => h.docente)
                 .Include(h => h.periodoAcademico)
-                .Include(h => h.programa)
                 .FirstOrDefaultAsync(m => m.horarioId == id);
             if (horario == null)
             {
@@ -58,7 +65,6 @@ namespace ProyectoFinalSoft.Controllers
             obtenerAmbientes();
             obtenerDocentes();
             obtenerPeridosAcademicos();
-            obtenerProgramas();
             obtenerCompetencias();
 
             return View();
@@ -69,7 +75,7 @@ namespace ProyectoFinalSoft.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("horarioId,horarioDia,horarioHoraInicio,horarioHoraFin,horarioDuracion,horarioEstado,ambienteId,docenteId,periodoAcademicoId,ProgramaId,CompetenciaId")] Horario horario)
+        public async Task<IActionResult> Create([Bind("horarioId,horarioDia,horarioHoraInicio,horarioHoraFin,horarioDuracion,horarioEstado,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
         {
             if (ModelState.IsValid)
             {
@@ -77,11 +83,7 @@ namespace ProyectoFinalSoft.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo", horario.ambienteId);
-            ViewData["competenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaNombre", horario.CompetenciaId);
-            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "infoCompleta", horario.docenteId);
-            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre", horario.periodoAcademicoId);
-            ViewData["programaId"] = new SelectList(_context.Programas, "programaId", "programaNombre", horario.ProgramaId);
+            obtenerTodos(horario);
             return View(horario);
         }
 
@@ -98,11 +100,7 @@ namespace ProyectoFinalSoft.Controllers
             {
                 return NotFound();
             }
-            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo", horario.ambienteId);
-            ViewData["competenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaNombre", horario.CompetenciaId);
-            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "infoCompleta", horario.docenteId);
-            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre", horario.periodoAcademicoId);
-            ViewData["programaId"] = new SelectList(_context.Programas, "programaId", "programaNombre", horario.ProgramaId);
+            obtenerTodos(horario);
             return View(horario);
         }
 
@@ -111,7 +109,7 @@ namespace ProyectoFinalSoft.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("horarioId,horarioDia,horarioHoraInicio,horarioHoraFin,horarioDuracion,horarioEstado,ambienteId,docenteId,periodoAcademicoId,ProgramaId,CompetenciaId")] Horario horario)
+        public async Task<IActionResult> Edit(int id, [Bind("horarioId,horarioDia,horarioHoraInicio,horarioHoraFin,horarioDuracion,horarioEstado,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
         {
             if (id != horario.horarioId)
             {
@@ -138,11 +136,8 @@ namespace ProyectoFinalSoft.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo", horario.ambienteId);
-            ViewData["competenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaNombre", horario.CompetenciaId);
-            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "infoCompleta", horario.docenteId);
-            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre", horario.periodoAcademicoId);
-            ViewData["programaId"] = new SelectList(_context.Programas, "programaId", "programaNombre", horario.ProgramaId);
+            obtenerTodos(horario);
+           
             return View(horario);
         }
 
@@ -159,7 +154,6 @@ namespace ProyectoFinalSoft.Controllers
                 .Include(h => h.competencia)
                 .Include(h => h.docente)
                 .Include(h => h.periodoAcademico)
-                .Include(h => h.programa)
                 .FirstOrDefaultAsync(m => m.horarioId == id);
             if (horario == null)
             {
@@ -194,14 +188,10 @@ namespace ProyectoFinalSoft.Controllers
             ViewData["competenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaNombre");
         }
 
-        public void obtenerProgramas()
-        {
-            ViewData["programaId"] = new SelectList(_context.Programas, "programaId", "programaNombre");
-        }
 
         public void obtenerDocentes()
         {
-            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "infoCompleta");
+            ViewData["docenteId"] = _docenteServicio.ObtenerDocentes();
         }
 
         public void obtenerPeridosAcademicos()
@@ -214,9 +204,17 @@ namespace ProyectoFinalSoft.Controllers
             ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo");
         }
 
+        public void obtenerTodos(Horario horario)
+        {
+            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo", horario.ambienteId);
+            ViewData["competenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaNombre", horario.CompetenciaId);
+            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "infoCompleta", horario.docenteId);
+            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre", horario.periodoAcademicoId);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> guardarDatosProgComp()
+        public async void guardarDatosProgComp()
         {
             var rutaAlArchivo = "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Json\\Programas.json";
 
@@ -235,9 +233,6 @@ namespace ProyectoFinalSoft.Controllers
 
             // Guarda los cambios en la base de datos
             await _context.SaveChangesAsync();
-
-            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico).Include(h => h.programa);
-            return View(await appDbContext.ToListAsync());
         }
     }
 }

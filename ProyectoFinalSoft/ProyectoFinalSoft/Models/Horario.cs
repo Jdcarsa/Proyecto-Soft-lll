@@ -41,11 +41,6 @@ namespace ProyectoFinalSoft.Models
         [Display(Name = "Periodo Academico")]
         public int? periodoAcademicoId {  get; set; }
 		public PeriodoAcademico? periodoAcademico { get; set; }
-
-        //relaciones simuladas
-        [Display(Name = "Programa")]
-        public int ProgramaId { get; set; }
-        public Programa? programa { get; set; }
         [Display(Name = "Competencia")]
         public int CompetenciaId { get; set; }
 		public Competencia? competencia { get; set; }

@@ -38,7 +38,12 @@
         </div>
     </div>
 </div>
-
+<!--<div>
+    <form asp-controller="HorariosControlador" asp-action="guardarDatosProgComp" method="post">
+        <button type="submit">Cargar datos</button>
+    </form>
+</div>
+-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -49,10 +54,8 @@
                 </button>
             </div>
             <div class="modal-body d-grid gap-3 mb-3">
-                <a id="linkGuardar" class="btn btn-primary mx-4" asp-controller="HorariosControlador" asp-action="Create">Crear</a>
-                <a id="linkEditar" class="btn btn-warning mx-4" asp-action="Edit" asp-route-id="">Editar</a>
-                <a id="linkDetalles" class="btn btn-info mx-4" asp-action="Details" asp-route-id="">Detalles</a>
-                <a id="linkEliminar" class="btn btn-danger mx-4" asp-action="Delete" asp-route-id="">Eliminar</a>
+                <a class="btn btn-primary mx-4" asp-controller="HorariosControlador" asp-action="Create">Crear</a>
+                <a class="btn btn-secondary mx-4" asp-controller="HorariosControlador" asp-action="List">Gestión horarios</a>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCerrar">Cerrar</button>
@@ -67,11 +70,6 @@
     $(document).ready(function () {
         // Evento para abrir la ventana modal
         $(".celda-horario").click(function () {
-            var horarioId = $(this).data("horario-id");
-            $("#linkGuardar").attr("asp-route-id", horarioId);
-            $("#linkEditar").attr("asp-route-id", horarioId);
-            $("#linkDetalles").attr("asp-route-id", horarioId);
-            $("#linkEliminar").attr("asp-route-id", horarioId);
             $('#myModal').modal('show');
         });
 

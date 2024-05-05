@@ -1,15 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProyectoFinalSoft.Models;
 
 namespace ProyectoFinalSoft.Fachada
 {
     public interface IFachada
     {
-        void obtenerProgramas();
+       
         void obtenerDocentes();
         void obtenerPeridosAcademicos();
         void obtenerAmbientes();
         void obtenerCompetencias();
 
-        Task<IActionResult> guardarDatosProgComp();
+        void obtenerTodos(Horario horario);
+        void guardarDatosProgComp();
     }
 }
