@@ -9,5 +9,7 @@ namespace ProyectoFinalSoft.Fachada
         Task<IActionResult> obtenerPeridosAcademicos();
         Task<IActionResult> obtenerAmbientes();
         Task<IActionResult>  obtenerCompetencias();
+
+        Task<IActionResult> guardarDatosProgComp();
     }
 }

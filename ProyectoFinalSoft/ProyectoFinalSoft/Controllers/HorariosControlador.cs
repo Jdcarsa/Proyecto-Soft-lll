@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using ProyectoFinalSoft.Fachada;
+using ProyectoFinalSoft.Json;
 using ProyectoFinalSoft.Models;
 using ProyectoFinalSoft.Services;
 
@@ -209,6 +211,32 @@ namespace ProyectoFinalSoft.Controllers
         public Task<IActionResult> obtenerAmbientes()
         {
             throw new NotImplementedException();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> guardarDatosProgComp()
+        {
+            var rutaAlArchivo = "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Json\\Programas.json";
+
+            // Usa 'await' para esperar a que la lectura del archivo se complete
+            var contenidoDeArchivo = await System.IO.File.ReadAllTextAsync(rutaAlArchivo);
+
+            // Deserializa el JSON a una lista de programas
+            var rootObject = JsonConvert.DeserializeObject<RootObject>(contenidoDeArchivo);
+            var programas = rootObject.programas;
+
+            foreach (var programa in programas)
+            {
+                // Guarda cada programa en la base de datos
+                _context.Programas.Add(programa);
+            }
+
+            // Guarda los cambios en la base de datos
+            await _context.SaveChangesAsync();
+
+            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico).Include(h => h.programa);
+            return View(await appDbContext.ToListAsync());
         }
     }
 }

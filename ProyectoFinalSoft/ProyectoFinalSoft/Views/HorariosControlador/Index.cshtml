@@ -4,86 +4,48 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.horarioDia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.horarioHoraInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.horarioHoraFin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.horarioDuracion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.horarioEstado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ambiente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.docente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.periodoAcademico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.programa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.competencia)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.horarioDia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.horarioHoraInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.horarioHoraFin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.horarioDuracion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.horarioEstado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ambiente.ambienteCodigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.docente.docenteApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.periodoAcademico.periodoNombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.programa.programaId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.competencia.competenciaId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.horarioId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.horarioId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.horarioId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<h1 class="text-center my-3">Horario</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 7; i <= 22; i++)
+                    {
+                        <tr>
+                            <td>@i:00</td>
+                            @for (int j = 0; j < 6; j++)
+                            {
+                                <td style="cursor: pointer;" onclick="openMenu('@i:00')" ></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--
+<div>
+    <form asp-controller="HorariosControlador" asp-action="guardarDatosProgComp" method="post">
+        <button type="submit">Cargar datos</button>
+    </form>
+</div>-->
+<script>
+    function openMenu(time) {
+        alert("Has seleccionado la franja horaria de las " + time);
+        // Aquí puedes agregar el código para abrir tu menú
+    }
+</script>

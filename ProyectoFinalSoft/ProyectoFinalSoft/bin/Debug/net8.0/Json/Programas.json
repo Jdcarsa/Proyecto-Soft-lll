@@ -1,40 +1,40 @@
 {
   "programas": [
     {
-      "id": 1,
-      "nombre": "Ingenieria de Sistemas",
-      "estado": "activo",
-      "competencias": [
+      "programaId": 1,
+      "programaNombre": "Ingenieria de Sistemas",
+      "programaEstado": 1,
+      "Competencias": [
         {
-          "id": 1,
-          "nombre": "Matem�ticas",
-          "tipo": "Generica",
-          "estado": "activo"
+          "competenciaId": 1,
+          "competenciaNombre": "Matemáticas",
+          "competenciaTipo": "Generica",
+          "competenciaEstado": 1
         },
         {
-          "id": 2,
-          "nombre": "Base de Datos 1",
-          "tipo": "Especifica",
-          "estado": "activo"
+          "competenciaId": 2,
+          "competenciaNombre": "Base de Datos 1",
+          "competenciaTipo": "Especifica",
+          "competenciaEstado": 1
         }
       ]
     },
     {
-      "id": 2,
-      "nombre": "Ciencias Sociales",
-      "estado": "activo",
-      "competencias": [
+      "programaId": 2,
+      "programaNombre": "Ciencias Sociales",
+      "programaEstado": 1,
+      "Competencias": [
         {
-          "id": 3,
-          "nombre": "Historica",
-          "tipo": "Especefica",
-          "estado": "activo"
+          "competenciaId": 3,
+          "competenciaNombre": "Historica",
+          "competenciaTipo": "Especifica",
+          "competenciaEstado": 1
         },
         {
-          "id": 4,
-          "nombre": "Lectura Critica",
-          "tipo": "Generica",
-          "estado": "activo"
+          "competenciaId": 4,
+          "competenciaNombre": "Lectura Critica",
+          "competenciaTipo": "Generica",
+          "competenciaEstado": 1
         }
       ]
     }
