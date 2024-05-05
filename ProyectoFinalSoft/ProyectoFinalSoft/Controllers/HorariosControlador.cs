@@ -55,11 +55,12 @@ namespace ProyectoFinalSoft.Controllers
         // GET: HorariosControlador/Create
         public IActionResult Create()
         {
-            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo");
-            ViewData["CompetenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaId");
-            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "docenteApellido");
-            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre");
-            ViewData["ProgramaId"] = new SelectList(_context.Programas, "programaId", "programaId");
+            obtenerAmbientes();
+            obtenerDocentes();
+            obtenerPeridosAcademicos();
+            obtenerProgramas();
+            obtenerCompetencias();
+
             return View();
         }
 
@@ -77,10 +78,10 @@ namespace ProyectoFinalSoft.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo", horario.ambienteId);
-            ViewData["CompetenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaId", horario.CompetenciaId);
-            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "docenteApellido", horario.docenteId);
+            ViewData["competenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaNombre", horario.CompetenciaId);
+            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "infoCompleta", horario.docenteId);
             ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre", horario.periodoAcademicoId);
-            ViewData["ProgramaId"] = new SelectList(_context.Programas, "programaId", "programaId", horario.ProgramaId);
+            ViewData["programaId"] = new SelectList(_context.Programas, "programaId", "programaNombre", horario.ProgramaId);
             return View(horario);
         }
 
@@ -98,10 +99,10 @@ namespace ProyectoFinalSoft.Controllers
                 return NotFound();
             }
             ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo", horario.ambienteId);
-            ViewData["CompetenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaId", horario.CompetenciaId);
-            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "docenteApellido", horario.docenteId);
+            ViewData["competenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaNombre", horario.CompetenciaId);
+            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "infoCompleta", horario.docenteId);
             ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre", horario.periodoAcademicoId);
-            ViewData["ProgramaId"] = new SelectList(_context.Programas, "programaId", "programaId", horario.ProgramaId);
+            ViewData["programaId"] = new SelectList(_context.Programas, "programaId", "programaNombre", horario.ProgramaId);
             return View(horario);
         }
 
@@ -138,10 +139,10 @@ namespace ProyectoFinalSoft.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo", horario.ambienteId);
-            ViewData["CompetenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaId", horario.CompetenciaId);
-            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "docenteApellido", horario.docenteId);
+            ViewData["competenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaNombre", horario.CompetenciaId);
+            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "infoCompleta", horario.docenteId);
             ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre", horario.periodoAcademicoId);
-            ViewData["ProgramaId"] = new SelectList(_context.Programas, "programaId", "programaId", horario.ProgramaId);
+            ViewData["programaId"] = new SelectList(_context.Programas, "programaId", "programaNombre", horario.ProgramaId);
             return View(horario);
         }
 
@@ -188,29 +189,29 @@ namespace ProyectoFinalSoft.Controllers
             return _context.Horarios.Any(e => e.horarioId == id);
         }
 
-        public Task<IActionResult> obtenerCompetencias()
+        public void obtenerCompetencias()
         {
-            throw new NotImplementedException();
+            ViewData["competenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaNombre");
         }
 
-        public Task<IActionResult> obtenerProgramas()
+        public void obtenerProgramas()
         {
-            throw new NotImplementedException();
+            ViewData["programaId"] = new SelectList(_context.Programas, "programaId", "programaNombre");
         }
 
-        public Task<IActionResult> obtenerDocentes()
+        public void obtenerDocentes()
         {
-            throw new NotImplementedException();
+            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "infoCompleta");
         }
 
-        public Task<IActionResult> obtenerPeridosAcademicos()
+        public void obtenerPeridosAcademicos()
         {
-            throw new NotImplementedException();
+            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre");
         }
 
-        public Task<IActionResult> obtenerAmbientes()
+        public void obtenerAmbientes()
         {
-            throw new NotImplementedException();
+            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo");
         }
 
         [HttpPost]

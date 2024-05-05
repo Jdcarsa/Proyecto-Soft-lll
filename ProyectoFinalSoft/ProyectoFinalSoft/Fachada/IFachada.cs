@@ -4,11 +4,11 @@ namespace ProyectoFinalSoft.Fachada
 {
     public interface IFachada
     {
-        Task<IActionResult> obtenerProgramas();
-        Task<IActionResult> obtenerDocentes();
-        Task<IActionResult> obtenerPeridosAcademicos();
-        Task<IActionResult> obtenerAmbientes();
-        Task<IActionResult>  obtenerCompetencias();
+        void obtenerProgramas();
+        void obtenerDocentes();
+        void obtenerPeridosAcademicos();
+        void obtenerAmbientes();
+        void obtenerCompetencias();
 
         Task<IActionResult> guardarDatosProgComp();
     }

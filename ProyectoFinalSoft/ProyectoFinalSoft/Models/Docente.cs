@@ -55,5 +55,13 @@ namespace ProyectoFinalSoft.Models
 
 		//relacion 0 a muchos , un docente puede tener muchos horarios
 		public ICollection<Horario> Horarios { get; } = new List<Horario>();
-	}
+
+        public string infoCompleta
+        {
+            get
+            {
+                return $"{docenteNombre} {docenteApellido} - {docenteNumId}";
+            }
+        }
+    }
 }
