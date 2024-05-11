@@ -19,12 +19,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="horarioHoraInicio" class="control-label"></label>
-                <input asp-for="horarioHoraInicio" class="form-control" />
+                <input asp-for="horarioHoraInicio" type="time" class="form-control" disabled />
                 <span asp-validation-for="horarioHoraInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="horarioHoraFin" class="control-label"></label>
-                <input asp-for="horarioHoraFin" class="form-control" />
+                <input asp-for="horarioHoraFin" type="time" class="form-control" />
                 <span asp-validation-for="horarioHoraFin" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -78,7 +78,15 @@
             $('#horarioDia').val(dias[diaSeleccionado]);
         }
 
-        $('#horarioHoraInicio').val(localStorage.getItem('horaSeleccionada'));
+        var horaSeleccionada = localStorage.getItem('horaSeleccionada');
+        if (horaSeleccionada) {
+                var horaFormato24 = parseInt(horaSeleccionada, 10);
+                if (!isNaN(horaFormato24)) {
+                    var horaFormateada = horaFormato24 < 10 ? '0' + horaFormato24 : horaFormato24;
+                    $('#horarioHoraInicio').val(horaFormateada + ":00");
+                }
+        }
+
     });
 </script>
 

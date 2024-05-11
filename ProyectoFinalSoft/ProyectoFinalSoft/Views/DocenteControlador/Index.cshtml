@@ -71,14 +71,8 @@
                         <td class="d-flex justify-content-around">
                         <a class="btn btn-warning btn-sm mx-2" asp-action="Edit" asp-route-id="@item.docenteId">Editar</a>
                         <a class="btn btn-info btn-sm mx-2" asp-action="Details" asp-route-id="@item.docenteId">Detalles</a>
-                        @if(item.docenteEstado == 0)
-                         {
-                           <a class="btn btn-success btn-sm mx-2 px-3" asp-action="Delete" asp-route-id="@item.docenteId">Activar</a>
-                         }
-                         else
-                          {
-                            <a class="btn btn-danger btn-sm mx-2" asp-action="Delete" asp-route-id="@item.docenteId">Desactivar</a>
-                          }
+                        <a class="btn btn-sm mx-2 @(item.docenteEstado == 0 ? "btn-success px-3" : "btn-danger")"
+                        asp-action="Delete" asp-route-id="@item.docenteId">@(item.docenteEstado == 0 ? "Activar" : "Desactivar")</a>
                     </td>
                 </tr>
         }

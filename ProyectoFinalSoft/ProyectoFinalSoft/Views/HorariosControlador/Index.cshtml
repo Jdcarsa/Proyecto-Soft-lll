@@ -25,10 +25,10 @@
                     @for (int i = 7; i <= 22; i++)
                     {
                         <tr>
-                            <td>@i:00</td>
+                            <td>@(i <= 12 ? i : i - 12):00 @(i < 12 ? "AM" : "PM")</td>
                             @for (int j = 0; j < 6; j++)
                             {
-                                <td class="celda-horario" style="cursor: pointer;" data-dia="@j" data-hora ="@i">
+                                <td class="celda-horario" style="cursor: pointer;" data-dia="@j" data-hora="@i">
                                 </td>
                             }
                         </tr>

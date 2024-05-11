@@ -4,15 +4,9 @@
     ViewData["Title"] = "Desactivar Docente";
 }
 <div class="container mt-5 text-center mb-6">
-    @if(Model.docenteEstado ==1)
-    {
-        <h1 class="text-center mb-6">Desactivar</h1>
-        <h3 class="text-center mb-6">¿Esta seguro que desea desactivar a este Docente?</h3>
-    } else{
-        <h1 class="text-center mb-6">Activar</h1>
-        <h3 class="text-center mb-6">¿Esta seguro que desea Activar a este Docente?</h3>
-    }
-
+    <h1 class="text-center mb-6">@((Model.docenteEstado == 1) ? "Desactivar" : "Activar")</h1>
+    <h3 class="text-center mb-6">¿Esta seguro que desea @(Model.docenteEstado == 1 ? "desactivar" : "activar")
+        a este Docente?</h3>
     <hr />
     <div class="container-fluid">
         <dl class="row mb-3">
@@ -58,14 +52,7 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="docenteId" />
         <a asp-action="Index" class="col-md-4 btn btn-secondary me-5">Cancelar</a>
-        @if (Model.docenteEstado == 1)
-        {
-            <input type="submit" value="Desactivar" class="col-md-4 btn btn-danger" />
-        }
-        else
-        {
-            <input type="submit" value="Activar" class="col-md-4 btn btn-success" />
-        }
-
+        <input type="submit" value="@(Model.docenteEstado == 1 ? "Desactivar" : "Activar")" class="col-md-4 btn
+        @(Model.docenteEstado == 1 ? "btn-danger" : "btn-success")" />
     </form>
 </div>
