@@ -3,20 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\views\\horarioscontrolador\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\views\\horarioscontrolador\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\services\\docenteservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\services\\docenteservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\views\\docentecontrolador\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\views\\docentecontrolador\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\controllers\\docentecontrolador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\controllers\\docentecontrolador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\views\\docentecontrolador\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\views\\docentecontrolador\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\controllers\\horarioscontrolador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\controllers\\horarioscontrolador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\views\\horarioscontrolador\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\views\\horarioscontrolador\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\views\\horarioscontrolador\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\views\\horarioscontrolador\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|solutionrelative:proyectofinalsoft\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8C3E5F32-AF88-40B7-AA25-AF6414102312}|ProyectoFinalSoft\\ProyectoFinalSoft.csproj|c:\\users\\ideapad330s\\documents\\github\\proyecto-soft-lll\\proyectofinalsoft\\proyectofinalsoft\\fachada\\ifachada.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 235,
-          "SelectedChildIndex": 16,
+          "SelectedChildIndex": 18,
           "Children": [
             {
               "$type": "Bookmark",
@@ -98,46 +110,98 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Program.cs",
-              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Program.cs",
-              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Program.cs",
-              "RelativeToolTip": "ProyectoFinalSoft\\Program.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAAAAUAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T19:55:29.888Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DocenteServicio.cs",
-              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Services\\DocenteServicio.cs",
-              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Services\\DocenteServicio.cs",
-              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Services\\DocenteServicio.cs",
-              "RelativeToolTip": "ProyectoFinalSoft\\Services\\DocenteServicio.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T19:51:57.943Z",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Index.cshtml",
+              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Views\\DocenteControlador\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Index.cshtml",
+              "RelativeToolTip": "ProyectoFinalSoft\\Views\\DocenteControlador\\Index.cshtml",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAAAFcAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-11T14:49:06.526Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "DocenteControlador.cs",
-              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Controllers\\DocenteControlador.cs",
-              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Controllers\\DocenteControlador.cs",
-              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Controllers\\DocenteControlador.cs",
-              "RelativeToolTip": "ProyectoFinalSoft\\Controllers\\DocenteControlador.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T19:46:41.89Z",
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Create.cshtml",
+              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Views\\DocenteControlador\\Create.cshtml",
+              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\DocenteControlador\\Create.cshtml",
+              "RelativeToolTip": "ProyectoFinalSoft\\Views\\DocenteControlador\\Create.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-11T14:49:04.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "List.cshtml",
+              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\HorariosControlador\\List.cshtml",
+              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Views\\HorariosControlador\\List.cshtml",
+              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\HorariosControlador\\List.cshtml",
+              "RelativeToolTip": "ProyectoFinalSoft\\Views\\HorariosControlador\\List.cshtml",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAAAFMAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-11T14:48:53.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "ProyectoFinalSoft\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAACQAAAAAAAAAAAAAADUAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-11T14:43:38.868Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "ProyectoFinalSoft\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-11T14:43:34.393Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\HorariosControlador\\Create.cshtml",
+              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Views\\HorariosControlador\\Create.cshtml",
+              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\HorariosControlador\\Create.cshtml",
+              "RelativeToolTip": "ProyectoFinalSoft\\Views\\HorariosControlador\\Create.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEkAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-10T20:32:58.999Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\HorariosControlador\\Index.cshtml",
+              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Views\\HorariosControlador\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Views\\HorariosControlador\\Index.cshtml",
+              "RelativeToolTip": "ProyectoFinalSoft\\Views\\HorariosControlador\\Index.cshtml",
+              "ViewState": "AQIAADMAAAAAAAAAAAAAADkAAABnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-10T20:32:33.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "IFachada.cs",
               "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Fachada\\IFachada.cs",
               "RelativeDocumentMoniker": "ProyectoFinalSoft\\Fachada\\IFachada.cs",
@@ -145,21 +209,7 @@
               "RelativeToolTip": "ProyectoFinalSoft\\Fachada\\IFachada.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T19:18:45.504Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HorariosControlador.cs",
-              "DocumentMoniker": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Controllers\\HorariosControlador.cs",
-              "RelativeDocumentMoniker": "ProyectoFinalSoft\\Controllers\\HorariosControlador.cs",
-              "ToolTip": "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Controllers\\HorariosControlador.cs",
-              "RelativeToolTip": "ProyectoFinalSoft\\Controllers\\HorariosControlador.cs",
-              "ViewState": "AQIAALoAAAAAAAAAAAAAAMEAAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T00:33:16.936Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T19:18:45.504Z"
             }
           ]
         },

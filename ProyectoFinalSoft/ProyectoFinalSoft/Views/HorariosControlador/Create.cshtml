@@ -65,5 +65,29 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+           
+            if (localStorage.getItem('diaSeleccionado')==0){
+                $('#horarioDia').val('Lunes');
+            } else if (localStorage.getItem('diaSeleccionado') == 1){
+                $('#horarioDia').val('Martes');
+            } else if (localStorage.getItem('diaSeleccionado') == 2){
+                $('#horarioDia').val('Miercoles');
+            } else if (localStorage.getItem('diaSeleccionado') == 3){
+                $('#horarioDia').val('Jueves');
+            } else if (localStorage.getItem('diaSeleccionado') == 4){
+                $('#horarioDia').val('Viernes');
+            } else if (localStorage.getItem('diaSeleccionado') == 5){
+                $('#horarioDia').val('Sabado');
+            }
+            
+
+            $('#horarioHoraInicio').val(localStorage.getItem('horaSeleccionada'));
+        });
+    </script>
 }

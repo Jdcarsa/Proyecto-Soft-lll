@@ -28,7 +28,7 @@
                             <td>@i:00</td>
                             @for (int j = 0; j < 6; j++)
                             {
-                                <td class="celda-horario" style="cursor: pointer;" data-horario-id="@i-@j">
+                                <td class="celda-horario" style="cursor: pointer;" data-dia="@j" data-hora ="@i">
                                 </td>
                             }
                         </tr>
@@ -70,6 +70,12 @@
     $(document).ready(function () {
         // Evento para abrir la ventana modal
         $(".celda-horario").click(function () {
+            // Captura los valores
+            let dia = $(this).data('dia');
+            let hora = $(this).data('hora');
+            // Almacena los valores
+            localStorage.setItem('diaSeleccionado', dia);
+            localStorage.setItem('horaSeleccionada', hora);
             $('#myModal').modal('show');
         });
 
