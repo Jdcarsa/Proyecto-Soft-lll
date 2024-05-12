@@ -31,7 +31,7 @@ namespace ProyectoFinalSoft.Models
 
         [Column("Horario_estado", TypeName = "numeric(1,0)")]
 		public int horarioEstado { get; set; }
-        //relaciones existentes
+       
         [Display(Name = "Ambiente")]
         public int? ambienteId { get; set; }
 		public Ambiente? ambiente { get; set; }
