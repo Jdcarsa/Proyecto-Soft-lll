@@ -194,16 +194,8 @@ namespace ProyectoFinalSoft.Controllers
             var docente = await _context.Docentes.FindAsync(id);
             if (docente != null)
             {
-                if(docente.docenteEstado == 0)
-                {
-                    docente.docenteEstado = 1;
-                    _context.Docentes.Update(docente);
-                }
-                else
-                {
-                    docente.docenteEstado = 0;
-                    _context.Docentes.Update(docente);
-                }
+                docente.docenteEstado = docente.docenteEstado == 0 ? 1 : 0;
+                _context.Docentes.Update(docente);
             }
             DisableUser(docente.docenteId, docente.docenteEstado);
             await _context.SaveChangesAsync();

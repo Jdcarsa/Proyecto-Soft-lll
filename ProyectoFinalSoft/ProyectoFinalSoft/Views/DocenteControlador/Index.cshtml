@@ -48,37 +48,37 @@
                 </tr>
             </thead>
             <tbody>
-        @foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.docenteNumId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.docenteTipoId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.docenteNombre) @Html.DisplayFor(modelItem => item.docenteApellido)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.docenteTipo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.docenteTipoContrato)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.docenteArea)
-                    </td>
-                        <td class="d-flex justify-content-around">
-                        <a class="btn btn-warning btn-sm mx-2" asp-action="Edit" asp-route-id="@item.docenteId">Editar</a>
-                        <a class="btn btn-info btn-sm mx-2" asp-action="Details" asp-route-id="@item.docenteId">Detalles</a>
-                        <a class="btn btn-sm mx-2 @(item.docenteEstado == 0 ? "btn-success px-3" : "btn-danger")"
-                        asp-action="Delete" asp-route-id="@item.docenteId">@(item.docenteEstado == 0 ? "Activar" : "Desactivar")</a>
-                    </td>
-                </tr>
-        }
+                @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.docenteNumId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.docenteTipoId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.docenteNombre) @Html.DisplayFor(modelItem => item.docenteApellido)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.docenteTipo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.docenteTipoContrato)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.docenteArea)
+                            </td>
+                                <td class="d-flex justify-content-around">
+                                <a class="btn btn-warning btn-sm mx-2" asp-action="Edit" asp-route-id="@item.docenteId">Editar</a>
+                                <a class="btn btn-info btn-sm mx-2" asp-action="Details" asp-route-id="@item.docenteId">Detalles</a>
+                                <a class="btn btn-sm mx-2 @(item.docenteEstado == 0 ? "btn-success px-3" : "btn-danger")"
+                                asp-action="Delete" asp-route-id="@item.docenteId">@(item.docenteEstado == 0 ? "Activar" : "Desactivar")</a>
+                            </td>
+                        </tr>
+                }
             </tbody>
         </table>
     </div>
-    <a class="btn btn-primary"  asp-action="Create">Crear Docente</a>
+ <a class="btn btn-primary"  asp-action="Create">Crear Docente</a>
 </div>
 
