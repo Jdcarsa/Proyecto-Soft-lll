@@ -15,5 +15,16 @@ namespace ProyectoFinalSoft.Services
 		public DbSet<Usuario> Usuarios { get; set; }
 		public DbSet<Programa> Programas { get; set; }
 		public DbSet<Competencia> Competencias { get; set; }
-	}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Docente>()
+                .HasIndex(d => d.docenteNumId)
+                .IsUnique();
+
+            modelBuilder.Entity<Ambiente>()
+                .HasIndex(a => a.ambienteCodigo)
+                .IsUnique();
+        }
+    }
 }

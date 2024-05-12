@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProyectoFinalSoft.Models
@@ -25,11 +26,12 @@ namespace ProyectoFinalSoft.Models
         [Column("Docente_TipoId", TypeName = "varchar(20)")]
 		public string? docenteTipoId { get; set; }
 
+        
         [Display(Name = "Número de Identificación")]
         [Required(ErrorMessage = "El número de identificación es obligatorio.")]
         [RegularExpression(@"^\d+$", ErrorMessage = "Solo se permiten números.")]
         [Column("Docente_NumId", TypeName = "varchar(15)")]
-		public string? docenteNumId { get; set; }
+        public string? docenteNumId { get; set; }
 
         [Display(Name = "Tipo")]
         [Required]

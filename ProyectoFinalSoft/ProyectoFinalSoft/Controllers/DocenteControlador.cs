@@ -207,16 +207,8 @@ namespace ProyectoFinalSoft.Controllers
             var usuario = _context.Usuarios.FirstOrDefault(u => u.docenteId == docenteId);
             if (usuario != null)
             {
-                if (docenteEstado == 1)
-                {
-                    usuario.usuarioEstado = 1;
-                    _context.Usuarios.Update(usuario);
-                }
-                else
-                {
-                    usuario.usuarioEstado = 0;
-                    _context.Usuarios.Update(usuario);
-                }
+                usuario.usuarioEstado = docenteEstado == 1 ? 1 : 0;
+                _context.Usuarios.Update(usuario);
             }
         }
 

@@ -75,6 +75,9 @@ namespace ProyectoFinalSoft.Migrations
 
                     b.HasKey("ambienteId");
 
+                    b.HasIndex("ambienteCodigo")
+                        .IsUnique();
+
                     b.ToTable("Ambientes");
                 });
 
@@ -172,6 +175,9 @@ namespace ProyectoFinalSoft.Migrations
                         .HasColumnName("Docente_TipoId");
 
                     b.HasKey("docenteId");
+
+                    b.HasIndex("docenteNumId")
+                        .IsUnique();
 
                     b.ToTable("Docentes");
                 });
