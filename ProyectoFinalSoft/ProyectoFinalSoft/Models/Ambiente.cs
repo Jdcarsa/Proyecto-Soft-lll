@@ -20,7 +20,7 @@ namespace ProyectoFinalSoft.Models
 		public string? ambienteNombre { get; set;}
 
         [Display(Name = "Ubicacion")]
-        [Required]
+        [Required(ErrorMessage = "La ubicacion es obligatoria.")]
         [Column("Ambiente_ubicacion", TypeName = "varchar(100)")]
 		public string? ambienteUbicacion { get; set;}
 

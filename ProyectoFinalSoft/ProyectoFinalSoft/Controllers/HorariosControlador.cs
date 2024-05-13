@@ -17,11 +17,19 @@ namespace ProyectoFinalSoft.Controllers
     {
         private readonly AppDbContext _context;
         private readonly DocenteServicio _docenteServicio;
+        private readonly AmbienteServicio _ambienteServicio;
+        private readonly CompetenciaServicio _competenciaServicio;
+        private readonly PeriodoAcademicoServicio _pAServicio;
 
-        public HorariosControlador(AppDbContext context, DocenteServicio docenteServicio)
+        public HorariosControlador(AppDbContext context, DocenteServicio docenteServicio,
+            AmbienteServicio ambienteServicio, CompetenciaServicio competenciaServicio, 
+            PeriodoAcademicoServicio pAServicio)
         {
             _context = context;
             _docenteServicio = docenteServicio;
+            _ambienteServicio = ambienteServicio;
+            _competenciaServicio = competenciaServicio;
+            _pAServicio = pAServicio;
         }
 
         // GET: HorariosControlador
@@ -62,11 +70,7 @@ namespace ProyectoFinalSoft.Controllers
         // GET: HorariosControlador/Create
         public IActionResult Create()
         {
-            obtenerAmbientes();
-            obtenerDocentes();
-            obtenerPeridosAcademicos();
-            obtenerCompetencias();
-
+            obtenerTodos();
             return View();
         }
 
@@ -243,33 +247,22 @@ namespace ProyectoFinalSoft.Controllers
             return _context.Horarios.Any(e => e.horarioId == id);
         }
 
-        public void obtenerCompetencias()
-        {
-            ViewData["competenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaNombre");
-        }
 
-
-        public void obtenerDocentes()
+        public void obtenerTodos()
         {
+            ViewData["competenciaId"] = _competenciaServicio.ObtenerCompetencias();
             ViewData["docenteId"] = _docenteServicio.ObtenerDocentes();
+            ViewData["periodoAcademicoId"] = _pAServicio.ObtenerPA();
+            ViewData["ambienteId"] = _ambienteServicio.ObtenerAmbientes();
         }
 
-        public void obtenerPeridosAcademicos()
-        {
-            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre");
-        }
-
-        public void obtenerAmbientes()
-        {
-            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo");
-        }
 
         public void obtenerTodos(Horario horario)
         {
-            ViewData["ambienteId"] = new SelectList(_context.Ambientes, "ambienteId", "ambienteCodigo", horario.ambienteId);
-            ViewData["competenciaId"] = new SelectList(_context.Competencias, "competenciaId", "competenciaNombre", horario.CompetenciaId);
-            ViewData["docenteId"] = new SelectList(_context.Docentes, "docenteId", "infoCompleta", horario.docenteId);
-            ViewData["periodoAcademicoId"] = new SelectList(_context.PeriodosAcademicos, "periodoId", "periodoNombre", horario.periodoAcademicoId);
+            ViewData["ambienteId"] = _ambienteServicio.ObtenerAmbientes(horario.ambienteId);
+            ViewData["competenciaId"] = _competenciaServicio.ObtenerCompetencias(horario.CompetenciaId);
+            ViewData["docenteId"] = _docenteServicio.ObtenerDocentes(horario.docenteId);
+            ViewData["periodoAcademicoId"] = _pAServicio.ObtenerPA(horario.periodoAcademicoId);
         }
 
         [HttpPost]

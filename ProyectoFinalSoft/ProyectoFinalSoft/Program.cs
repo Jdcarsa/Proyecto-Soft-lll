@@ -21,6 +21,9 @@ var connectionString = builder.Configuration.GetConnectionString("MySql");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString,
     ServerVersion.AutoDetect(connectionString)));
 builder.Services.AddScoped<DocenteServicio>();
+builder.Services.AddScoped<CompetenciaServicio>();
+builder.Services.AddScoped<PeriodoAcademicoServicio>();
+builder.Services.AddScoped<AmbienteServicio>();
 
 var app = builder.Build();
 

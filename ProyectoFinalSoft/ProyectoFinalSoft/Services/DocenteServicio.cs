@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ProyectoFinalSoft.Models;
 
 namespace ProyectoFinalSoft.Services
 {
@@ -14,7 +15,15 @@ namespace ProyectoFinalSoft.Services
 
         public SelectList ObtenerDocentes()
         {
-            return new SelectList(_context.Docentes, "docenteId", "infoCompleta");
+            var docentes = _context.Docentes.Where(d => d.docenteEstado == 1);
+            return new SelectList(docentes, "docenteId", "infoCompleta");
         }
+
+        public SelectList ObtenerDocentes(int? horarioDocenteId)
+        {
+            var docentes = _context.Docentes.Where(d => d.docenteEstado == 1);
+            return new SelectList(docentes, "docenteId", "infoCompleta", horarioDocenteId);
+        }
+
     }
 }

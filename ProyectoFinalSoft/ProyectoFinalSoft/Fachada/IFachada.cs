@@ -6,11 +6,7 @@ namespace ProyectoFinalSoft.Fachada
     public interface IFachada
     {
        
-        void obtenerDocentes();
-        void obtenerPeridosAcademicos();
-        void obtenerAmbientes();
-        void obtenerCompetencias();
-
+        void obtenerTodos();
         void obtenerTodos(Horario horario);
         Task guardarDatosProgComp();
     }

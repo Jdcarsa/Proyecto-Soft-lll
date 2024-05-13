@@ -34,7 +34,8 @@
                                 {
                                    
                                     var dia = dias[j];
-                                    var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours <= i && h.horarioHoraInicio.Hours + h.horarioDuracion > i).ToList();
+                                    var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours
+                                                <= i && h.horarioHoraInicio.Hours + h.horarioDuracion > i).ToList();
                                     if (horarios.Any())
                                     {
                                         var horario = horarios.First();
