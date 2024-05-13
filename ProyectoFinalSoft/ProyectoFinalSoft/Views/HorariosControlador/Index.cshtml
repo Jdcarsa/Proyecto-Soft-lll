@@ -22,28 +22,47 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (int i = 7; i <= 22; i++)
-                    {
+                    @{
+                        string[] dias = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
+                    }
+                <tbody>
+                        @for (int i = 7; i <= 22; i++)
+                        {
                         <tr>
                             <td>@(i <= 12 ? i : i - 12):00 @(i < 12 ? "AM" : "PM")</td>
-                            @for (int j = 0; j < 6; j++)
-                            {
-                                <td class="celda-horario" style="cursor: pointer;" data-dia="@j" data-hora="@i">
-                                </td>
-                            }
+                                @for (int j = 0; j < 6; j++)
+                                {
+                                   
+                                    var dia = dias[j];
+                                    var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours <= i && h.horarioHoraInicio.Hours + h.horarioDuracion > i).ToList();
+                                    if (horarios.Any())
+                                    {
+                                        var horario = horarios.First();
+                                    <td class="celda-horario" style="cursor: pointer;" data-dia="@j" data-hora="@i">
+                                        @horario.ambiente.ambienteCodigo @horario.ambiente.ambienteNombre
+                                    </td>
+                                    }
+                                    else
+                                    {
+                                    <td class="celda-horario" style="cursor: pointer;" data-dia="@j" data-hora="@i"></td>
+                                    }
+                                }
                         </tr>
-                    }
+                        }
+                </tbody>
+
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
 <!--<div>
     <form asp-controller="HorariosControlador" asp-action="guardarDatosProgComp" method="post">
         <button type="submit">Cargar datos</button>
     </form>
-</div>
--->
+</div>-->
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -88,6 +107,7 @@
             $('#myModal').modal('hide');
         });
     });
+
 </script>
 
 

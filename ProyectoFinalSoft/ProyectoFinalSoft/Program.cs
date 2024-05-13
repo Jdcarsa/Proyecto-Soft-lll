@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<DocenteServicio>();
+
 /*
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
@@ -20,6 +20,7 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 var connectionString = builder.Configuration.GetConnectionString("MySql");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString,
     ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddScoped<DocenteServicio>();
 
 var app = builder.Build();
 

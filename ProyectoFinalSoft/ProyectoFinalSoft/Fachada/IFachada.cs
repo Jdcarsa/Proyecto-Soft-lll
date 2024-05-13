@@ -12,6 +12,6 @@ namespace ProyectoFinalSoft.Fachada
         void obtenerCompetencias();
 
         void obtenerTodos(Horario horario);
-        void guardarDatosProgComp();
+        Task guardarDatosProgComp();
     }
 }

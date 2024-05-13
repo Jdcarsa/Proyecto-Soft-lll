@@ -208,16 +208,12 @@ namespace ProyectoFinalSoft.Migrations
                         .HasColumnType("numeric(1,0)")
                         .HasColumnName("Horario_duracion");
 
-                    b.Property<decimal>("horarioEstado")
-                        .HasColumnType("numeric(1,0)")
-                        .HasColumnName("Horario_estado");
-
-                    b.Property<decimal>("horarioHoraFin")
-                        .HasColumnType("numeric(2,0)")
+                    b.Property<TimeSpan>("horarioHoraFin")
+                        .HasColumnType("time(6)")
                         .HasColumnName("Horario_hora_fin");
 
-                    b.Property<decimal>("horarioHoraInicio")
-                        .HasColumnType("numeric(2,0)")
+                    b.Property<TimeSpan>("horarioHoraInicio")
+                        .HasColumnType("time(6)")
                         .HasColumnName("Horario_hora_inicio");
 
                     b.Property<int?>("periodoAcademicoId")

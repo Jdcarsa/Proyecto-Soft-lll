@@ -16,21 +16,18 @@ namespace ProyectoFinalSoft.Models
 
         [Display(Name = "Hora de inicio")]
         [Required(ErrorMessage = "La hora de inicio es obligatoria.")]
-        [Column("Horario_hora_inicio", TypeName = "numeric(2,0)")]
-		public int horarioHoraInicio { get; set; }
+        [Column("Horario_hora_inicio")]
+		public TimeSpan horarioHoraInicio { get; set; }
 
         [Display(Name = "Hora fin")]
         [Required(ErrorMessage = "La hora de fin es obligatoria.")]
-        [Column("Horario_hora_fin", TypeName = "numeric(2,0)")]
-		public int horarioHoraFin { get; set; }
+        [Column("Horario_hora_fin")]
+		public TimeSpan horarioHoraFin { get; set; }
 
         [Display(Name = "Duracion")]
         [Required]
         [Column("Horario_duracion", TypeName = "numeric(1,0)")]
 		public int horarioDuracion { get; set; }
-
-        [Column("Horario_estado", TypeName = "numeric(1,0)")]
-		public int horarioEstado { get; set; }
        
         [Display(Name = "Ambiente")]
         public int? ambienteId { get; set; }

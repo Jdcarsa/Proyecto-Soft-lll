@@ -75,8 +75,9 @@ namespace ProyectoFinalSoft.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("horarioId,horarioDia,horarioHoraInicio,horarioHoraFin,horarioDuracion,horarioEstado,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
+        public async Task<IActionResult> Create([Bind("horarioId,horarioDia,horarioHoraInicio,horarioHoraFin,horarioDuracion,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Add(horario);
@@ -109,7 +110,7 @@ namespace ProyectoFinalSoft.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("horarioId,horarioDia,horarioHoraInicio,horarioHoraFin,horarioDuracion,horarioEstado,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
+        public async Task<IActionResult> Edit(int id, [Bind("horarioId,horarioDia,horarioHoraInicio,horarioHoraFin,horarioDuracion,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
         {
             if (id != horario.horarioId)
             {
@@ -214,7 +215,7 @@ namespace ProyectoFinalSoft.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async void guardarDatosProgComp()
+        public async Task guardarDatosProgComp()
         {
             var rutaAlArchivo = "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Json\\Programas.json";
 
@@ -228,7 +229,7 @@ namespace ProyectoFinalSoft.Controllers
             foreach (var programa in programas)
             {
                 // Guarda cada programa en la base de datos
-                _context.Programas.Add(programa);
+                this._context.Programas.Add(programa);
             }
 
             // Guarda los cambios en la base de datos
