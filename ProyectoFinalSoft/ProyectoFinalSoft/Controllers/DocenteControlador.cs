@@ -69,10 +69,11 @@ namespace ProyectoFinalSoft.Controllers
                 _context.Docentes.Add(docente);
                 await _context.SaveChangesAsync();
                 await CreateUser(docente);
-                return RedirectToAction(nameof(Index));
+                return Json(new { success = true });
             }
-            return View(docente);
+            return Json(new { success = false });
         }
+
 
         public async Task<IActionResult> CreateUser(Docente docente)
         {
@@ -163,9 +164,9 @@ namespace ProyectoFinalSoft.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Json(new { success = true });
             }
-            return View(docente);
+            return Json(new { success = false });
         }
 
         // GET: DocenteControlador/Delete/5
