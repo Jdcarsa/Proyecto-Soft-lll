@@ -35,13 +35,15 @@ namespace ProyectoFinalSoft.Controllers
         // GET: HorariosControlador
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico);
+            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h
+                => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico);
             return View(await appDbContext.ToListAsync());
         }
 
         public async Task<IActionResult> List()
         {
-            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico);
+            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h 
+                => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico);
             return View(await appDbContext.ToListAsync());
         }
 
@@ -79,28 +81,30 @@ namespace ProyectoFinalSoft.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("horarioId,horarioDia,horarioHoraInicio,horarioHoraFin,horarioDuracion,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
+        public async Task<IActionResult> Create([Bind("horarioId,horarioDia,horarioHoraInicio," +
+            "horarioHoraFin,horarioDuracion,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
         {
             if (ModelState.IsValid)
             {
+                
                 if (!ValidarHorasTrabajo(horario))
                 {
-                    ModelState.AddModelError("", "El docente excede el límite de horas permitido por día o por semana.");
+                    ModelState.AddModelError("", "El docente excede el limite de horas permitido por dia o por semana.");
                     obtenerTodos(horario);
                     return View(horario);
                 }
 
                 _context.Add(horario);
                 await _context.SaveChangesAsync();
+                obtenerTodos(horario);
                 return RedirectToAction(nameof(Index));
             }
-            obtenerTodos(horario);
+            
             return View(horario);
         }
 
         private bool ValidarHorasTrabajo(Horario horario)
         {
-            // Obtener el tipo de docente
             var docente = _context.Docentes.FirstOrDefault(d => d.docenteId == horario.docenteId);
 
             if (docente == null)
@@ -108,45 +112,36 @@ namespace ProyectoFinalSoft.Controllers
                 return true;
             }
 
-            Dictionary<string, int> diaSemanaNumerico = new Dictionary<string, int>
-            {
-                { "Lunes", 1 },
-                { "Martes", 2 },
-                { "Miércoles", 3 },
-                { "Jueves", 4 },
-                { "Viernes", 5 },
-                { "Sábado", 6 }
-            };
-
             var franjasSemana = _context.Horarios
                 .Where(h => h.docenteId == horario.docenteId &&
-                            diaSemanaNumerico[h.horarioDia] >= diaSemanaNumerico["Lunes"] &&
-                            diaSemanaNumerico[h.horarioDia] <= diaSemanaNumerico["Sábado"])
+                            (h.horarioDia == "Lunes" || h.horarioDia == "Martes" || h.horarioDia == "Miércoles" ||
+                             h.horarioDia == "Jueves" || h.horarioDia == "Viernes" || h.horarioDia == "Sábado"))
                 .ToList();
 
             // Calcular las horas trabajadas por el docente en el día
             var horasDia = franjasSemana.Where(h => h.horarioDia == horario.horarioDia)
                                          .Sum(h => h.horarioDuracion);
-
+         
             // Calcular las horas trabajadas por el docente en la semana
             var horasSemana = franjasSemana.Sum(h => h.horarioDuracion);
 
+            horasDia = horasDia + horario.horarioDuracion;
+            horasSemana = horasSemana + horario.horarioDuracion;
 
-            // Verificar el tipo de docente y sus límites de horas
-            if (docente.docenteTipo == "PT")
+            if (docente.docenteTipoContrato == "PT")
             {
-                // Docente PT: Máximo 8 horas al día y 32 a la semana
-                return horasDia + (horario.horarioHoraFin - horario.horarioHoraInicio).TotalHours <= 8 &&
-                       horasSemana + (horario.horarioHoraFin - horario.horarioHoraInicio).TotalHours <= 32;
+                // Docente CNT: Máximo 8 horas al día y 32 a la semana
+                return horasDia  <= 8 &&
+                       horasSemana <= 32;
             }
-            else if (docente.docenteTipo == "CNT")
+            else if (docente.docenteTipoContrato == "CNT")
             {
                 // Docente CNT: Máximo 10 horas al día y 40 a la semana
-                return horasDia + (horario.horarioHoraFin - horario.horarioHoraInicio).TotalHours <= 10 &&
-                       horasSemana + (horario.horarioHoraFin - horario.horarioHoraInicio).TotalHours <= 40;
+                return horasDia  <= 10 &&
+                       horasSemana <= 40;
             }
 
-            // Si el tipo de docente no es reconocido, permitir la creación del horario
+   
             return true;
         }
 
