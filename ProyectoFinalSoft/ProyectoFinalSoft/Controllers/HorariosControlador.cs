@@ -179,6 +179,12 @@ namespace ProyectoFinalSoft.Controllers
             {
                 try
                 {
+                    if (!ValidarHorasTrabajo(horario))
+                    {
+                        ModelState.AddModelError("", "El docente excede el limite de horas permitido por dia o por semana.");
+                        obtenerTodos(horario);
+                        return View(horario);
+                    }
                     _context.Update(horario);
                     await _context.SaveChangesAsync();
                 }
