@@ -120,6 +120,7 @@ namespace FinalSoftwarelll.Controllers
             {
                 try
                 {
+                    periodoAcademico.periodoEstado = 1;
                     _context.Update(periodoAcademico);
                     await _context.SaveChangesAsync();
                 }

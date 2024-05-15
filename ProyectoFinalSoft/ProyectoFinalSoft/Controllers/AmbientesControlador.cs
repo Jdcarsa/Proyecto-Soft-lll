@@ -117,6 +117,7 @@ namespace FinalSoftwarelll.Controllers
             {
                 try
                 {
+                    ambiente.ambienteEstado = 1;
                     _context.Update(ambiente);
                     await _context.SaveChangesAsync();
                 }
