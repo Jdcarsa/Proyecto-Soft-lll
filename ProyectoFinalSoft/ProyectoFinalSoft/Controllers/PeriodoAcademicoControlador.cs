@@ -5,27 +5,38 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ProyectoFinalSoft.Models;
-using ProyectoFinalSoft.Services;
+using FinalSoftwarelll.Models;
+using FinalSoftwarelll.Services;
 
-namespace ProyectoFinalSoft.Controllers
+namespace FinalSoftwarelll.Controllers
 {
-    public class PeriodoAcademicosControlador : Controller
+    public class PeriodoAcademicoControlador : Controller
     {
         private readonly AppDbContext _context;
 
-        public PeriodoAcademicosControlador(AppDbContext context)
+        public PeriodoAcademicoControlador(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: PeriodoAcademicosControlador
-        public async Task<IActionResult> Index()
+        // GET: PeriodoAcademicoControlador
+        public async Task<IActionResult> Index(string periodoBusqueda)
         {
-            return View(await _context.PeriodosAcademicos.ToListAsync());
+            // Obtener todos los periodos
+            var periodos = from periodo in _context.PeriodosAcademicos select periodo;
+
+            // Verificar si se proporcionó un término de búsqueda
+            if (!String.IsNullOrEmpty(periodoBusqueda))
+            {
+                // Filtrar los periodos cuyo nombre o fecha de inicio contengan el término de búsqueda
+                periodos = periodos.Where(periodo => (periodo.periodoNombre + " " + periodo.periodoFechaInicio).Contains(periodoBusqueda));
+            }
+
+            // Devolver la vista con los resultados filtrados
+            return View(await periodos.ToListAsync());
         }
 
-        // GET: PeriodoAcademicosControlador/Details/5
+        // GET: PeriodoAcademicoControlador/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,13 +54,13 @@ namespace ProyectoFinalSoft.Controllers
             return View(periodoAcademico);
         }
 
-        // GET: PeriodoAcademicosControlador/Create
+        // GET: PeriodoAcademicoControlador/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: PeriodoAcademicosControlador/Create
+        // POST: PeriodoAcademicoControlador/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -58,6 +69,18 @@ namespace ProyectoFinalSoft.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (periodoAcademico.periodoFechaInicio >= periodoAcademico.periodoFechaFin)
+                {
+                    ModelState.AddModelError("periodoFechaFin", "La fecha de fin debe ser mayor que la fecha de inicio.");
+                    return View(periodoAcademico);
+                }
+                var diferenciaMeses = ((periodoAcademico.periodoFechaFin.Year - periodoAcademico.periodoFechaInicio.Year) * 12) + periodoAcademico.periodoFechaFin.Month - periodoAcademico.periodoFechaInicio.Month;
+                if (diferenciaMeses < 2 || diferenciaMeses > 6)
+                {
+                    ModelState.AddModelError("periodoFechaFin", "La duración del periodo académico debe ser de mínimo dos meses y máximo seis meses.");
+                    return View(periodoAcademico);
+                }
+                periodoAcademico.periodoEstado = 1;
                 _context.Add(periodoAcademico);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -65,7 +88,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(periodoAcademico);
         }
 
-        // GET: PeriodoAcademicosControlador/Edit/5
+        // GET: PeriodoAcademicoControlador/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,7 +104,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(periodoAcademico);
         }
 
-        // POST: PeriodoAcademicosControlador/Edit/5
+        // POST: PeriodoAcademicoControlador/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +139,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(periodoAcademico);
         }
 
-        // GET: PeriodoAcademicosControlador/Delete/5
+        // GET: PeriodoAcademicoControlador/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,15 +157,16 @@ namespace ProyectoFinalSoft.Controllers
             return View(periodoAcademico);
         }
 
-        // POST: PeriodoAcademicosControlador/Delete/5
+        // POST: PeriodoAcademicoControlador/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var periodoAcademico = await _context.PeriodosAcademicos.FindAsync(id);
-            if (periodoAcademico != null)
+            var periodo = await _context.PeriodosAcademicos.FindAsync(id);
+            if (periodo != null)
             {
-                _context.PeriodosAcademicos.Remove(periodoAcademico);
+                periodo.periodoEstado = periodo.periodoEstado == 0 ? 1 : 0;
+                _context.PeriodosAcademicos.Update(periodo);
             }
 
             await _context.SaveChangesAsync();

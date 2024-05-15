@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ProyectoFinalSoft.Models;
-using ProyectoFinalSoft.Services;
+using FinalSoftwarelll.Models;
+using FinalSoftwarelll.Services;
 
-namespace ProyectoFinalSoft.Controllers
+namespace FinalSoftwarelll.Controllers
 {
     public class AmbientesControlador : Controller
     {
@@ -20,10 +20,22 @@ namespace ProyectoFinalSoft.Controllers
         }
 
         // GET: AmbientesControlador
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string ambienteBusqueda)
         {
-            return View(await _context.Ambientes.ToListAsync());
+            // Obtener todos los ambientes
+            var ambientes = from ambiente in _context.Ambientes select ambiente;
+
+            // Verificar si se proporcionó un término de búsqueda
+            if (!String.IsNullOrEmpty(ambienteBusqueda))
+            {
+                // Filtrar los ambientes cuyo nombre o ubicación contengan el término de búsqueda
+                ambientes = ambientes.Where(amb => (amb.ambienteNombre + " " + amb.ambienteUbicacion).Contains(ambienteBusqueda));
+            }
+
+            // Devolver la vista con los resultados filtrados
+            return View(await ambientes.ToListAsync());
         }
+
 
         // GET: AmbientesControlador/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -58,6 +70,14 @@ namespace ProyectoFinalSoft.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                var existeAmbiente = await _context.Ambientes.AnyAsync(amb => amb.ambienteCodigo == ambiente.ambienteCodigo);
+                if (existeAmbiente)
+                {
+                    ModelState.AddModelError("ambienteCodigo", "El ID ingresado ya existe.");
+                    return View(ambiente);
+                }
+                ambiente.ambienteEstado = 1;
                 _context.Add(ambiente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -142,7 +162,8 @@ namespace ProyectoFinalSoft.Controllers
             var ambiente = await _context.Ambientes.FindAsync(id);
             if (ambiente != null)
             {
-                _context.Ambientes.Remove(ambiente);
+                ambiente.ambienteEstado = ambiente.ambienteEstado == 0 ? 1 : 0;
+                _context.Ambientes.Update(ambiente);
             }
 
             await _context.SaveChangesAsync();
