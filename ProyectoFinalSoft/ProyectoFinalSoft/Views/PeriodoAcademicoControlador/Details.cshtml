@@ -1,0 +1,35 @@
+﻿@model FinalSoftwarelll.Models.PeriodoAcademico
+
+@{
+    ViewData["Title"] = "Detalles Periodos académicos";
+}
+
+<h1>Detalles Periodo académico</h1>
+
+<div>
+    <h4>Periodo Académico</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.periodoFechaInicio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.periodoFechaInicio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.periodoFechaFin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.periodoFechaFin)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.periodoNombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.periodoNombre)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+</div>

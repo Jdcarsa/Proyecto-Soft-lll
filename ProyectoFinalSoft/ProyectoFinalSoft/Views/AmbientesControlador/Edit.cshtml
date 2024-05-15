@@ -1,12 +1,12 @@
-﻿@model ProyectoFinalSoft.Models.Ambiente
+﻿@model FinalSoftwarelll.Models.Ambiente
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Ambientes de aprendizaje";
 }
 
-<h1>Edit</h1>
+<h1>Editar Ambiente de aprendizaje</h1>
 
-<h4>Ambiente</h4>
+<h4>Ambiente de aprendizaje</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -39,19 +39,14 @@
                 <span asp-validation-for="ambienteCapacidad" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ambienteEstado" class="control-label"></label>
-                <input asp-for="ambienteEstado" class="form-control" />
-                <span asp-validation-for="ambienteEstado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
 </div>
 
 @section Scripts {

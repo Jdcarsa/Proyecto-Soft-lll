@@ -1,13 +1,13 @@
-﻿@model ProyectoFinalSoft.Models.Ambiente
+﻿@model FinalSoftwarelll.Models.Ambiente
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles Ambiente de aprendizaje";
 }
 
-<h1>Details</h1>
+<h1>Detalles Ambiente de aprendizaje</h1>
 
 <div>
-    <h4>Ambiente</h4>
+    <h4>Ambiente de aprendizaje</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -40,15 +40,8 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ambienteCapacidad)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ambienteEstado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ambienteEstado)
-        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.ambienteId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
 </div>
