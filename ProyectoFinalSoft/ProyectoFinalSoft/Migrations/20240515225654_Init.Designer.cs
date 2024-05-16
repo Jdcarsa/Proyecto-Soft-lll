@@ -12,7 +12,7 @@ using ProyectoFinalSoft.Services;
 namespace ProyectoFinalSoft.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240513033306_Init")]
+    [Migration("20240515225654_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -309,8 +309,12 @@ namespace ProyectoFinalSoft.Migrations
                         .HasColumnName("Usuario_login");
 
                     b.Property<string>("usuarioPassword")
-                        .HasColumnType("varchar(30)")
+                        .HasColumnType("varchar(500)")
                         .HasColumnName("Usuario_password");
+
+                    b.Property<decimal>("usuarioRol")
+                        .HasColumnType("numeric(1,0)")
+                        .HasColumnName("usuario_rol");
 
                     b.HasKey("usuarioId");
 

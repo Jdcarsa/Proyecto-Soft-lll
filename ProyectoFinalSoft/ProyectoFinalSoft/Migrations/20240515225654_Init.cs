@@ -142,9 +142,10 @@ namespace ProyectoFinalSoft.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Usuario_login = table.Column<string>(type: "varchar(30)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Usuario_password = table.Column<string>(type: "varchar(30)", nullable: true)
+                    Usuario_password = table.Column<string>(type: "varchar(500)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     usuario_estado = table.Column<decimal>(type: "numeric(1,0)", nullable: false),
+                    usuario_rol = table.Column<decimal>(type: "numeric(1,0)", nullable: false),
                     docenteId = table.Column<int>(type: "int", nullable: true),
                     coordinadorId = table.Column<int>(type: "int", nullable: true)
                 },

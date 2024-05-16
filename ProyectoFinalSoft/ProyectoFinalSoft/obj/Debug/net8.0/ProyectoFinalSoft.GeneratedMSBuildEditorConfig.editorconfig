@@ -26,6 +26,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\ideapad330S\Documents\GitHub\Proyecto-Soft-lll\ProyectoFinalSoft\ProyectoFinalSoft
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/AccesoControlador/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNvQ29udHJvbGFkb3JcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/AmbientesControlador/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW1iaWVudGVzQ29udHJvbGFkb3JcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -98,24 +102,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9yYXJpb3NDb250cm9sYWRvclxMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/PeriodoAcademicosControlador/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyaW9kb0FjYWRlbWljb3NDb250cm9sYWRvclxDcmVhdGUuY3NodG1s
+[C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/PeriodoAcademicoControlador/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyaW9kb0FjYWRlbWljb0NvbnRyb2xhZG9yXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/PeriodoAcademicosControlador/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyaW9kb0FjYWRlbWljb3NDb250cm9sYWRvclxEZWxldGUuY3NodG1s
+[C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/PeriodoAcademicoControlador/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyaW9kb0FjYWRlbWljb0NvbnRyb2xhZG9yXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/PeriodoAcademicosControlador/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyaW9kb0FjYWRlbWljb3NDb250cm9sYWRvclxEZXRhaWxzLmNzaHRtbA==
+[C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/PeriodoAcademicoControlador/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyaW9kb0FjYWRlbWljb0NvbnRyb2xhZG9yXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/PeriodoAcademicosControlador/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyaW9kb0FjYWRlbWljb3NDb250cm9sYWRvclxFZGl0LmNzaHRtbA==
+[C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/PeriodoAcademicoControlador/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyaW9kb0FjYWRlbWljb0NvbnRyb2xhZG9yXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/PeriodoAcademicosControlador/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyaW9kb0FjYWRlbWljb3NDb250cm9sYWRvclxJbmRleC5jc2h0bWw=
+[C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/PeriodoAcademicoControlador/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyaW9kb0FjYWRlbWljb0NvbnRyb2xhZG9yXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/Shared/Error.cshtml]

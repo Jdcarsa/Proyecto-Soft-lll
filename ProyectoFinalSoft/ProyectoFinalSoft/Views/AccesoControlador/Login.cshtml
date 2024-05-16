@@ -1,0 +1,40 @@
+﻿@model ProyectoFinalSoft.Models.LoginModel.LoginUsuario;
+@{
+    ViewData["Title"] = "Iniciar sesión";
+    Layout = null;
+}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    </head>
+    <body>
+    <div class="container row mt-5 justify-content-center">
+        <div class="card col-sm-4">
+            <div  class="card-header">
+                <h2>@ViewData["Title"]</h2>
+            </div>
+            <div class="card-body">
+                <form class="form-signin" asp-controller="AccesoControlador" asp-action="Login" method="post">
+                    <div class="form-group">
+                        <input asp-for="usuario" class="form-control" placeholder="Usuario" required  />
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="contrasenia" type="password" class="form-control" placeholder="Contraseña" required />
+                    </div>
+                    <div class="mx-3">
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                    </div>
+                    
+                </form>
+                @if (ViewData["Message"] != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewData["Message"]
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

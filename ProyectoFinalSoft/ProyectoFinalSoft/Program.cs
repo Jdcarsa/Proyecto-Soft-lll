@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProyectoFinalSoft.Services;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,9 +17,19 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
+	AddCookie(options =>
+	{
+		options.LoginPath = "/AccesoControlador/Login";
+		options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+		options.AccessDeniedPath = "/Home/Privacy";
+    });
+
+
 var connectionString = builder.Configuration.GetConnectionString("MySql");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString,
     ServerVersion.AutoDetect(connectionString)));
+
 builder.Services.AddScoped<DocenteServicio>();
 builder.Services.AddScoped<CompetenciaServicio>();
 builder.Services.AddScoped<PeriodoAcademicoServicio>();
@@ -39,11 +49,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}");
+	pattern: "{controller=AccesoControlador}/{action=Login}/{id?}");
 
 app.Run();

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +12,7 @@ using ProyectoFinalSoft.Services;
 
 namespace ProyectoFinalSoft.Controllers
 {
+    [Authorize(Roles = "Coordinador")]
     public class DocenteControlador : Controller
     {
         private readonly AppDbContext _context;
@@ -69,6 +72,7 @@ namespace ProyectoFinalSoft.Controllers
                 _context.Docentes.Add(docente);
                 await _context.SaveChangesAsync();
                 await CreateUser(docente);
+                //await CreateUser();
                 return Json(new { success = true });
             }
             return Json(new { success = false });
@@ -79,14 +83,28 @@ namespace ProyectoFinalSoft.Controllers
         {
             try
             {
+                var passwordHasher = new PasswordHasher<object>();
+
                 Usuario user = new Usuario();
                 user.docenteId = docente.docenteId;
                 user.docente = docente;
                 user.usuarioEstado = 1;
                 user.usuarioLogin = GenerarNombreUsuario(docente.docenteNombre, docente.docenteApellido);
-                user.usuarioPassword = GenerarContrasena();
+                user.usuarioRol = 1;
+                
+                string contrasenaGenerada = GenerarContrasena();
+
+                string path = "C:\\Users\\ideapad330S\\Documents\\U\\usercontra.txt";
+                using (StreamWriter sw = System.IO.File.AppendText(path))
+                {
+                    sw.WriteLine($"Usuario: {user.usuarioLogin}, Contraseña: {contrasenaGenerada}");
+                }
+
+                user.usuarioPassword = passwordHasher.HashPassword(null, contrasenaGenerada);
                 _context.Usuarios.Add(user);
+
                 await _context.SaveChangesAsync();
+
                 return Ok();
             }
             catch (Exception ex)
@@ -94,6 +112,42 @@ namespace ProyectoFinalSoft.Controllers
                 return BadRequest(new { message = "Hubo un error al crear el usuario", error = ex.Message });
             }
         }
+
+
+        public async Task<IActionResult> CreateUser()
+        {
+            try
+            {
+                var passwordHasher = new PasswordHasher<object>();
+
+                Usuario user = new Usuario();
+                user.coordinadorId = 1;
+                user.usuarioEstado = 1;
+                user.usuarioLogin = GenerarNombreUsuario("Jose", "coor");
+                user.usuarioRol = 0;
+
+                string contrasenaGenerada = GenerarContrasena();
+
+                string path = "C:\\Users\\ideapad330S\\Documents\\U\\usercontra.txt";
+                using (StreamWriter sw = System.IO.File.AppendText(path))
+                {
+                    sw.WriteLine($"Usuario: {user.usuarioLogin}, Contraseña: {contrasenaGenerada}");
+                }
+
+                user.usuarioPassword = passwordHasher.HashPassword(null, contrasenaGenerada);
+                _context.Usuarios.Add(user);
+
+                await _context.SaveChangesAsync();
+
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Hubo un error al crear el usuario", error = ex.Message });
+            }
+        }
+
 
         private string GenerarNombreUsuario(string? nombre, string? apellido)
         {

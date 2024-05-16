@@ -306,8 +306,12 @@ namespace ProyectoFinalSoft.Migrations
                         .HasColumnName("Usuario_login");
 
                     b.Property<string>("usuarioPassword")
-                        .HasColumnType("varchar(30)")
+                        .HasColumnType("varchar(500)")
                         .HasColumnName("Usuario_password");
+
+                    b.Property<decimal>("usuarioRol")
+                        .HasColumnType("numeric(1,0)")
+                        .HasColumnName("usuario_rol");
 
                     b.HasKey("usuarioId");
 

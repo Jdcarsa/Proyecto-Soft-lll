@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using FinalSoftwarelll.Models;
-using FinalSoftwarelll.Services;
+using ProyectoFinalSoft.Models;
+using ProyectoFinalSoft.Services;
 
-namespace FinalSoftwarelll.Controllers
+namespace ProyectoFinalSoft.Controllers
 {
+    [Authorize(Roles = "Coordinador")]
     public class PeriodoAcademicoControlador : Controller
     {
         private readonly AppDbContext _context;
