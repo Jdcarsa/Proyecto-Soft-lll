@@ -50,7 +50,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(await appDbContext.ToListAsync());
         }
 
-        [Authorize(Roles = "Coordinador")]
+        [Authorize(Roles = "Coordinador,Docente")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

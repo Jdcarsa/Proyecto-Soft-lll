@@ -1,57 +1,101 @@
 ﻿@model IEnumerable<ProyectoFinalSoft.Models.Horario>
-
+@using System.Security.Claims;
 @{
     ViewData["Title"] = "DocenteHorario";
+    Layout = null;
 }
 
-
-<h1 class="text-center my-3">Horario</h1>
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Hora</th>
-                        <th>Lunes</th>
-                        <th>Martes</th>
-                        <th>Miércoles</th>
-                        <th>Jueves</th>
-                        <th>Viernes</th>
-                        <th>Sábado</th>
-                    </tr>
-                </thead>
-                @{
-                    string[] dias = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
-                }
-                <tbody>
-                    @for (int i = 7; i <= 22; i++)
-                    {
-                        <tr>
-                            <td>@(i <= 12 ? i : i - 12):00 @(i < 12 ? "AM" : "PM")</td>
-                            @for (int j = 0; j < 6; j++)
+<html>
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item text-light d-flex align-items-center justify-content-start">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="IndexDocente">Horario Academico</a>
+                        </li>
+                        <li class="nav-item text-light d-flex align-items-center justify-content-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar2-week" viewBox="0 0 16 16">
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z" />
+                                <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
+                            </svg>
+                            @if (User.Identity!.IsAuthenticated)
                             {
-
-                                var dia = dias[j];
-                                var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours
-                                <= i && h.horarioHoraInicio.Hours + h.horarioDuracion > i).ToList();
-                                if (horarios.Any())
-                                {
-                                    var horario = horarios.First();
-                                    <td class="celda-horario" style="cursor: pointer;" data-dia="@j" data-hora="@i">
-                                        @horario.ambiente.ambienteCodigo @horario.ambiente.ambienteNombre
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td class="celda-horario" data-dia="@j" data-hora="@i"></td>
-                                }
+                                var userDocente = @User.Claims.Where(c => c.Type == ClaimTypes.Name)
+                                .Select(c => c.Value).SingleOrDefault();
+                                <a class="nav-link nav-hover" asp-area="" asp-route-id="@userDocente"
+                                   asp-controller="HorariosControlador" asp-action="DocenteHorario">Consultar Horario</a>
                             }
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                        </li>
+                        <li class="nav-item text-light d-flex align-items-center justify-content-start mx-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                            </svg>
+                            <a class="nav-link nav-hover" asp-area="" asp-controller="Home" asp-action="Salir">Salir</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+        <h1 class="text-center my-3">Horario</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Hora</th>
+                                <th>Lunes</th>
+                                <th>Martes</th>
+                                <th>Miércoles</th>
+                                <th>Jueves</th>
+                                <th>Viernes</th>
+                                <th>Sábado</th>
+                            </tr>
+                        </thead>
+                        @{
+                            string[] dias = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
+                        }
+                        <tbody>
+                            @for (int i = 7; i <= 22; i++)
+                            {
+                                <tr>
+                                    <td>@(i <= 12 ? i : i - 12):00 @(i < 12 ? "AM" : "PM")</td>
+                                    @for (int j = 0; j < 6; j++)
+                                    {
 
+                                        var dia = dias[j];
+                                        var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours
+                                        <= i && h.horarioHoraInicio.Hours + h.horarioDuracion > i).ToList();
+                                        if (horarios.Any())
+                                        {
+                                            var horario = horarios.First();
+                                            <td class="celda-horario" style="cursor: pointer;" data-dia="@j" data-hora="@i">
+                                            <a style="text-decoration: none; color:black;" asp-action="Details" asp-route-id="@horario.horarioId">
+                                                @horario.ambiente.ambienteCodigo @horario.ambiente.ambienteNombre</a>
+                                        </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="celda-horario" data-dia="@j" data-hora="@i"></td>
+                                        }
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
