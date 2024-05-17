@@ -31,15 +31,19 @@ namespace ProyectoFinalSoft.Models
        
         [Display(Name = "Ambiente")]
         public int? ambienteId { get; set; }
-		public Ambiente? ambiente { get; set; }
+        [Display(Name = "Ambiente")]
+        public Ambiente? ambiente { get; set; }
         [Display(Name = "Docente")]
         public int? docenteId { get; set; }
-		public Docente? docente { get; set; }
+        [Display(Name = "Docente")]
+        public Docente? docente { get; set; }
         [Display(Name = "Periodo Academico")]
         public int? periodoAcademicoId {  get; set; }
-		public PeriodoAcademico? periodoAcademico { get; set; }
+        [Display(Name = "Periodo Academico")]
+        public PeriodoAcademico? periodoAcademico { get; set; }
         [Display(Name = "Competencia")]
         public int CompetenciaId { get; set; }
-		public Competencia? competencia { get; set; }
+        [Display(Name = "Competencia")]
+        public Competencia? competencia { get; set; }
     }
 }

@@ -5,6 +5,23 @@
     Layout = null;
 }
 
+@{
+    Dictionary<string, string> coloresPorCompetencia = new Dictionary<string, string>();
+
+    string GetColorForCompetencia(string competencia)
+    {
+        if (!coloresPorCompetencia.ContainsKey(competencia))
+        {
+            Random random = new Random();
+            string color = String.Format("#{0:X2}{1:X2}{2:X2}",
+            random.Next(200, 256), random.Next(200, 256), random.Next(200, 256));
+            coloresPorCompetencia.Add(competencia, color);
+        }
+        return coloresPorCompetencia[competencia];
+    }
+}
+
+
 <html>
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -66,36 +83,48 @@
                         @{
                             string[] dias = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
                         }
-                        <tbody>
-                            @for (int i = 7; i <= 22; i++)
-                            {
-                                <tr>
-                                    <td>@(i <= 12 ? i : i - 12):00 @(i < 12 ? "AM" : "PM")</td>
-                                    @for (int j = 0; j < 6; j++)
+                    <tbody>
+                        @for (int i = 7; i <= 22; i++)
+                        {
+                            <tr>
+                                <td>@(i <= 12 ? i : i - 12):00 @(i < 12 ? "AM" : "PM")</td>
+                                @for (int j = 0; j < 6; j++)
+                                {
+                                    var dia = dias[j];
+                                    var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours
+                                    <= i && h.horarioHoraInicio.Hours + h.horarioDuracion > i).ToList();
+                                    if (horarios.Any())
                                     {
-
-                                        var dia = dias[j];
-                                        var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours
-                                        <= i && h.horarioHoraInicio.Hours + h.horarioDuracion > i).ToList();
-                                        if (horarios.Any())
-                                        {
-                                            var horario = horarios.First();
-                                            <td class="celda-horario" style="cursor: pointer;" data-dia="@j" data-hora="@i">
+                                        var horario = horarios.First();
+                                        string color = GetColorForCompetencia(horario.CompetenciaId.ToString());
+                                        <td class="celda-horario" style="cursor: pointer; background-color: @color;" data-dia="@j" data-hora="@i">
                                             <a style="text-decoration: none; color:black;" asp-action="Details" asp-route-id="@horario.horarioId">
-                                                @horario.ambiente.ambienteCodigo @horario.ambiente.ambienteNombre</a>
+                                                @horario.ambiente.ambienteCodigo @horario.ambiente.ambienteNombre
+                                            </a>
                                         </td>
-                                        }
-                                        else
-                                        {
-                                            <td class="celda-horario" data-dia="@j" data-hora="@i"></td>
-                                        }
                                     }
-                                </tr>
-                            }
-                        </tbody>
+                                    else
+                                    {
+                                        <td class="celda-horario" data-dia="@j" data-hora="@i"></td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    </tbody>
+
                     </table>
                 </div>
             </div>
         </div>
+        <footer class="border-top footer text-muted text-center foot">
+            <div class="container">
+                &copy; 2024 - Todos los derechos reservados
+            </div>
+        </footer>
 </body>
 </html>
+
+
+
+
+

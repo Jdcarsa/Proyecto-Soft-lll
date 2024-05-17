@@ -1,78 +1,78 @@
 ﻿@model IEnumerable<ProyectoFinalSoft.Models.Horario>
 
 @{
-    ViewData["Title"] = "View";
+    ViewData["Title"] = "Franjas Horarias";
 }
 
-<h1>View</h1>
-
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.horarioDia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.horarioHoraInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.horarioHoraFin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.horarioDuracion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ambiente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.docente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.periodoAcademico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.competencia)
-            </th>
-            <th>
-                Acciones
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.horarioDia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.horarioHoraInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.horarioHoraFin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.horarioDuracion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ambiente.ambienteCodigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.docente.docenteApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.periodoAcademico.periodoNombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.competencia.competenciaId)
-            </td>
-            <td class="d-flex justify-content-around">
-                <a class="btn btn-warning btn-sm mx-2" asp-action="Edit" asp-route-id="@item.horarioId">Editar</a>
-                <a class="btn btn-info btn-sm mx-2" asp-action="Details" asp-route-id="@item.horarioId">Detalles</a>
-                <a class="btn btn-danger btn-sm mx-2" asp-action="Delete" asp-route-id="@item.horarioId">Eliminar</a>
-             </td>
-        </tr>
-}
-    </tbody>
-</table>
-<a class="btn btn-primary" asp-action="Index">Volver al calendario</a>
+<div class="container mt-5">
+    <h1 class="text-center mb-3">Franjas Horarias</h1>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.horarioDia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.horarioHoraInicio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.horarioHoraFin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.horarioDuracion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ambiente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.docente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.periodoAcademico)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.competencia)
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horarioDia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horarioHoraInicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horarioHoraFin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horarioDuracion) Hrs
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ambiente.ambienteCodigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.docente.docenteNombre) @Html.DisplayFor(modelItem => item.docente.docenteApellido)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.periodoAcademico.periodoNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.competencia.competenciaNombre)
+                </td>
+                <td class="d-flex justify-content-around">
+                    <a class="btn btn-warning btn-sm mx-2" asp-action="Edit" asp-route-id="@item.horarioId">Editar</a>
+                    <a class="btn btn-info btn-sm mx-2" asp-action="Details" asp-route-id="@item.horarioId">Detalles</a>
+                    <a class="btn btn-danger btn-sm mx-2" asp-action="Delete" asp-route-id="@item.horarioId">Eliminar</a>
+                 </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+    <a class="btn btn-primary" asp-action="Index">Volver al calendario</a>
+</div>

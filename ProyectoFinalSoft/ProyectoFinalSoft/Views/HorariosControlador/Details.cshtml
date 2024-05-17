@@ -56,67 +56,65 @@
                 </div>
             </nav>
         </header>
-        <div class="container">
-            <main role="main" class="pb-3">
+            <main role="main" class="pb-3 mx-5">
                 <div class="container mt-5 text-center mb-6">
                     <h1>Información Detallada del Horario</h1>
                     <hr />
                     <dl class="row mb-3">
-                        <dt class="col-sm-2">
+                        <dt class="col-sm-5">
                             @Html.DisplayNameFor(model => model.horarioDia)
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd class="col-sm-5">
                             @Html.DisplayFor(model => model.horarioDia)
                         </dd>
-                        <dt class="col-sm-2">
+                        <dt class="col-sm-5">
                             @Html.DisplayNameFor(model => model.horarioHoraInicio)
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd class="col-sm-5">
                             @Html.DisplayFor(model => model.horarioHoraInicio)
                         </dd>
-                        <dt class="col-sm-2">
+                        <dt class="col-sm-5">
                             @Html.DisplayNameFor(model => model.horarioHoraFin)
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd class="col-sm-5">
                             @Html.DisplayFor(model => model.horarioHoraFin)
                         </dd>
-                        <dt class="col-sm-2">
+                        <dt class="col-sm-5">
                             @Html.DisplayNameFor(model => model.horarioDuracion)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.horarioDuracion)
+                        <dd class="col-sm-5">
+                            @Html.DisplayFor(model => model.horarioDuracion) Horas
                         </dd>
-                        <dt class="col-sm-2">
+                        <dt class="col-sm-5">
                             @Html.DisplayNameFor(model => model.ambiente)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.ambiente.ambienteCodigo)
+                        <dd class="col-sm-5">
+                            @Html.DisplayFor(model => model.ambiente.ambienteCodigo) @Html.DisplayFor(model => model.ambiente.ambienteNombre)
                         </dd>
-                        <dt class="col-sm-2">
+                        <dt class="col-sm-5">
                             @Html.DisplayNameFor(model => model.docente)
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd class="col-sm-5">
                             @Html.DisplayFor(model => model.docente.docenteNombre) @Html.DisplayFor(model => model.docente.docenteApellido)
                         </dd>
-                        <dt class="col-sm-2">
+                        <dt class="col-sm-5">
                             @Html.DisplayNameFor(model => model.periodoAcademico)
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd class="col-sm-5">
                             @Html.DisplayFor(model => model.periodoAcademico.periodoNombre)
                         </dd>
-                        <dt class="col-sm-2">
+                        <dt class="col-sm-5">
                             @Html.DisplayNameFor(model => model.competencia)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.competencia.competenciaId)
+                        <dd class="col-sm-5">
+                            @Html.DisplayFor(model => model.competencia.competenciaNombre)
                         </dd>
                     </dl>
-                    <div>
-                        <a asp-action="IndexDocente" class="btn btn-secondary">Volver a la pagina principal</a>
+                <div class="row mb-3">
+                    <a asp-action="DocenteHorario" asp-controller="HorarioControler" class="btn btn-secondary">Regresar</a>
                     </div>
                 </div>
             </main>
-      </div>
     </body>
     </html>
 }
@@ -126,57 +124,57 @@ else
         <h1>Información Detallada del Horario</h1>
         <hr />
         <dl class="row mb-3">
-            <dt class="col-sm-2">
+            <dt class="col-sm-5">
                 @Html.DisplayNameFor(model => model.horarioDia)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-5">
                 @Html.DisplayFor(model => model.horarioDia)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-5">
                 @Html.DisplayNameFor(model => model.horarioHoraInicio)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-5">
                 @Html.DisplayFor(model => model.horarioHoraInicio)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-5">
                 @Html.DisplayNameFor(model => model.horarioHoraFin)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-5">
                 @Html.DisplayFor(model => model.horarioHoraFin)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-5">
                 @Html.DisplayNameFor(model => model.horarioDuracion)
             </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.horarioDuracion)
+            <dd class="col-sm-5">
+                @Html.DisplayFor(model => model.horarioDuracion) Horas
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-5">
                 @Html.DisplayNameFor(model => model.ambiente)
             </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.ambiente.ambienteCodigo)
+            <dd class="col-sm-5">
+                @Html.DisplayFor(model => model.ambiente.ambienteCodigo) @Html.DisplayFor(model => model.ambiente.ambienteNombre)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-5">
                 @Html.DisplayNameFor(model => model.docente)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-5">
                 @Html.DisplayFor(model => model.docente.docenteNombre) @Html.DisplayFor(model => model.docente.docenteApellido)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-5">
                 @Html.DisplayNameFor(model => model.periodoAcademico)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-5">
                 @Html.DisplayFor(model => model.periodoAcademico.periodoNombre)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-5">
                 @Html.DisplayNameFor(model => model.competencia)
             </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.competencia.competenciaId)
+            <dd class="col-sm-5">
+                @Html.DisplayFor(model => model.competencia.competenciaNombre)
             </dd>
         </dl>
-        <div>
-            <a asp-action="IndexDocente" class="btn btn-secondary">Volver a la pagina principal</a>
+        <div class ="row mb-3">
+            <a asp-action="List" class="btn btn-secondary">Volver a la pagina principal</a>
         </div>
     </div>
 }
