@@ -88,16 +88,11 @@ namespace ProyectoFinalSoft.Controllers
             if (ModelState.IsValid)
             {
                 obtenerTodos(horario);
-                if (!ValidarHorasTrabajo(horario))
+
+                var validationResult = ValidarHorario(horario);
+                if (!string.IsNullOrEmpty(validationResult))
                 {
-                    ModelState.AddModelError("docenteId", "El docente excede el limite de horas permitido por dia o por semana.");
-
-                    return View(horario);
-                }
-
-                if (!_ambienteServicio.EstaDisponible(horario)){
-                    ModelState.AddModelError("ambienteId", "El ambiente no esta dispobile en la franja seleccionada.");
-
+                    obtenerTodos(horario);
                     return View(horario);
                 }
 
@@ -106,51 +101,65 @@ namespace ProyectoFinalSoft.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            
+
             return View(horario);
         }
 
-        private bool ValidarHorasTrabajo(Horario horario)
+        private string ValidarHorario(Horario horario)
         {
-            var docente = _context.Docentes.FirstOrDefault(d => d.docenteId == horario.docenteId);
-
-            if (docente == null)
+            if (horario.horarioHoraInicio > horario.horarioHoraFin)
             {
-                return true;
+                ModelState.AddModelError("horarioHoraInicio", "La hora seleccionada es invalida.");
+                return "horarioHoraInicio";
             }
 
-            var franjasSemana = _context.Horarios
-                .Where(h => h.docenteId == horario.docenteId &&
-                            (h.horarioDia == "Lunes" || h.horarioDia == "Martes" || h.horarioDia == "Miércoles" ||
-                             h.horarioDia == "Jueves" || h.horarioDia == "Viernes" || h.horarioDia == "Sábado"))
-                .ToList();
-
-            // Calcular las horas trabajadas por el docente en el día
-            var horasDia = franjasSemana.Where(h => h.horarioDia == horario.horarioDia)
-                                         .Sum(h => h.horarioDuracion);
-         
-            // Calcular las horas trabajadas por el docente en la semana
-            var horasSemana = franjasSemana.Sum(h => h.horarioDuracion);
-
-            horasDia = horasDia + horario.horarioDuracion;
-            horasSemana = horasSemana + horario.horarioDuracion;
-
-            if (docente.docenteTipoContrato == "PT")
+            if (horario.horarioHoraInicio < TimeSpan.FromHours(7) || horario.horarioHoraInicio > TimeSpan.FromHours(21))
             {
-                // Docente PT: Maximo 8 horas al dia y 32 a la semana
-                return horasDia  <= 8 &&
-                       horasSemana <= 32;
-            }
-            else if (docente.docenteTipoContrato == "CNT")
-            {
-                // Docente CNT: Maximo 10 horas al dia y 40 a la semana
-                return horasDia  <= 10 &&
-                       horasSemana <= 40;
+                ModelState.AddModelError("horarioHoraInicio", "La hora seleccionada es invalida.");
+                return "horarioHoraInicio";
             }
 
-   
-            return true;
+            if (horario.horarioHoraFin < TimeSpan.FromHours(8) || horario.horarioHoraFin > TimeSpan.FromHours(22))
+            {
+                ModelState.AddModelError("horarioHoraFin", "La hora seleccionada es invalida.");
+                return "horarioHoraFin";
+            }
+
+            if (!_docenteServicio.ValidarHorasTrabajo(horario))
+            {
+                ModelState.AddModelError("docenteId", "El docente excede el limite de horas permitido por dia o por semana.");
+                return "docenteId";
+            }
+
+            if (!_ambienteServicio.EstaDisponibleMismaHora(horario))
+            {
+                ModelState.AddModelError("ambienteId", "El ambiente no esta dispobile en la franja seleccionada.");
+                return "ambienteId";
+            }
+
+            if (!_ambienteServicio.EstaDisponible(horario))
+            {
+                ModelState.AddModelError("ambienteId", "El ambiente no esta dispobile en la franja seleccionada.");
+                return "ambienteId";
+            }
+
+            if (!_docenteServicio.EstaDisponibleMismaHora(horario))
+            {
+                ModelState.AddModelError("docneteId", "El docente no esta dispobile en la franja seleccionada.");
+                return "docneteId";
+            }
+
+            if (!_docenteServicio.EstaDisponible(horario))
+            {
+                ModelState.AddModelError("docneteId", "El docente no esta dispobile en la franja seleccionada.");
+                return "docneteId";
+            }
+
+            return string.Empty;
         }
+
+
+
 
 
         [Authorize(Roles = "Coordinador")]
@@ -166,7 +175,7 @@ namespace ProyectoFinalSoft.Controllers
             {
                 return NotFound();
             }
-            obtenerTodos(horario);
+           obtenerTodos(horario);
             return View(horario);
         }
 
@@ -179,18 +188,22 @@ namespace ProyectoFinalSoft.Controllers
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    if (!ValidarHorasTrabajo(horario))
+
+                    var validationResult = ValidarHorario(horario);
+
+                    if (!string.IsNullOrEmpty(validationResult))
                     {
-                        ModelState.AddModelError("", "El docente excede el limite de horas permitido por dia o por semana.");
                         obtenerTodos(horario);
                         return View(horario);
                     }
-                    _context.Update(horario);
+
+                    _context.Horarios.Remove(horario);
+                    await _context.SaveChangesAsync();
+                    _context.Horarios.Add(horario);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -207,7 +220,6 @@ namespace ProyectoFinalSoft.Controllers
                 return RedirectToAction(nameof(Index));
             }
             obtenerTodos(horario);
-           
             return View(horario);
         }
 

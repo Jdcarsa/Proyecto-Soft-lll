@@ -20,13 +20,24 @@ namespace ProyectoFinalSoft.Services
             return new SelectList(ambientes, "ambienteId", "infoCompleta");
         }
 
-        public bool EstaDisponible(Horario horario)
+        public bool EstaDisponibleMismaHora(Horario horario)
         {
             var ambientesDisponibles = _context.Ambientes
                 .Where(a => a.ambienteEstado == 1 && a.ambienteId == horario.ambienteId)
                 .Where(a => !a.Horarios.Any(h =>
                     (h.horarioHoraInicio == horario.horarioHoraInicio 
                     && h.horarioHoraFin == horario.horarioHoraFin && h.horarioDia == horario.horarioDia)))
+                .ToList();
+
+            return ambientesDisponibles.Any();
+        }
+
+        public bool EstaDisponible(Horario horario)
+        {
+            var ambientesDisponibles = _context.Ambientes
+                .Where(a => a.ambienteEstado == 1 && a.ambienteId == horario.ambienteId)
+                .Where(a => !a.Horarios.Any(h =>
+                    (h.horarioHoraInicio < horario.horarioHoraFin && h.horarioHoraFin > horario.horarioHoraInicio) && h.horarioDia == horario.horarioDia))
                 .ToList();
 
             return ambientesDisponibles.Any();
