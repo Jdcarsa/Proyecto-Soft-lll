@@ -29,8 +29,13 @@
                 <span asp-validation-for="ambienteUbicacion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ambienteTipo" class="control-label"></label>
-                <input asp-for="ambienteTipo" class="form-control" />
+                <label asp-for="ambienteTipo" class="form-label"></label>
+
+                <select asp-for="ambienteTipo" class="form-control form-select">
+                    <option>Selecciona un tipo de ambiente</option>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Virtual">Virtual</option>
+                </select>
                 <span asp-validation-for="ambienteTipo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -39,15 +44,15 @@
                 <span asp-validation-for="ambienteCapacidad" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <br>
+                <a class="col-md-5 btn btn-danger me-5" asp-action="Index">Cancelar</a>
+                <input type="submit" value="Actualizar" class="btn btn-primary col-md-5" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

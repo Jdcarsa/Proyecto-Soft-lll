@@ -1,0 +1,25 @@
+﻿@using System.Security.Claims;
+
+@{
+    ViewData["Title"] = "Home";
+    Layout = null;
+}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    </head>
+    <body>
+        <section class="container">
+        <div class="text-center">
+            <h1 class="display-4">Bienvenido Docente</h1>
+            @if(User.Identity!.IsAuthenticated){
+                var userDocente = @User.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
+                <a class="nav-link nav-hover" asp-area="" asp-route-id="@userDocente" asp-controller="HorariosControlador" asp-action="DocenteHorario">Docente horario</a>
+            }
+        </div>
+        </section>
+    </body>
+</html>
+
+

@@ -39,6 +39,14 @@ namespace ProyectoFinalSoft.Models
 		public int ambienteEstado { get; set;}
 		//relacion 0 a muchos , un ambiente puede tenr muchos horarios
 		public ICollection<Horario> Horarios { get;} = new List<Horario>();
-	}
+
+        public string infoCompleta
+        {
+            get
+            {
+                return $"{ambienteNombre} - {ambienteCodigo}";
+            }
+        }
+    }
 }
 

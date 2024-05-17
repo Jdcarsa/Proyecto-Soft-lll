@@ -14,7 +14,7 @@ using ProyectoFinalSoft.Services;
 
 namespace ProyectoFinalSoft.Controllers
 {
-    [Authorize(Roles = "Coordinador")]
+    
     public class HorariosControlador : Controller, IFachada
     {
         private readonly AppDbContext _context;
@@ -34,7 +34,7 @@ namespace ProyectoFinalSoft.Controllers
             _pAServicio = pAServicio;
         }
 
-        // GET: HorariosControlador
+        [Authorize(Roles = "Coordinador")]
         public async Task<IActionResult> Index()
         {
             var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h
@@ -42,6 +42,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(await appDbContext.ToListAsync());
         }
 
+        [Authorize(Roles = "Coordinador")]
         public async Task<IActionResult> List()
         {
             var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h 
@@ -49,7 +50,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(await appDbContext.ToListAsync());
         }
 
-        // GET: HorariosControlador/Details/5
+        [Authorize(Roles = "Coordinador")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -71,16 +72,14 @@ namespace ProyectoFinalSoft.Controllers
             return View(horario);
         }
 
-        // GET: HorariosControlador/Create
+        [Authorize(Roles = "Coordinador")]
         public IActionResult Create()
         {
             obtenerTodos();
             return View();
         }
 
-        // POST: HorariosControlador/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Coordinador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("horarioId,horarioDia,horarioHoraInicio," +
@@ -88,17 +87,23 @@ namespace ProyectoFinalSoft.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                obtenerTodos(horario);
                 if (!ValidarHorasTrabajo(horario))
                 {
-                    ModelState.AddModelError("", "El docente excede el limite de horas permitido por dia o por semana.");
-                    obtenerTodos(horario);
+                    ModelState.AddModelError("docenteId", "El docente excede el limite de horas permitido por dia o por semana.");
+
+                    return View(horario);
+                }
+
+                if (!_ambienteServicio.EstaDisponible(horario)){
+                    ModelState.AddModelError("ambienteId", "El ambiente no esta dispobile en la franja seleccionada.");
+
                     return View(horario);
                 }
 
                 _context.Add(horario);
                 await _context.SaveChangesAsync();
-                obtenerTodos(horario);
+
                 return RedirectToAction(nameof(Index));
             }
             
@@ -132,13 +137,13 @@ namespace ProyectoFinalSoft.Controllers
 
             if (docente.docenteTipoContrato == "PT")
             {
-                // Docente CNT: Máximo 8 horas al día y 32 a la semana
+                // Docente PT: Maximo 8 horas al dia y 32 a la semana
                 return horasDia  <= 8 &&
                        horasSemana <= 32;
             }
             else if (docente.docenteTipoContrato == "CNT")
             {
-                // Docente CNT: Máximo 10 horas al día y 40 a la semana
+                // Docente CNT: Maximo 10 horas al dia y 40 a la semana
                 return horasDia  <= 10 &&
                        horasSemana <= 40;
             }
@@ -148,7 +153,7 @@ namespace ProyectoFinalSoft.Controllers
         }
 
 
-        // GET: HorariosControlador/Edit/5
+        [Authorize(Roles = "Coordinador")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -165,9 +170,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(horario);
         }
 
-        // POST: HorariosControlador/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Coordinador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("horarioId,horarioDia,horarioHoraInicio,horarioHoraFin,horarioDuracion,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
@@ -208,7 +211,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(horario);
         }
 
-        // GET: HorariosControlador/Delete/5
+        [Authorize(Roles = "Coordinador")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -230,7 +233,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(horario);
         }
 
-        // POST: HorariosControlador/Delete/5
+        [Authorize(Roles = "Coordinador")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -268,6 +271,7 @@ namespace ProyectoFinalSoft.Controllers
             ViewData["periodoAcademicoId"] = _pAServicio.ObtenerPA(horario.periodoAcademicoId);
         }
 
+        [Authorize(Roles = "Coordinador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task guardarDatosProgComp()
@@ -289,6 +293,36 @@ namespace ProyectoFinalSoft.Controllers
 
             // Guarda los cambios en la base de datos
             await _context.SaveChangesAsync();
+        }
+
+        
+        [Authorize (Roles="Docente")]
+        public async Task<IActionResult> DocenteHorario(int? id)
+        {
+            
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.usuarioId == id);
+
+            if(usuario == null)
+            {
+                return NotFound();
+            }
+
+            var appDbContext = _context.Horarios.Include(h => h.ambiente).
+                Include(h=> h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico);
+
+            var horariosDocente = appDbContext.Where(h => h.docenteId == usuario.docenteId);
+
+          if (!horariosDocente.Any())
+          {
+                    return NotFound();
+           }
+
+           return View(await horariosDocente.ToListAsync());
         }
     }
 }

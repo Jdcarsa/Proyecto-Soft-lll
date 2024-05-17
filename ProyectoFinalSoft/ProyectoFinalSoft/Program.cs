@@ -22,7 +22,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 	{
 		options.LoginPath = "/AccesoControlador/Login";
 		options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-		options.AccessDeniedPath = "/Home/Privacy";
+		options.AccessDeniedPath = "/Home/IndexDocente";
     });
 
 

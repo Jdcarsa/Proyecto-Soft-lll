@@ -76,10 +76,11 @@ namespace ProyectoFinalSoft.Controllers
                     ModelState.AddModelError("periodoFechaFin", "La fecha de fin debe ser mayor que la fecha de inicio.");
                     return View(periodoAcademico);
                 }
-                var diferenciaMeses = ((periodoAcademico.periodoFechaFin.Year - periodoAcademico.periodoFechaInicio.Year) * 12) + periodoAcademico.periodoFechaFin.Month - periodoAcademico.periodoFechaInicio.Month;
-                if (diferenciaMeses < 2 || diferenciaMeses > 6)
+                var diferenciaMeses = ((periodoAcademico.periodoFechaFin.Year - periodoAcademico.periodoFechaInicio.Year)
+                                         * 12) + periodoAcademico.periodoFechaFin.Month - periodoAcademico.periodoFechaInicio.Month;
+                if (diferenciaMeses !=6 && diferenciaMeses!= 3)
                 {
-                    ModelState.AddModelError("periodoFechaFin", "La duración del periodo académico debe ser de mínimo dos meses y máximo seis meses.");
+                    ModelState.AddModelError("periodoFechaFin", "La duración del periodo académico debe ser de tres o seis meses.");
                     return View(periodoAcademico);
                 }
                 periodoAcademico.periodoEstado = 1;

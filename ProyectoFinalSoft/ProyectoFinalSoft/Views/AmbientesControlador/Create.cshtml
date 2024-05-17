@@ -28,7 +28,12 @@
             </div>
             <div class="col-md-12">
                 <label asp-for="ambienteTipo" class="form-label"></label>
-                <input asp-for="ambienteTipo" class="form-control" />
+
+                <select asp-for="ambienteTipo" class="form-control form-select">
+                    <option>Selecciona un tipo de ambiente</option>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Virtual">Virtual</option>
+                </select>
                 <span asp-validation-for="ambienteTipo" class="text-danger"></span>
             </div>
             <div class="col-md-12">
@@ -36,11 +41,10 @@
                 <input asp-for="ambienteCapacidad" class="form-control" />
                 <span asp-validation-for="ambienteCapacidad" class="text-danger"></span>
             </div>
-            <div class="col-md-6">
-                <a asp-action="Index" class="btn btn-danger">Cancelar</a>
-            </div>
-            <div class="col-md-6">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+            <div class="form-group">
+                <br>
+                <a asp-action="Index" class="btn btn-danger col-md-5 me-5">Cancelar</a>
+                <button type="submit" class="btn btn-primary col-md-5">Guardar</button>
             </div>
         </form>
     </div>

@@ -74,6 +74,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/Home/IndexDocente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleERvY2VudGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -88,6 +92,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/HorariosControlador/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9yYXJpb3NDb250cm9sYWRvclxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/HorariosControlador/DocenteHorario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9yYXJpb3NDb250cm9sYWRvclxEb2NlbnRlSG9yYXJpby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ideapad330S/Documents/GitHub/Proyecto-Soft-lll/ProyectoFinalSoft/ProyectoFinalSoft/Views/HorariosControlador/Edit.cshtml]

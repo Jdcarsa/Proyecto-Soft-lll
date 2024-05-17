@@ -38,5 +38,11 @@ namespace ProyectoFinalSoft.Controllers
 			await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login","AccesoControlador");
         }
+
+        public IActionResult IndexDocente()
+        {
+            return View();
+        }
+
     }
 }

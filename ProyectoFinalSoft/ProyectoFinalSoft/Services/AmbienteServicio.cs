@@ -17,13 +17,26 @@ namespace ProyectoFinalSoft.Services
         public SelectList ObtenerAmbientes()
         {
             var ambientes = _context.Ambientes.Where(d => d.ambienteEstado == 1);
-            return new SelectList(ambientes, "ambienteId", "ambienteCodigo");
+            return new SelectList(ambientes, "ambienteId", "infoCompleta");
         }
+
+        public bool EstaDisponible(Horario horario)
+        {
+            var ambientesDisponibles = _context.Ambientes
+                .Where(a => a.ambienteEstado == 1 && a.ambienteId == horario.ambienteId)
+                .Where(a => !a.Horarios.Any(h =>
+                    (h.horarioHoraInicio == horario.horarioHoraInicio 
+                    && h.horarioHoraFin == horario.horarioHoraFin && h.horarioDia == horario.horarioDia)))
+                .ToList();
+
+            return ambientesDisponibles.Any();
+        }
+
 
         public SelectList ObtenerAmbientes(int? horarioAmbienteId)
         {
             var ambientes = _context.Ambientes.Where(d => d.ambienteEstado == 1);
-            return new SelectList(ambientes, "ambienteId", "ambienteCodigo", horarioAmbienteId);
+            return new SelectList(ambientes, "ambienteId", "infoCompleta", horarioAmbienteId);
         }
     }
 

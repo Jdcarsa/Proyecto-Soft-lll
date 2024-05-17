@@ -21,8 +21,18 @@ namespace ProyectoFinalSoft.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            if(User.Identity!.IsAuthenticated) { return RedirectToAction("Index", "Home"); }
-            return View();
+            if (User.Identity!.IsAuthenticated)
+            {
+                if (User.IsInRole("Coordinador"))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else if (User.IsInRole("Docente"))
+                {
+                    return RedirectToAction("IndexDocente", "Home");
+                }
+            }
+           return View();
         }
 
         [HttpPost]
@@ -45,14 +55,14 @@ namespace ProyectoFinalSoft.Controllers
                 {
                      claims = new List<Claim>()
                     {
-                      new Claim(ClaimTypes.Name,user.usuarioLogin),
+                      new Claim(ClaimTypes.Name,user.coordinadorId.ToString()),
                       new Claim(ClaimTypes.Role, "Coordinador"),
                     };
                 } else 
                 {
                     claims = new List<Claim>()
                      {
-                       new Claim(ClaimTypes.Name,user.usuarioLogin),
+                       new Claim(ClaimTypes.Name,user.docenteId.ToString()),
                        new Claim(ClaimTypes.Role, "Docente"),
                     };
                 }
@@ -76,7 +86,7 @@ namespace ProyectoFinalSoft.Controllers
                 }
                 else if (user.usuarioRol == 1)
                 {
-                    return RedirectToAction("Privacy", "Home");
+                    return RedirectToAction("IndexDocente", "Home");
                 }
             }
 

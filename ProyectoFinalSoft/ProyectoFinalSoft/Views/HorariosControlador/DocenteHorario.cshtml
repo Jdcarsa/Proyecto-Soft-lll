@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ProyectoFinalSoft.Models.Horario>
+
+@{
+    ViewData["Title"] = "DocenteHorario";
+}
+
+
+<h1 class="text-center my-3">Horario</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                    </tr>
+                </thead>
+                @{
+                    string[] dias = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
+                }
+                <tbody>
+                    @for (int i = 7; i <= 22; i++)
+                    {
+                        <tr>
+                            <td>@(i <= 12 ? i : i - 12):00 @(i < 12 ? "AM" : "PM")</td>
+                            @for (int j = 0; j < 6; j++)
+                            {
+
+                                var dia = dias[j];
+                                var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours
+                                <= i && h.horarioHoraInicio.Hours + h.horarioDuracion > i).ToList();
+                                if (horarios.Any())
+                                {
+                                    var horario = horarios.First();
+                                    <td class="celda-horario" style="cursor: pointer;" data-dia="@j" data-hora="@i">
+                                        @horario.ambiente.ambienteCodigo @horario.ambiente.ambienteNombre
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="celda-horario" data-dia="@j" data-hora="@i"></td>
+                                }
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
