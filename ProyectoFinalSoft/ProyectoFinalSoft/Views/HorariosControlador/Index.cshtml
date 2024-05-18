@@ -1,111 +1,198 @@
 ﻿@model IEnumerable<ProyectoFinalSoft.Models.Horario>
-
 @{
-    ViewData["Title"] = "Horarios";
+    ViewData["Title"] = "Gestion Horarios";
+    String[] diasDeLaSemana = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
+    var horasDelDia = Enumerable.Range(7, 15).ToList();
 }
 
-
-<h1 class="text-center my-3">Horario</h1>
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Hora</th>
-                        <th>Lunes</th>
-                        <th>Martes</th>
-                        <th>Miércoles</th>
-                        <th>Jueves</th>
-                        <th>Viernes</th>
-                        <th>Sábado</th>
-                    </tr>
-                </thead>
-                    @{
-                        string[] dias = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
-                    }
-                <tbody>
-                        @for (int i = 7; i <= 22; i++)
-                        {
-                        <tr>
-                            <td>@(i <= 12 ? i : i - 12):00 @(i < 12 ? "AM" : "PM")</td>
-                                @for (int j = 0; j < 6; j++)
-                                {
-                                   
-                                    var dia = dias[j];
-                                    var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours
-                                                <= i && h.horarioHoraInicio.Hours + h.horarioDuracion > i).ToList();
-                                    if (horarios.Any())
-                                    {
-                                        var horario = horarios.First();
-                                    <td class="celda-horario" style="cursor: pointer;" data-dia="@j" data-hora="@i">
-                                        @horario.ambiente.ambienteCodigo @horario.ambiente.ambienteNombre
-                                    </td>
-                                    }
-                                    else
-                                    {
-                                    <td class="celda-horario" style="cursor: pointer;" data-dia="@j" data-hora="@i"></td>
-                                    }
-                                }
-                        </tr>
-                        }
-                </tbody>
-            </table>
+<div class="container mt-4">
+    <h1 class="text-center">Gestión de horarios</h1><br />
+    @if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState[""].Errors)
+            {
+                <p>@error.ErrorMessage</p>
+            }
         </div>
+    }
+    <div class="container">
+        <form asp-controller="HorariosControlador" asp-action="Index" method="get">
+            <div class="row align-items-center mb-3">
+                <div class="col-12 col-md-4">
+                    <label class="form-label">Periodo académico:</label>
+                </div>
+                <div class="col-12 col-md-8">
+                    <select class="form-select" id="periodoAcademicoNombre" name="periodoAcademicoNombre" required>
+                        <option value="" selected disabled>Seleccione un periodo académico</option>
+                        @foreach (var periodoNombre in ViewBag.PeriodosAcademicos)
+                        {
+                            <option value="@periodoNombre">@periodoNombre</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row align-items-center mb-3">
+                <div class="col-12 col-md-4">
+                    <label class="form-label">Ambiente:</label>
+                </div>
+                <div class="col-12 col-md-8">
+                    <input type="text" name="ambienteBusqueda" placeholder="Ingrese el nombre del ambiente" class="form-control" />
+                </div>
+            </div>
+            <div class="row align-items-center mb-3">
+                <div class="col-12 col-md-4">
+                    <label class="form-label">Docente:</label>
+                </div>
+                <div class="col-12 col-md-8">
+                    <input type="text" name="docenteBusqueda" placeholder="Ingrese el nombre del docente" class="form-control" />
+                </div>
+            </div>
+            <div class="row align-items-center mb-3">
+                <div class="col-12 col-md-8 offset-md-4">
+                    <button type="submit" class="btn btn-primary w-100 w-md-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
+    <br />
+    <br />
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Hora</th>
+                    @foreach (var dia in diasDeLaSemana)
+                    {
+                        <th scope="col">@dia</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var hora in horasDelDia)
+                {
+                    <tr>
+                        <td>@(hora <= 12 ? hora : hora - 12):00 @(hora < 12 ? "AM" : "PM") - @(hora + 1 <= 12 ? hora + 1 : hora + 1 - 12):00 @(hora + 1 < 12 ? "AM" : "PM")</td>
+                        @foreach (var dia in diasDeLaSemana)
+                        {
+                            @if (Model != null)
+                            {
+                                var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours <= hora && h.horarioHoraInicio.Hours + h.horarioDuracion > hora).ToList();
+                                if (horarios.Any())
+                                {
+                                    var horario = horarios.First();
+                                    <td class="celda-horario bg-lightseagreen" style="cursor: pointer; background-color: lightseagreen" data-dia="@dia" data-hora="@hora" onclick="mostrarFormulario('@dia','@hora')">
+                                        <strong>Ambiente:</strong> @horario.ambiente.ambienteCodigo @horario.ambiente.ambienteNombre<br />
+                                        <strong>Materia:</strong> @horario.competencia.competenciaNombre<br />
+                                        <strong>Docente:</strong> @horario.docente.docenteNombre
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="celda-horario" style="cursor: pointer;" data-dia="@dia" data-hora="@hora" onclick="mostrarFormulario('@dia','@hora')"></td>
+                                }
+                            }
+                            else
+                            {
+                                <td class="celda-horario" style="cursor: pointer;" data-dia="@dia" data-hora="@hora" onclick="mostrarFormulario('@dia','@hora')"></td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
 </div>
 
+<!--
 <div>
     <form asp-controller="HorariosControlador" asp-action="guardarDatosProgComp" method="post">
         <button type="submit">Cargar datos</button>
     </form>
 </div>
+-->
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<!-- Modal para menu horario -->
+<div class="modal fade" id="modalHorario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Gestión Horario</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+                <h5 class="modal-title" id="exampleModalLabel">Gestión de Horarios</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body d-grid gap-3 mb-3">
-                <a class="btn btn-primary mx-4" asp-controller="HorariosControlador" asp-action="Create">Crear</a>
-                <a class="btn btn-secondary mx-4" asp-controller="HorariosControlador" asp-action="List">Gestión horarios</a>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCerrar">Cerrar</button>
+            <div class="modal-body">
+                <form id="formGestionHorario">
+                    <input type="hidden" id="horarioDia" name="dia" />
+                    <input type="hidden" id="horarioHoraInicio" name="hora" />
+                    <div class="d-grid gap-2 justify-content-center">
+                        <a class="btn btn-primary mx-4" href="#" id="btnCrear" onclick="redirigirACrear()">Crear Franja Horaria</a>
+                        <a class="btn btn-secondary mx-4" href="#" onclick="redirigirAList()">Eliminar o Editar Franja Horaria</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    .table-bordered th,
+    .table-bordered td {
+        border-color: black !important;
+        border-width: 1px !important;
+    }
 
-<script>
-    $(document).ready(function () {
-        // Evento para abrir la ventana modal
-        $(".celda-horario").click(function () {
-            // Captura los valores
-            let dia = $(this).data('dia');
-            let hora = $(this).data('hora');
-            // Almacena los valores
-            localStorage.setItem('diaSeleccionado', dia);
-            localStorage.setItem('horaSeleccionada', hora);
-            $('#myModal').modal('show');
+    .table-hover tbody tr:hover {
+        background-color: ghostwhite;
+    }
+
+</style>
+
+@section Scripts {
+    <script>
+        function mostrarFormulario(dia, hora) {
+            document.getElementById('horarioDia').value = dia;
+            document.getElementById('horarioHoraInicio').value = hora;
+            var modal = new bootstrap.Modal(document.getElementById('modalHorario'));
+            modal.show();
+        }
+
+        function redirigirACrear() {
+            var dia = document.getElementById('horarioDia').value;
+            var hora = document.getElementById('horarioHoraInicio').value;
+            var url = "/HorariosControlador/Create?dia=" + encodeURIComponent(dia) + "&hora=" + encodeURIComponent(hora);
+            window.location.href = url;
+        }
+
+        function redirigirAList() {
+            var dia = document.getElementById('horarioDia').value;
+            var hora = document.getElementById('horarioHoraInicio').value;
+            console.log("Hora: ", hora);
+            var url = "/HorariosControlador/List?dia=" + encodeURIComponent(dia) + "&hora=" + encodeURIComponent(hora);
+            window.location.href = url;
+        }
+
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var form = document.querySelector("form");
+            form.addEventListener("submit", function (event) {
+                var periodoSelect = document.getElementById("periodoAcademicoNombre");
+                if (periodoSelect.value === "") {
+                    event.preventDefault();
+                    alert("Por favor, seleccione un periodo académico.");
+                }
+            });
         });
+    </script>
 
-        // Evento para cerrar la ventana modal haciendo clic en el botón de cerrar (x)
-        $('#myModal .close').on('click', function () {
-            $('#myModal').modal('hide');
-        });
+}
 
-        $("#btnCerrar").click(function () {
-            $('#myModal').modal('hide');
-        });
-    });
-
-</script>
 
 

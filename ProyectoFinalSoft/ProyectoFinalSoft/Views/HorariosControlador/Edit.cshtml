@@ -1,37 +1,32 @@
 ﻿@model ProyectoFinalSoft.Models.Horario
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Franja horaria";
+    int horarioHoraInicioInt = Model.horarioHoraInicio.Hours;
+    String horarioHoraInicioString = horarioHoraInicioInt.ToString();
 }
 
-<h1>Edit</h1>
-
-<h4>Horario</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<div class="container mt-5">
+    <h1 class="text-center mb-6">Editar Franja Horaria</h1>
+    <hr />
+    <div class="row col-md-6 mx-auto">
+        <form class="row mb-3 d-grid gap-2" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="horarioId" />
             <div class="form-group">
                 <label asp-for="horarioDia" class="control-label"></label>
-                <input asp-for="horarioDia" class="form-control" />
+                <input asp-for="horarioDia" class="form-control" readonly />
                 <span asp-validation-for="horarioDia" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="horarioHoraInicio" class="control-label"></label>
-                <input type="time" asp-for="horarioHoraInicio" class="form-control" />
+                <input asp-for="horarioHoraInicio" class="form-control" type="time" />
                 <span asp-validation-for="horarioHoraInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="horarioHoraFin" class="control-label"></label>
-                <input type="time" asp-for="horarioHoraFin" class="form-control" />
+                <input asp-for="horarioHoraFin" class="form-control" type="time" />
                 <span asp-validation-for="horarioHoraFin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="horarioDuracion" class="control-label"></label>
-                <input asp-for="horarioDuracion" class="form-control" />
-                <span asp-validation-for="horarioDuracion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ambienteId" class="control-label"></label>
@@ -54,16 +49,16 @@
                 <span asp-validation-for="CompetenciaId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <br>
+                <a class="col-md-5 btn btn-danger me-5" asp-action="List" asp-route-dia="@Model.horarioDia" asp-route-hora="@horarioHoraInicioString">Cancelar</a>
+                <input type="submit" value="Actualizar" class="btn btn-warning col-md-5" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

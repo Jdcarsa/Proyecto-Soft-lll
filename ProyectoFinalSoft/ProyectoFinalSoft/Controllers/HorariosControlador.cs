@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -35,18 +36,67 @@ namespace ProyectoFinalSoft.Controllers
         }
 
         [Authorize(Roles = "Coordinador")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string periodoAcademicoNombre ,string ambienteBusqueda , string docenteBusqueda )
         {
-            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h
-                => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico);
-            return View(await appDbContext.ToListAsync());
+            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico);
+
+            var periodosAcademicos = await _context.PeriodosAcademicos.Select(p => p.periodoNombre).ToListAsync();
+            ViewBag.PeriodosAcademicos = periodosAcademicos;
+
+            if (!string.IsNullOrEmpty(ambienteBusqueda) && !string.IsNullOrEmpty(docenteBusqueda))
+            {
+                ModelState.AddModelError("", "Buscar solo por el nombre del ambiente o del docente");
+                return View();
+            }
+
+            if (!string.IsNullOrEmpty(ambienteBusqueda))
+            {
+                var ambienteExiste = await _context.Ambientes.AnyAsync(a => a.ambienteNombre == ambienteBusqueda);
+                if (!ambienteExiste)
+                {
+                    ModelState.AddModelError("", "El ambiente ingresado no existe.");
+                    return View();
+                }
+
+                var horarioAmbiente = appDbContext.Where(h => h.ambiente.ambienteNombre == ambienteBusqueda && h.periodoAcademico.periodoNombre == periodoAcademicoNombre);
+                return View(await horarioAmbiente.ToListAsync());
+            }
+
+            if (!string.IsNullOrEmpty(docenteBusqueda))
+            {
+                var docenteExiste = await _context.Docentes.AnyAsync(d => d.docenteNombre == docenteBusqueda);
+                if (!docenteExiste)
+                {
+                    ModelState.AddModelError("", "El docente ingresado no existe.");
+                    return View();
+                }
+
+                var horarioDocente = appDbContext.Where(h => h.docente.docenteNombre == docenteBusqueda && h.periodoAcademico.periodoNombre == periodoAcademicoNombre);
+                return View(await horarioDocente.ToListAsync());
+            }
+
+            ViewBag.PeriodoAcademicoNombre = periodoAcademicoNombre;
+            ViewBag.AmbienteBusqueda = ambienteBusqueda;
+            ViewBag.DocenteBusqueda = docenteBusqueda;
+
+            return View();
         }
 
         [Authorize(Roles = "Coordinador")]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(string dia, string hora)
         {
-            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h 
-                => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico);
+
+            hora = hora + ":00";
+            TimeSpan horaSeleccionada = TimeSpan.Parse(hora);
+
+            var appDbContext = _context.Horarios
+            .Include(h => h.ambiente)
+            .Include(h => h.competencia)
+            .Include(h => h.docente)
+            .Include(h => h.periodoAcademico)
+            .Where(h => h.horarioDia == dia &&
+            (horaSeleccionada >= h.horarioHoraInicio && horaSeleccionada < h.horarioHoraFin));
+
             return View(await appDbContext.ToListAsync());
         }
 
@@ -73,17 +123,27 @@ namespace ProyectoFinalSoft.Controllers
         }
 
         [Authorize(Roles = "Coordinador")]
-        public IActionResult Create()
+        public IActionResult Create(string dia, int hora)
         {
+            int aux = hora + 1;
+
+            var horario = new Horario
+            {
+                horarioDia = dia,
+                horarioHoraInicio = TimeSpan.ParseExact(hora.ToString(), "%h", System.Globalization.CultureInfo.InvariantCulture),
+                horarioHoraFin = TimeSpan.ParseExact(aux.ToString(), "%h", System.Globalization.CultureInfo.InvariantCulture),
+            };
+
+            horario.horarioDuracion = (int)(horario.horarioHoraFin - horario.horarioHoraInicio).TotalMinutes;
             obtenerTodos();
-            return View();
+            return View(horario);
         }
 
         [Authorize(Roles = "Coordinador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("horarioId,horarioDia,horarioHoraInicio," +
-            "horarioHoraFin,horarioDuracion,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
+            "horarioHoraFin,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +155,7 @@ namespace ProyectoFinalSoft.Controllers
                     obtenerTodos(horario);
                     return View(horario);
                 }
-
+                horario.horarioDuracion = (int)(horario.horarioHoraFin - horario.horarioHoraInicio).TotalHours;
                 _context.Add(horario);
                 await _context.SaveChangesAsync();
 
@@ -139,20 +199,20 @@ namespace ProyectoFinalSoft.Controllers
 
             if (!_ambienteServicio.EstaDisponible(horario))
             {
-                ModelState.AddModelError("ambienteId", "El ambiente no esta dispobile en la franja seleccionada.");
+                ModelState.AddModelError("ambienteId", "El ambiente no esta disponible en la franja seleccionada.");
                 return "ambienteId";
             }
 
             if (!_docenteServicio.EstaDisponibleMismaHora(horario))
             {
-                ModelState.AddModelError("docneteId", "El docente no esta dispobile en la franja seleccionada.");
-                return "docneteId";
+                ModelState.AddModelError("docenteId", "El docente no esta dispobile en la franja seleccionada.");
+                return "docenteId";
             }
 
             if (!_docenteServicio.EstaDisponible(horario))
             {
-                ModelState.AddModelError("docneteId", "El docente no esta dispobile en la franja seleccionada.");
-                return "docneteId";
+                ModelState.AddModelError("docenteId", "El docente no esta dispobile en la franja seleccionada.");
+                return "docenteId";
             }
 
             return string.Empty;
@@ -182,7 +242,7 @@ namespace ProyectoFinalSoft.Controllers
         [Authorize(Roles = "Coordinador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("horarioId,horarioDia,horarioHoraInicio,horarioHoraFin,horarioDuracion,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
+        public async Task<IActionResult> Edit(int id, [Bind("horarioId,horarioDia,horarioHoraInicio,horarioHoraFin,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
         {
             if (id != horario.horarioId)
             {
@@ -192,7 +252,6 @@ namespace ProyectoFinalSoft.Controllers
             {
                 try
                 {
-
                     var validationResult = ValidarHorario(horario);
 
                     if (!string.IsNullOrEmpty(validationResult))
@@ -201,9 +260,22 @@ namespace ProyectoFinalSoft.Controllers
                         return View(horario);
                     }
 
-                    _context.Horarios.Remove(horario);
-                    await _context.SaveChangesAsync();
-                    _context.Horarios.Add(horario);
+                    var existingHorario = await _context.Horarios.FindAsync(id);
+                    if (existingHorario == null)
+                    {
+                        return NotFound();
+                    }
+
+                    existingHorario.horarioDia = horario.horarioDia;
+                    existingHorario.horarioHoraInicio = horario.horarioHoraInicio;
+                    existingHorario.horarioHoraFin = horario.horarioHoraFin;
+                    existingHorario.horarioDuracion = (int)(horario.horarioHoraFin - horario.horarioHoraInicio).TotalHours;
+                    existingHorario.ambienteId = horario.ambienteId;
+                    existingHorario.docenteId = horario.docenteId;
+                    existingHorario.periodoAcademicoId = horario.periodoAcademicoId;
+                    existingHorario.CompetenciaId = horario.CompetenciaId;
+
+                    _context.Update(existingHorario);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -222,6 +294,7 @@ namespace ProyectoFinalSoft.Controllers
             obtenerTodos(horario);
             return View(horario);
         }
+
 
         [Authorize(Roles = "Coordinador")]
         public async Task<IActionResult> Delete(int? id)

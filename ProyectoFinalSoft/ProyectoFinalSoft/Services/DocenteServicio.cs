@@ -71,23 +71,30 @@ namespace ProyectoFinalSoft.Services
             var docentesDisponibles = _context.Docentes
                 .Where(d => d.docenteEstado == 1 && d.docenteId == horario.docenteId)
                 .Where(d => !d.Horarios.Any(h =>
-                    (h.horarioHoraInicio == horario.horarioHoraInicio
-                    && h.horarioHoraFin == horario.horarioHoraFin && h.horarioDia == horario.horarioDia)))
+                    h.horarioId != horario.horarioId &&
+                    h.horarioHoraInicio == horario.horarioHoraInicio
+                    && h.horarioHoraFin == horario.horarioHoraFin
+                    && h.horarioDia == horario.horarioDia))
                 .ToList();
 
             return docentesDisponibles.Any();
         }
+
 
         public bool EstaDisponible(Horario horario)
         {
             var docentesDisponibles = _context.Docentes
                 .Where(d => d.docenteEstado == 1 && d.docenteId == horario.docenteId)
                 .Where(d => !d.Horarios.Any(h =>
-                    (h.horarioHoraInicio < horario.horarioHoraFin && h.horarioHoraFin > horario.horarioHoraInicio) && h.horarioDia == horario.horarioDia))
+                    h.horarioId != horario.horarioId &&
+                    h.horarioHoraInicio < horario.horarioHoraFin
+                    && h.horarioHoraFin > horario.horarioHoraInicio
+                    && h.horarioDia == horario.horarioDia))
                 .ToList();
 
             return docentesDisponibles.Any();
         }
+
 
     }
 }

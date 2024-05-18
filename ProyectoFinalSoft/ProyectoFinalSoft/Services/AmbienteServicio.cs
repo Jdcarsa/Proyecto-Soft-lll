@@ -25,8 +25,10 @@ namespace ProyectoFinalSoft.Services
             var ambientesDisponibles = _context.Ambientes
                 .Where(a => a.ambienteEstado == 1 && a.ambienteId == horario.ambienteId)
                 .Where(a => !a.Horarios.Any(h =>
-                    (h.horarioHoraInicio == horario.horarioHoraInicio 
-                    && h.horarioHoraFin == horario.horarioHoraFin && h.horarioDia == horario.horarioDia)))
+                    h.horarioId != horario.horarioId &&
+                    h.horarioHoraInicio == horario.horarioHoraInicio
+                    && h.horarioHoraFin == horario.horarioHoraFin
+                    && h.horarioDia == horario.horarioDia))
                 .ToList();
 
             return ambientesDisponibles.Any();
@@ -37,7 +39,10 @@ namespace ProyectoFinalSoft.Services
             var ambientesDisponibles = _context.Ambientes
                 .Where(a => a.ambienteEstado == 1 && a.ambienteId == horario.ambienteId)
                 .Where(a => !a.Horarios.Any(h =>
-                    (h.horarioHoraInicio < horario.horarioHoraFin && h.horarioHoraFin > horario.horarioHoraInicio) && h.horarioDia == horario.horarioDia))
+                    h.horarioId != horario.horarioId &&
+                    h.horarioHoraInicio < horario.horarioHoraFin
+                    && h.horarioHoraFin > horario.horarioHoraInicio
+                    && h.horarioDia == horario.horarioDia))
                 .ToList();
 
             return ambientesDisponibles.Any();

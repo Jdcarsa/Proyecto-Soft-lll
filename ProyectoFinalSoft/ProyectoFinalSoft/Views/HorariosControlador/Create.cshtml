@@ -1,16 +1,14 @@
 ﻿@model ProyectoFinalSoft.Models.Horario
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Franja Horaria";
 }
 
-<h1>Create</h1>
-
-<h4>Horario</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+<div class="container mt-5">
+    <h1 class="text-center mb-6">Crear Franja Horaria</h1>
+    <hr />
+    <div class="col-md-6 mx-auto">
+        <form class="row mb-3 d-grid gap-2" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="horarioDia" class="control-label"></label>
@@ -19,70 +17,41 @@
             </div>
             <div class="form-group">
                 <label asp-for="horarioHoraInicio" class="control-label"></label>
-                <input asp-for="horarioHoraInicio" type="time" class="form-control" readonly />
+                <input asp-for="horarioHoraInicio" class="form-control" type="time" />
                 <span asp-validation-for="horarioHoraInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="horarioHoraFin" class="control-label"></label>
-                <input asp-for="horarioHoraFin" type="time" class="form-control" />
+                <input asp-for="horarioHoraFin" class="form-control" type="time" />
                 <span asp-validation-for="horarioHoraFin" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="horarioDuracion" class="control-label"></label>
-                <input asp-for="horarioDuracion" class="form-control" />
-                <span asp-validation-for="horarioDuracion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="ambienteId" class="control-label"></label>
-                <select asp-for="ambienteId" class ="form-control" asp-items="ViewBag.ambienteId"></select>
+                <select asp-for="ambienteId" class="form-control" asp-items="ViewBag.ambienteId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="docenteId" class="control-label"></label>
-                <select asp-for="docenteId" class ="form-control" asp-items="ViewBag.docenteId"></select>
+                <select asp-for="docenteId" class="form-control" asp-items="ViewBag.docenteId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="periodoAcademicoId" class="control-label"></label>
-                <select asp-for="periodoAcademicoId" class ="form-control" asp-items="ViewBag.periodoAcademicoId"></select>
+                <select asp-for="periodoAcademicoId" class="form-control" asp-items="ViewBag.periodoAcademicoId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="CompetenciaId" class="control-label"></label>
-                <select asp-for="CompetenciaId" class ="form-control" asp-items="ViewBag.CompetenciaId"></select>
+                <select asp-for="CompetenciaId" class="form-control" asp-items="ViewBag.CompetenciaId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <br>
+                <a class="col-md-5 btn btn-danger me-5" asp-action="Index">Cancelar</a>
+                <button type="submit" value="Create" class="btn btn-primary col-md-5">Guardar</button>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-
-<script>
-    $(document).ready(function () {
-        var dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
-        var diaSeleccionado = localStorage.getItem('diaSeleccionado');
-        
-        if (diaSeleccionado >= 0 && diaSeleccionado < dias.length) {
-            $('#horarioDia').val(dias[diaSeleccionado]);
-        }
-
-        var horaSeleccionada = localStorage.getItem('horaSeleccionada');
-        if (horaSeleccionada) {
-                var horaFormato24 = parseInt(horaSeleccionada, 10);
-                if (!isNaN(horaFormato24)) {
-                    var horaFormateada = horaFormato24 < 10 ? '0' + horaFormato24 : horaFormato24;
-                    $('#horarioHoraInicio').val(horaFormateada + ":00");
-                }
-        }
-
-    });
-</script>
-
 }
