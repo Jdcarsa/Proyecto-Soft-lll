@@ -390,7 +390,7 @@ namespace ProyectoFinalSoft.Controllers
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.usuarioId == id);
+            var usuario = await _context.Usuarios.FindAsync(id);
 
             if(usuario == null)
             {
@@ -404,8 +404,8 @@ namespace ProyectoFinalSoft.Controllers
 
           if (!horariosDocente.Any())
           {
-                    return NotFound();
-           }
+                    return View();
+          }
 
            return View(await horariosDocente.ToListAsync());
         }

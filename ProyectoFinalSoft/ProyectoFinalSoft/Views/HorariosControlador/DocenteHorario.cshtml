@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<ProyectoFinalSoft.Models.Horario>
 @using System.Security.Claims;
 @{
-    ViewData["Title"] = "DocenteHorario";
+    ViewData["Title"] = "Docente Horario";
     Layout = null;
+    String[] diasDeLaSemana = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
+    var horasDelDia = Enumerable.Range(7, 15).ToList();
 }
 
 @{
@@ -67,51 +69,52 @@
         <h1 class="text-center my-3">Horario</h1>
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Hora</th>
-                                <th>Lunes</th>
-                                <th>Martes</th>
-                                <th>Miércoles</th>
-                                <th>Jueves</th>
-                                <th>Viernes</th>
-                                <th>Sábado</th>
-                            </tr>
-                        </thead>
-                        @{
-                            string[] dias = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
-                        }
-                    <tbody>
-                        @for (int i = 7; i <= 22; i++)
-                        {
-                            <tr>
-                                <td>@(i <= 12 ? i : i - 12):00 @(i < 12 ? "AM" : "PM")</td>
-                                @for (int j = 0; j < 6; j++)
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Hora</th>
+                                    @foreach (var dia in diasDeLaSemana)
+                                    {
+                                        <th scope="col">@dia</th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var hora in horasDelDia)
                                 {
-                                    var dia = dias[j];
-                                    var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours
-                                    <= i && h.horarioHoraInicio.Hours + h.horarioDuracion > i).ToList();
-                                    if (horarios.Any())
-                                    {
-                                        var horario = horarios.First();
-                                        string color = GetColorForCompetencia(horario.CompetenciaId.ToString());
-                                        <td class="celda-horario" style="cursor: pointer; background-color: @color;" data-dia="@j" data-hora="@i">
-                                            <a style="text-decoration: none; color:black;" asp-action="Details" asp-route-id="@horario.horarioId">
-                                                @horario.ambiente.ambienteCodigo @horario.ambiente.ambienteNombre
-                                            </a>
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td class="celda-horario" data-dia="@j" data-hora="@i"></td>
-                                    }
-                                }
-                            </tr>
-                        }
-                    </tbody>
+                                    <tr>
+                                        <td>@(hora <= 12 ? hora : hora - 12):00 @(hora < 12 ? "AM" : "PM") - @(hora + 1 <= 12 ? hora + 1 : hora + 1 - 12):00 @(hora + 1 < 12 ? "AM" : "PM")</td>
+                                        @foreach (var dia in diasDeLaSemana)
+                                        {
+                                            @if (Model != null)
+                                            {
+                                                var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours <= hora && h.horarioHoraInicio.Hours + h.horarioDuracion > hora).ToList();
+                                                if (horarios.Any())
+                                                {
+                                                    var horario = horarios.First();
+                                                    string color = GetColorForCompetencia(horario.CompetenciaId.ToString());
+                                                    <td class="celda-horario" style="cursor: pointer; background-color: @color;" data-dia="@dia" data-hora="@hora">
+                                                        <a style="text-decoration: none; color:black;" asp-action="Details" asp-route-id="@horario.horarioId">
+                                                             <strong>Ambiente:</strong> @horario.ambiente.ambienteCodigo @horario.ambiente.ambienteNombre<br />
+                                                             <strong>Materia:</strong> @horario.competencia.competenciaNombre<br />
+                                                        </a>
+                                                     </td>
+                                                }
+                                                else
+                                                {
+                                                <td class="celda-horario" data-dia="@dia" data-hora="@hora"></td>
+                                                }
 
+                                            }
+                                            else
+                                            {
+                                                <td class="celda-horario" data-dia="@dia" data-hora="@hora"></td>
+                                            }
+                                        }
+                                     </tr>
+                                }
+                           </tbody>
                     </table>
                 </div>
             </div>
@@ -126,5 +129,52 @@
 
 
 
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Hora</th>
+                    @foreach (var dia in diasDeLaSemana)
+                    {
+                        <th scope="col">@dia</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var hora in horasDelDia)
+                {
+                    <tr>
+                        <td>@(hora <= 12 ? hora : hora - 12):00 @(hora < 12 ? "AM" : "PM") - @(hora + 1 <= 12 ? hora + 1 : hora + 1 - 12):00 @(hora + 1 < 12 ? "AM" : "PM")</td>
+                        @foreach (var dia in diasDeLaSemana)
+                        {
+                            @if (Model != null)
+                            {
+                                var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours <= hora && h.horarioHoraInicio.Hours + h.horarioDuracion > hora).ToList();
+                                if (horarios.Any())
+                                {
+                                    var horario = horarios.First();
+                                    <td class="celda-horario bg-lightseagreen" style="cursor: pointer; background-color: lightseagreen" data-dia="@dia" data-hora="@hora" onclick="mostrarFormulario('@dia','@hora')">
+                                        <strong>Ambiente:</strong> @horario.ambiente.ambienteCodigo @horario.ambiente.ambienteNombre<br />
+                                        <strong>Materia:</strong> @horario.competencia.competenciaNombre<br />
+                                        <strong>Docente:</strong> @horario.docente.docenteNombre
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="celda-horario" style="cursor: pointer;" data-dia="@dia" data-hora="@hora" onclick="mostrarFormulario('@dia','@hora')"></td>
+                                }
+                            }
+                            else
+                            {
+                                <td class="celda-horario" style="cursor: pointer;" data-dia="@dia" data-hora="@hora" onclick="mostrarFormulario('@dia','@hora')"></td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
 

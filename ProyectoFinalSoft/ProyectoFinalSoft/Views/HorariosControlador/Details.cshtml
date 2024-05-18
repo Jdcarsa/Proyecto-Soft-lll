@@ -112,9 +112,15 @@
                         @Html.DisplayFor(model => model.competencia.competenciaId)
                     </dd>
                     <div class="row">
-                        <div class="col text-center">
-                            <a asp-action="HorarioDocente" asp-controller="HorariosControler" class="btn btn-secondary" style="width: 300px">Volver</a>
-                        </div>
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            var userDocente = @User.Claims.Where(c => c.Type == ClaimTypes.Name)
+                            .Select(c => c.Value).SingleOrDefault();
+                            <div class="col text-center">
+                                <a asp-controller="HorariosControlador" asp-action="DocenteHorario" asp-route-id="@userDocente"
+                                class="btn btn-secondary" style="width: 300px">Volver</a>
+                            </div>
+                        }
                     </div>
                 </dl>
             </div>
