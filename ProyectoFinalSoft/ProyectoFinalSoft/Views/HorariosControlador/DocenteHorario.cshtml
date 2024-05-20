@@ -48,7 +48,7 @@
                             </svg>
                             @if (User.Identity!.IsAuthenticated)
                             {
-                                var userDocente = @User.Claims.Where(c => c.Type == ClaimTypes.Name)
+                                var userDocente = @User.Claims.Where(c => c.Type == ClaimTypes.Name && c.Type == ClaimTypes.Role)
                                 .Select(c => c.Value).SingleOrDefault();
                                 <a class="nav-link nav-hover" asp-area="" asp-route-id="@userDocente"
                                    asp-controller="HorariosControlador" asp-action="DocenteHorario">Consultar Horario</a>
@@ -127,54 +127,5 @@
 </body>
 </html>
 
-
-
-
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">Hora</th>
-                    @foreach (var dia in diasDeLaSemana)
-                    {
-                        <th scope="col">@dia</th>
-                    }
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var hora in horasDelDia)
-                {
-                    <tr>
-                        <td>@(hora <= 12 ? hora : hora - 12):00 @(hora < 12 ? "AM" : "PM") - @(hora + 1 <= 12 ? hora + 1 : hora + 1 - 12):00 @(hora + 1 < 12 ? "AM" : "PM")</td>
-                        @foreach (var dia in diasDeLaSemana)
-                        {
-                            @if (Model != null)
-                            {
-                                var horarios = Model.Where(h => h.horarioDia == dia && h.horarioHoraInicio.Hours <= hora && h.horarioHoraInicio.Hours + h.horarioDuracion > hora).ToList();
-                                if (horarios.Any())
-                                {
-                                    var horario = horarios.First();
-                                    <td class="celda-horario bg-lightseagreen" style="cursor: pointer; background-color: lightseagreen" data-dia="@dia" data-hora="@hora" onclick="mostrarFormulario('@dia','@hora')">
-                                        <strong>Ambiente:</strong> @horario.ambiente.ambienteCodigo @horario.ambiente.ambienteNombre<br />
-                                        <strong>Materia:</strong> @horario.competencia.competenciaNombre<br />
-                                        <strong>Docente:</strong> @horario.docente.docenteNombre
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td class="celda-horario" style="cursor: pointer;" data-dia="@dia" data-hora="@hora" onclick="mostrarFormulario('@dia','@hora')"></td>
-                                }
-                            }
-                            else
-                            {
-                                <td class="celda-horario" style="cursor: pointer;" data-dia="@dia" data-hora="@hora" onclick="mostrarFormulario('@dia','@hora')"></td>
-                            }
-                        }
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
 
 

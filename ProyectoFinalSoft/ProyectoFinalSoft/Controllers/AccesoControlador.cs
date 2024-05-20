@@ -36,7 +36,7 @@ namespace ProyectoFinalSoft.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([Bind("usuario","contrasenia")] LoginUsuario login)
+        public async Task<IActionResult> Login([Bind("usuario", "contrasenia")] LoginUsuario login)
         {
             var user = _context.Usuarios.FirstOrDefault(u => u.usuarioLogin == login.usuario);
             if (user == null)
@@ -48,51 +48,27 @@ namespace ProyectoFinalSoft.Controllers
             var passwordHasher = new PasswordHasher<object>();
             var resultado = passwordHasher.VerifyHashedPassword(null, user.usuarioPassword, login.contrasenia);
 
-            if (resultado == PasswordVerificationResult.Success)
+            if (resultado != PasswordVerificationResult.Success)
             {
-                List<Claim> claims;
-                if (user.usuarioRol == 0)
-                {
-                     claims = new List<Claim>()
-                    {
-                      new Claim(ClaimTypes.Name,user.coordinadorId.ToString()),
-                      new Claim(ClaimTypes.Role, "Coordinador"),
-                    };
-                } else 
-                {
-                    claims = new List<Claim>()
-                     {
-                       new Claim(ClaimTypes.Name,user.docenteId.ToString()),
-                       new Claim(ClaimTypes.Role, "Docente"),
-                    };
-                }
-
-
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
-                AuthenticationProperties properties = new AuthenticationProperties()
-                {
-                    AllowRefresh = true,
-                };
-
-                await HttpContext.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(claimsIdentity),
-                    properties
-                    );
-                
-                if (user.usuarioRol == 0)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else if (user.usuarioRol == 1)
-                {
-                    return RedirectToAction("IndexDocente", "Home");
-                }
+                ViewData["Message"] = "Usuario o contraseña incorrectos";
+                return View();
             }
 
-            ViewData["Message"] = "Usuario o contraseña incorrectos";
-            return View();
-            
+            var name = user.usuarioRol == 0 ? user.coordinadorId.ToString() : user.docenteId.ToString();
+            var rol = user.usuarioRol == 0 ? "Coordinador" : "Docente";
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, name),
+                new Claim(ClaimTypes.Role, rol)
+            };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var properties = new AuthenticationProperties { AllowRefresh = true };
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
+
+            return RedirectToAction(user.usuarioRol == 0 ? "Index" : "IndexDocente", "Home");
         }
+
     }
 }

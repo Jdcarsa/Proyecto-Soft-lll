@@ -91,13 +91,7 @@
                         @Html.DisplayNameFor(model => model.ambiente)
                     </dt>
                     <dd class="col-sm-7">
-                        @Html.DisplayFor(model => model.ambiente.ambienteCodigo)
-                    </dd>
-                    <dt class="col-sm-5">
-                        @Html.DisplayNameFor(model => model.docente)
-                    </dt>
-                    <dd class="col-sm-7">
-                        @Html.DisplayFor(model => model.docente.docenteApellido)
+                        @Html.DisplayFor(model => model.ambiente.ambienteCodigo)@Html.DisplayFor(model => model.ambiente.ambienteNombre)
                     </dd>
                     <dt class="col-sm-5">
                         @Html.DisplayNameFor(model => model.periodoAcademico)
@@ -109,7 +103,7 @@
                         @Html.DisplayNameFor(model => model.competencia)
                     </dt>
                     <dd class="col-sm-7">
-                        @Html.DisplayFor(model => model.competencia.competenciaId)
+                        @Html.DisplayFor(model => model.competencia.competenciaNombre)
                     </dd>
                     <div class="row">
                         @if (User.Identity!.IsAuthenticated)
@@ -168,7 +162,7 @@ else
                 @Html.DisplayNameFor(model => model.docente)
             </dt>
             <dd class="col-sm-7">
-                @Html.DisplayFor(model => model.docente.docenteApellido)
+                @Html.DisplayFor(model => model.docente.docenteNombre)@Html.DisplayFor(model => model.docente.docenteApellido)
             </dd>
             <dt class="col-sm-5">
                 @Html.DisplayNameFor(model => model.periodoAcademico)
@@ -180,7 +174,7 @@ else
                 @Html.DisplayNameFor(model => model.competencia)
             </dt>
             <dd class="col-sm-7">
-                @Html.DisplayFor(model => model.competencia.competenciaId)
+                @Html.DisplayFor(model => model.competencia.competenciaNombre)
             </dd>
             <div class="row">
                 <div class="col text-center">

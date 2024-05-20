@@ -390,22 +390,23 @@ namespace ProyectoFinalSoft.Controllers
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios.FindAsync(id);
+            var docente = await _context.Docentes.FindAsync(id);
 
-            if(usuario == null)
+
+            if(docente == null)
             {
-                return NotFound();
+                return NotFound("Docente no existe");
             }
 
             var appDbContext = _context.Horarios.Include(h => h.ambiente).
                 Include(h=> h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico);
 
-            var horariosDocente = appDbContext.Where(h => h.docenteId == usuario.docenteId);
+            var horariosDocente = appDbContext.Where(h => h.docenteId == docente.docenteId);
 
-          if (!horariosDocente.Any())
-          {
-                    return View();
-          }
+              if (!horariosDocente.Any())
+              {
+                        return View();
+              }
 
            return View(await horariosDocente.ToListAsync());
         }
