@@ -12,17 +12,23 @@ namespace ProyectoFinalSoft.Models
         [Required(ErrorMessage = "El codigo es obligatorio.")]
         [Display(Name = "Codigo")]
         [Column("Ambiente_Codigo", TypeName = "varchar(30)")]
+        [MinLength(3, ErrorMessage = "El codigo debe tener al menos 3 caracteres.")]
+        [MaxLength(30, ErrorMessage = "El codigo no puede tener más de 30 caracteres.")]
         public string? ambienteCodigo { get; set; }
 
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [Column("Ambiente_Nombre", TypeName = "varchar(30)")]
-		public string? ambienteNombre { get; set;}
+        [MinLength(3, ErrorMessage = "El nombre debe tener al menos 3 caracteres.")]
+        [MaxLength(30, ErrorMessage = "El nombre no puede tener más de 30 caracteres.")]
+        public string? ambienteNombre { get; set;}
 
         [Display(Name = "Ubicacion")]
         [Required(ErrorMessage = "La ubicacion es obligatoria.")]
         [Column("Ambiente_ubicacion", TypeName = "varchar(100)")]
-		public string? ambienteUbicacion { get; set;}
+        [MinLength(3, ErrorMessage = "La ubicacion debe tener al menos 3 caracteres.")]
+        [MaxLength(100, ErrorMessage = "La ubicacion no puede tener más de 100 caracteres.")]
+        public string? ambienteUbicacion { get; set;}
 
         [Display(Name = "Tipo")]
         [Required]

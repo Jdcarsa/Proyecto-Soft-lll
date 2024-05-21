@@ -11,13 +11,17 @@ namespace ProyectoFinalSoft.Models
 
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "El nombre es obligatorio.")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Solo se permiten caracteres alfabéticos.")]
+        [RegularExpression(@"^[a-zA-ZÀ-ÖØ-öø-ÿÁÉÍÓÚáéíóúñÑ\s]+$", ErrorMessage = "Solo se permiten caracteres alfabéticos.")]
+        [MinLength(3, ErrorMessage = "El nombre debe tener al menos 3 caracteres.")]
+        [MaxLength(30, ErrorMessage = "El nombre no puede tener más de 30 caracteres.")]
         [Column("Docente_Nombre", TypeName = "varchar(30)")]
 		public string? docenteNombre { get; set; }
 
         [Display(Name = "Apellido")]
         [Required(ErrorMessage = "El apellido es obligatorio.")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Solo se permiten caracteres alfabéticos.")]
+        [RegularExpression(@"^[a-zA-ZÀ-ÖØ-öø-ÿÁÉÍÓÚáéíóúñÑ\s]+$", ErrorMessage = "Solo se permiten caracteres alfabéticos.")]
+        [MinLength(3, ErrorMessage = "El apellido debe tener al menos 3 caracteres.")]
+        [MaxLength(30, ErrorMessage = "El apellido no puede tener más de 30 caracteres.")]
         [Column("Docente_Apellido", TypeName = "varchar(30)")]
 		public string? docenteApellido { get; set; }
 
@@ -45,7 +49,9 @@ namespace ProyectoFinalSoft.Models
 
         [Display(Name = "Area")]
         [Required(ErrorMessage = "El area es obligatorio.")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Solo se permiten caracteres alfabéticos.")]
+        [RegularExpression(@"^[a-zA-ZÀ-ÖØ-öø-ÿÁÉÍÓÚáéíóúñÑ\s]+$", ErrorMessage = "Solo se permiten caracteres alfabéticos.")]
+        [MinLength(5, ErrorMessage = "El area debe tener al menos 5 caracteres.")]
+        [MaxLength(100, ErrorMessage = "El area no puede tener más de 100 caracteres.")]
         [Column("Docente_Area", TypeName = "varchar(100)")]
 		public string? docenteArea { get; set; }
 

@@ -12,7 +12,7 @@ using ProyectoFinalSoft.Services;
 
 namespace ProyectoFinalSoft.Controllers
 {
-    [Authorize(Roles = "Coordinador")]
+    
     public class DocenteControlador : Controller
     {
         private readonly AppDbContext _context;
@@ -22,20 +22,25 @@ namespace ProyectoFinalSoft.Controllers
             _context = context;
         }
 
-        // GET: DocenteControlador
+        [Authorize(Roles = "Coordinador")]
         public async Task<IActionResult> Index(string parametroBusqueda)
         {
 
-            var docentes = from docente in _context.Docentes select docente;
+            var docentes = from docente in _context.Docentes
+                           select docente;
 
             if (!String.IsNullOrEmpty(parametroBusqueda))
             {
                 docentes = docentes.Where(d => (d.docenteNombre + " " + d.docenteApellido)!.Contains(parametroBusqueda));
             }
+
+            docentes = docentes.OrderBy(d => d.docenteNombre);
+
             return View(await docentes.ToListAsync());
+
         }
 
-        // GET: DocenteControlador/Details/5
+        [Authorize(Roles = "Coordinador,Docente")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -53,19 +58,24 @@ namespace ProyectoFinalSoft.Controllers
             return View(docente);
         }
 
-        // GET: DocenteControlador/Create
+        [Authorize(Roles = "Coordinador")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: DocenteControlador/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Coordinador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("docenteId,docenteNombre,docenteApellido,docenteTipoId,docenteNumId,docenteTipo,docenteTipoContrato,docenteArea,docenteEstado")] Docente docente)
         {
+
+            var existeNumIdDocente = await _context.Docentes.AnyAsync(d => d.docenteNumId == docente.docenteNumId);
+            if (existeNumIdDocente)
+            {
+                ModelState.AddModelError("docenteNumId", "El número de identificación ya existe.");
+                return View(docente);
+            }
             if (ModelState.IsValid)
             {
                 docente.docenteEstado = 1;
@@ -169,9 +179,9 @@ namespace ProyectoFinalSoft.Controllers
             return new string(Enumerable.Repeat(chars, 8)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
-    
 
-    // GET: DocenteControlador/Edit/5
+
+        [Authorize(Roles = "Coordinador")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -187,9 +197,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(docente);
         }
 
-        // POST: DocenteControlador/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Coordinador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("docenteId,docenteNombre,docenteApellido,docenteTipoId,docenteNumId,docenteTipo,docenteTipoContrato,docenteArea,docenteEstado")] Docente docente)
@@ -223,7 +231,7 @@ namespace ProyectoFinalSoft.Controllers
             return Json(new { success = false });
         }
 
-        // GET: DocenteControlador/Delete/5
+        [Authorize(Roles = "Coordinador")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -241,7 +249,7 @@ namespace ProyectoFinalSoft.Controllers
             return View(docente);
         }
 
-        // POST: DocenteControlador/Delete/5
+        [Authorize(Roles = "Coordinador")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

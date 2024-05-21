@@ -20,6 +20,8 @@ namespace ProyectoFinalSoft.Models
 
         [Display(Name = "Nombre")]
         [Column("Periodo_Nombre", TypeName = "varchar(100)")]
+        [MinLength(3, ErrorMessage = "El nombre debe tener al menos 3 caracteres.")]
+        [MaxLength(100, ErrorMessage = "El nombre no puede tener más de 100 caracteres.")]
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         public string? periodoNombre { get; set; }
 		[Column("Periodo_estado", TypeName = "numeric(1,0)")]
