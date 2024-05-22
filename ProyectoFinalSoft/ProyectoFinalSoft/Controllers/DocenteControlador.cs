@@ -207,6 +207,15 @@ namespace ProyectoFinalSoft.Controllers
                 return NotFound();
             }
 
+
+            var existeNumIdDocente = await _context.Docentes.AnyAsync(d => d.docenteNumId == docente.docenteNumId && d.docenteId != id);
+
+            if (existeNumIdDocente)
+            {
+                ModelState.AddModelError("docenteNumId", "El número de identificación ya existe.");
+                return View(docente);
+            }
+
             if (ModelState.IsValid)
             {
                 try
