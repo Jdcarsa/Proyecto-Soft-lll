@@ -7,6 +7,6 @@ namespace ProyectoFinalSoft.Fachada
     {
         void obtenerTodos();
         void obtenerTodos(Horario horario);
-        Task guardarDatosProgComp();
+        Task<IActionResult> guardarDatosProgComp();
     }
 }

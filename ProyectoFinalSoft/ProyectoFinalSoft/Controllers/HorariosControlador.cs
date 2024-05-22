@@ -38,7 +38,11 @@ namespace ProyectoFinalSoft.Controllers
         [Authorize(Roles = "Coordinador")]
         public async Task<IActionResult> Index(string periodoAcademicoNombre ,string ambienteBusqueda , string docenteBusqueda )
         {
-            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h => h.competencia).Include(h => h.docente).Include(h => h.periodoAcademico);
+            bool existenDatos = _context.Programas.Any();
+            ViewBag.ExistenDatos = existenDatos;
+
+            var appDbContext = _context.Horarios.Include(h => h.ambiente).Include(h => h.competencia).Include(h =>
+            h.docente).Include(h => h.periodoAcademico);
 
             var periodosAcademicos = await _context.PeriodosAcademicos.Select(p => p.periodoNombre).ToListAsync();
             ViewBag.PeriodosAcademicos = periodosAcademicos;
@@ -58,7 +62,8 @@ namespace ProyectoFinalSoft.Controllers
                     return View();
                 }
 
-                var horarioAmbiente = appDbContext.Where(h => h.ambiente.ambienteNombre == ambienteBusqueda && h.periodoAcademico.periodoNombre == periodoAcademicoNombre);
+                var horarioAmbiente = appDbContext.Where(h => h.ambiente.ambienteNombre == ambienteBusqueda
+                && h.periodoAcademico.periodoNombre == periodoAcademicoNombre);
                 return View(await horarioAmbiente.ToListAsync());
             }
 
@@ -71,7 +76,8 @@ namespace ProyectoFinalSoft.Controllers
                     return View();
                 }
 
-                var horarioDocente = appDbContext.Where(h => h.docente.docenteNombre == docenteBusqueda && h.periodoAcademico.periodoNombre == periodoAcademicoNombre);
+                var horarioDocente = appDbContext.Where(h => h.docente.docenteNombre == docenteBusqueda
+                && h.periodoAcademico.periodoNombre == periodoAcademicoNombre);
                 return View(await horarioDocente.ToListAsync());
             }
 
@@ -359,28 +365,30 @@ namespace ProyectoFinalSoft.Controllers
         [Authorize(Roles = "Coordinador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task guardarDatosProgComp()
+        public async Task<IActionResult> guardarDatosProgComp()
         {
+
             var rutaAlArchivo = "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Json\\Programas.json";
 
-            // Usa 'await' para esperar a que la lectura del archivo se complete
+
             var contenidoDeArchivo = await System.IO.File.ReadAllTextAsync(rutaAlArchivo);
 
-            // Deserializa el JSON a una lista de programas
+    
             var rootObject = JsonConvert.DeserializeObject<RootObject>(contenidoDeArchivo);
             var programas = rootObject.programas;
 
             foreach (var programa in programas)
             {
-                // Guarda cada programa en la base de datos
+
                 this._context.Programas.Add(programa);
             }
 
-            // Guarda los cambios en la base de datos
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
-        
+
+
         [Authorize (Roles="Docente")]
         public async Task<IActionResult> DocenteHorario(int? id)
         {

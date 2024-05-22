@@ -110,13 +110,12 @@
 
 </div>
 
-<!--
+
 <div>
     <form asp-controller="HorariosControlador" asp-action="guardarDatosProgComp" method="post">
-        <button type="submit">Cargar datos</button>
+        <button type="submit" @(ViewBag.ExistenDatos ? "disabled" : "")>Cargar datos</button>
     </form>
 </div>
--->
 
 <!-- Modal para menu horario -->
 <div class="modal fade" id="modalHorario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
