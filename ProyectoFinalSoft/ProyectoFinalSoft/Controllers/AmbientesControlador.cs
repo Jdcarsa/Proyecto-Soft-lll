@@ -34,6 +34,9 @@ namespace ProyectoFinalSoft.Controllers
                 ambientes = ambientes.Where(amb => (amb.ambienteNombre + " " + amb.ambienteUbicacion).Contains(ambienteBusqueda));
             }
 
+            // Ordenar los ambientes por codigo
+            ambientes = ambientes.OrderBy(ambientes => ambientes.ambienteCodigo);
+
             // Devolver la vista con los resultados filtrados
             return View(await ambientes.ToListAsync());
         }
@@ -76,7 +79,7 @@ namespace ProyectoFinalSoft.Controllers
                 var existeAmbiente = await _context.Ambientes.AnyAsync(amb => amb.ambienteCodigo == ambiente.ambienteCodigo);
                 if (existeAmbiente)
                 {
-                    ModelState.AddModelError("ambienteCodigo", "El ID ingresado ya existe.");
+                    ModelState.AddModelError("ambienteCodigo", "El código ingresado ya existe.");
                     return View(ambiente);
                 }
                 ambiente.ambienteEstado = 1;
@@ -117,6 +120,14 @@ namespace ProyectoFinalSoft.Controllers
 
             if (ModelState.IsValid)
             {
+                // Verificar si el código ya existe en otros ambientes (excluyendo el actual)
+                var existeAmbiente = await _context.Ambientes.AnyAsync(amb => amb.ambienteCodigo == ambiente.ambienteCodigo && amb.ambienteId != ambiente.ambienteId);
+                if (existeAmbiente)
+                {
+                    ModelState.AddModelError("ambienteCodigo", "El código ingresado ya existe.");
+                    return View(ambiente);
+                }
+
                 try
                 {
                     ambiente.ambienteEstado = 1;

@@ -34,6 +34,9 @@ namespace ProyectoFinalSoft.Controllers
                 periodos = periodos.Where(periodo => (periodo.periodoNombre + " " + periodo.periodoFechaInicio).Contains(periodoBusqueda));
             }
 
+            // Ordenar los periodos por fecha de inicio
+            periodos = periodos.OrderBy(periodo => periodo.periodoFechaInicio);
+
             // Devolver la vista con los resultados filtrados
             return View(await periodos.ToListAsync());
         }
@@ -76,6 +79,13 @@ namespace ProyectoFinalSoft.Controllers
                     ModelState.AddModelError("periodoFechaFin", "La fecha de fin debe ser mayor que la fecha de inicio.");
                     return View(periodoAcademico);
                 }
+
+                if (ExistePeriodoConMismasFechas(periodoAcademico.periodoId, periodoAcademico.periodoFechaInicio, periodoAcademico.periodoFechaFin))
+                {
+                    ModelState.AddModelError("", "Ya existe un periodo académico con las mismas fechas de inicio y fin.");
+                    return View(periodoAcademico);
+                }
+
                 var diferenciaMeses = ((periodoAcademico.periodoFechaFin.Year - periodoAcademico.periodoFechaInicio.Year)
                                          * 12) + periodoAcademico.periodoFechaFin.Month - periodoAcademico.periodoFechaInicio.Month;
                 if (diferenciaMeses !=6 && diferenciaMeses!= 3)
@@ -89,6 +99,11 @@ namespace ProyectoFinalSoft.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(periodoAcademico);
+        }
+
+        private bool ExistePeriodoConMismasFechas(int periodoId, DateOnly periodoFechaInicio, DateOnly periodoFechaFin)
+        {
+            return _context.PeriodosAcademicos.Any(p => p.periodoFechaInicio == periodoFechaInicio && p.periodoFechaFin == periodoFechaFin && p.periodoId != periodoId);
         }
 
         // GET: PeriodoAcademicoControlador/Edit/5
@@ -121,6 +136,12 @@ namespace ProyectoFinalSoft.Controllers
 
             if (ModelState.IsValid)
             {
+                if (ExistePeriodoConMismasFechas(periodoAcademico.periodoId, periodoAcademico.periodoFechaInicio, periodoAcademico.periodoFechaFin))
+                {
+                    ModelState.AddModelError("", "Ya existe un periodo académico con las mismas fechas de inicio y fin.");
+                    return View(periodoAcademico);
+                }
+
                 try
                 {
                     periodoAcademico.periodoEstado = 1;
