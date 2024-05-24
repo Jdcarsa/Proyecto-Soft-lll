@@ -5,7 +5,7 @@
 }
 
 <div class="container mt-5">
-    <h1 class="text-center mb-3">Gestión Periodos académicos</h1>
+    <h1 class="text-center mb-3">Gestión Periodos académicos</h1><br />
     <div class="table table-responsive">
         <div class="d-flex justify-content-center">
             <div>
@@ -22,6 +22,10 @@
                 </form>
             </div>
         </div>
+    <br />
+        <a class="btn btn-primary" asp-action="Create">Crear Periodo académico</a>
+        <br />
+        <br />
     <table class="table table-bordered">
         <thead class="table-dark">
             <tr>
@@ -54,7 +58,7 @@
                 <td class="d-flex justify-content-evenly">
                    <a asp-controller="PeriodoAcademicoControlador" asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.periodoId">Editar</a>
                     <a asp-controller="PeriodoAcademicoControlador" asp-action="Details" class="btn btn-info btn-sm" asp-route-id="@item.periodoId">Detalles</a>
-                    <a asp-controller="PeriodoAcademicoControlador" asp-action="Delete" class="btn btn-sm @(item.periodoEstado == 0 ? "btn-success" : "btn-danger")"
+                    <a asp-controller="PeriodoAcademicoControlador" asp-action="Delete" class="btn btn-sm @(item.periodoEstado == 0 ? "btn-success px-3" : "btn-danger")"
                         asp-action="Delete" asp-route-id="@item.periodoId">@(item.periodoEstado == 0 ? "Activar" : "Desactivar")</a>
                 </td>
             </tr>
@@ -62,5 +66,4 @@
         </tbody>
     </table>
     </div>
-    <a class="btn btn-primary" asp-action="Create">Crear Periodo académico</a>
 </div>

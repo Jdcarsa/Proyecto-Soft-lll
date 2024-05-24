@@ -10,15 +10,14 @@
     </head>
     <body>
     <div class="d-flex justify-content-center align-items-center vh-100">
-        <div class="card col-md-6 col-lg-4 p-0">
-            <div class="card-body">
+        <div class="card col-md-6 col-lg-4 p-0 shadow">
+            <div class="card-body p-4">
                 <form asp-controller="AccesoControlador" asp-action="Login" method="post" 
                 class="d-grid form-signin container text-center gap-3">
                     <div class="container text-center">
-                        <h1 class="mt-5">Gestor de Horarios</h1>
-                        <img class="mb-4" src="https://img.freepik.com/vector-gratis/hombre-que-sostiene-concepto-gestion-tiempo-reloj_23-2148823171.jpg?w=740&t=st=1715828784~exp=1715829384~hmac=42b94774354dabca40a7b73e066491a27d40c9f2ef8261032f332e340a7de7b8"
-                             alt="Simbolo Horarios" width="75" height="75">
-                        <h2 class="mb-3">@ViewData["Title"]</h2>
+                        <h1 class="mt-4 mb-3">Gestor de Horarios</h1>
+                        <img class="mb-4 rounded-circle" src="https://img.freepik.com/vector-gratis/fondo-plano-concepto-e-learning_52683-7444.jpg?t=st=1716512384~exp=1716515984~hmac=5e454308bc02181504665791eea4b854747c1e86768c6c1ca898bd0e50bb39b2&w=740" alt="Simbolo SENA" width="120" height="120">
+                        <h2 class="h3 mb-3">@ViewData["Title"]</h2>
                     </div>
 
                     <div class="form-group">
@@ -32,7 +31,7 @@
                 </form>
                 @if (ViewData["Message"] != null)
                 {
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger mt-3" role="alert">
                         @ViewData["Message"]
                     </div>
                 }
@@ -41,3 +40,19 @@
     </div>
     </body>
 </html>
+
+<style>
+    body {
+        background-color: seagreen;
+    }
+
+    .btn-primary {
+        background-color: green;
+        border-color: green;
+    }
+
+    .btn-primary:hover {
+        background-color: darkgreen;
+        border-color: green;
+    }
+</style>

@@ -1,58 +1,63 @@
 ﻿@model ProyectoFinalSoft.Models.Docente
 
 @{
-    ViewData["Title"] = "Desactivar Docente";
+    ViewData["Title"] = "Activar/Desactivar Docente";
 }
-<div class="container mt-5 text-center mb-6">
+<div class="container mt-5 text-center">
     <h1 class="text-center mb-6">@((Model.docenteEstado == 1) ? "Desactivar" : "Activar")</h1>
     <h3 class="text-center mb-6">¿Esta seguro que desea @(Model.docenteEstado == 1 ? "desactivar" : "activar")
-        a este Docente?</h3>
+        a este Docente?
+    </h3>
     <hr />
-    <div class="container-fluid">
-        <dl class="row mb-3">
+    <div class="mb-6 d-flex justify-content-center">
+        <dl class="row col-6">
             <dt class = "col-sm-5">
                 @Html.DisplayNameFor(model => model.docenteNombre)
             </dt>
-            <dd class = "col-sm-5">
+            <dd class = "col-sm-7">
                 @Html.DisplayFor(model => model.docenteNombre)
                 @Html.DisplayFor(model => model.docenteApellido)
             </dd>
             <dt class = "col-sm-5">
                 @Html.DisplayNameFor(model => model.docenteTipoId)
             </dt>
-            <dd class = "col-sm-5">
+            <dd class = "col-sm-7">
                 @Html.DisplayFor(model => model.docenteTipoId)
             </dd>
             <dt class = "col-sm-5">
                 @Html.DisplayNameFor(model => model.docenteNumId)
             </dt>
-            <dd class = "col-sm-5">
+            <dd class = "col-sm-7">
                 @Html.DisplayFor(model => model.docenteNumId)
             </dd>
             <dt class = "col-sm-5">
                 @Html.DisplayNameFor(model => model.docenteTipo)
             </dt>
-            <dd class = "col-sm-5">
+            <dd class = "col-sm-7">
                 @Html.DisplayFor(model => model.docenteTipo)
             </dd>
             <dt class = "col-sm-5">
                 @Html.DisplayNameFor(model => model.docenteTipoContrato)
             </dt>
-            <dd class = "col-sm-5">
+            <dd class = "col-sm-7">
                 @Html.DisplayFor(model => model.docenteTipoContrato)
             </dd>
             <dt class = "col-sm-5">
                 @Html.DisplayNameFor(model => model.docenteArea)
             </dt>
-            <dd class = "col-sm-5">
+            <dd class = "col-sm-7">
                 @Html.DisplayFor(model => model.docenteArea)
             </dd>
         </dl>
     </div>
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="docenteId" />
-        <a asp-action="Index" class="col-md-4 btn btn-secondary me-5">Cancelar</a>
-        <input type="submit" value="@(Model.docenteEstado == 1 ? "Desactivar" : "Activar")" class="col-md-4 btn
-        @(Model.docenteEstado == 1 ? "btn-danger" : "btn-success")" />
-    </form>
+    <div class="row mb-3">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="docenteId" />
+            <a asp-action="Index" class="col-md-4 btn btn-secondary me-5" style="height: 38px; width: 200px">Cancelar</a>
+            <input type="submit" value="@(Model.docenteEstado == 1 ? "Desactivar" : "Activar")" class="col-md-4 btn
+        @(Model.docenteEstado == 1 ? "btn-danger" : "btn-success")" style="height: 38px; width: 200px"/>
+        </form>
+    </div>
 </div>
+<br />
+<br />

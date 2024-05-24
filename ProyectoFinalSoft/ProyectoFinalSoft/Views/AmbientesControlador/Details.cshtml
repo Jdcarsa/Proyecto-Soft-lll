@@ -1,47 +1,52 @@
 ﻿@model ProyectoFinalSoft.Models.Ambiente
 
 @{
-    ViewData["Title"] = "Detalles Ambiente de aprendizaje";
+    ViewData["Title"] = "Información del Ambiente de aprendizaje";
 }
 
-<h1>Detalles Ambiente de aprendizaje</h1>
-
-<div>
-    <h4>Ambiente de aprendizaje</h4>
+<div class="container mt-5 text-center">
+    <h1>Detalles Ambiente de aprendizaje</h1>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ambienteCodigo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ambienteCodigo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ambienteNombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ambienteNombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ambienteUbicacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ambienteUbicacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ambienteTipo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ambienteTipo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ambienteCapacidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ambienteCapacidad)
-        </dd>
-    </dl>
+    <div class="mb-6 d-flex justify-content-center">
+        <dl class="row col-6">
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.ambienteCodigo)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.ambienteCodigo)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.ambienteNombre)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.ambienteNombre)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.ambienteUbicacion)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.ambienteUbicacion)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.ambienteTipo)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.ambienteTipo)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.ambienteCapacidad)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.ambienteCapacidad)
+            </dd>
+            <br />
+            <br />
+        </dl>
+    </div>
+    <div class="row mb-3">
+        <a asp-action="Index" class="btn btn-primary" style="height: 35px; width: 180px">Volver</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-</div>
+<br />
+<br />
+

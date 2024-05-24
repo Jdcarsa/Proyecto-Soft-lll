@@ -4,13 +4,11 @@
     ViewData["Title"] = "Crear Periodos académicos";
 }
 
-<h1>Crear Periodo académico</h1>
-
-<h4>PeriodoAcademico</h4>
-<hr />
 <div class="container mt-5">
+    <h1 class="text-center mb-6">Crear Periodo académico</h1>
+    <hr />
     <div class="col-md-6 mx-auto">
-        <form asp-action="Create">
+        <form class="row mb-3 d-grid gap-2" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="periodoFechaInicio" class="control-label"></label>
@@ -29,16 +27,14 @@
             </div>
             <div class="form-group">
                 <br>
-                    <a asp-action="Index" class="btn btn-danger col-md-5 me-5">Cancelar</a>
-                    <button type="submit" class="btn btn-primary col-md-5">Guardar</button>
+                <a asp-action="Index" class="col-md-5 btn btn-danger me-5">Cancelar</a>
+                <button type="submit" value="Create" class="btn btn-primary col-md-5">Guardar</button>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-</div>
+
 
 @section Scripts {
     @{
@@ -51,8 +47,10 @@
     <script>
         $(function () {
             $(".datepicker").datepicker({
-                dateFormat: 'yy/mm/dd' 
+                dateFormat: 'yy/mm/dd'
             });
         });
+
     </script>
+
 }

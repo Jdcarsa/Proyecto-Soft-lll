@@ -141,7 +141,7 @@ namespace ProyectoFinalSoft.Controllers
             };
 
             horario.horarioDuracion = (int)(horario.horarioHoraFin - horario.horarioHoraInicio).TotalMinutes;
-            obtenerTodos();
+            getAll();
             return View(horario);
         }
 
@@ -149,19 +149,19 @@ namespace ProyectoFinalSoft.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("horarioId,horarioDia,horarioHoraInicio," +
-            "horarioHoraFin,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
+        "horarioHoraFin,ambienteId,docenteId,periodoAcademicoId,CompetenciaId")] Horario horario)
         {
             if (ModelState.IsValid)
             {
-                obtenerTodos(horario);
-
+                getAll(horario);
+                horario.horarioDuracion = (int)(horario.horarioHoraFin - horario.horarioHoraInicio).TotalHours;
                 var validationResult = ValidarHorario(horario);
                 if (!string.IsNullOrEmpty(validationResult))
                 {
-                    obtenerTodos(horario);
+                    getAll(horario);
                     return View(horario);
                 }
-                horario.horarioDuracion = (int)(horario.horarioHoraFin - horario.horarioHoraInicio).TotalHours;
+
                 _context.Add(horario);
                 await _context.SaveChangesAsync();
 
@@ -173,58 +173,64 @@ namespace ProyectoFinalSoft.Controllers
 
         private string ValidarHorario(Horario horario)
         {
+            var errors = new List<string>();
+
             if (horario.horarioHoraInicio > horario.horarioHoraFin)
             {
-                ModelState.AddModelError("horarioHoraInicio", "La hora seleccionada es invalida.");
-                return "horarioHoraInicio";
+                ModelState.AddModelError("horarioHoraFin", "La hora seleccionada es invalida.");
+                errors.Add("horarioHoraFin");
             }
 
             if (horario.horarioHoraInicio < TimeSpan.FromHours(7) || horario.horarioHoraInicio > TimeSpan.FromHours(21))
             {
                 ModelState.AddModelError("horarioHoraInicio", "La hora seleccionada es invalida.");
-                return "horarioHoraInicio";
+                errors.Add("horarioHoraInicio");
             }
 
             if (horario.horarioHoraFin < TimeSpan.FromHours(8) || horario.horarioHoraFin > TimeSpan.FromHours(22))
             {
                 ModelState.AddModelError("horarioHoraFin", "La hora seleccionada es invalida.");
-                return "horarioHoraFin";
+                errors.Add("horarioHoraFin");
             }
 
-            if (!_docenteServicio.ValidarHorasTrabajo(horario))
+            if (!_docenteServicio.ValidateDayHours(horario))
             {
-                ModelState.AddModelError("docenteId", "El docente excede el limite de horas permitido por dia o por semana.");
-                return "docenteId";
+                ModelState.AddModelError("docenteId", "El docente excede el limite de horas permitido por dia.");
+                errors.Add("docenteId");
             }
 
-            if (!_ambienteServicio.EstaDisponibleMismaHora(horario))
+            if (!_docenteServicio.ValidateWeekHours(horario))
+            {
+                ModelState.AddModelError("docenteId", "El docente excede el limite de horas permitido por semana.");
+                errors.Add("docenteId");
+            }
+
+            if (!_ambienteServicio.IsAvailableSameTime(horario))
             {
                 ModelState.AddModelError("ambienteId", "El ambiente no esta dispobile en la franja seleccionada.");
-                return "ambienteId";
+                errors.Add("ambienteId");
             }
 
-            if (!_ambienteServicio.EstaDisponible(horario))
+            if (!_ambienteServicio.IsAvailable(horario))
             {
                 ModelState.AddModelError("ambienteId", "El ambiente no esta disponible en la franja seleccionada.");
-                return "ambienteId";
+                errors.Add("ambienteId");
             }
 
-            if (!_docenteServicio.EstaDisponibleMismaHora(horario))
+            if (!_docenteServicio.IsAvailableSameHour(horario))
             {
                 ModelState.AddModelError("docenteId", "El docente no esta dispobile en la franja seleccionada.");
-                return "docenteId";
+                errors.Add("docenteId");
             }
 
-            if (!_docenteServicio.EstaDisponible(horario))
+            if (!_docenteServicio.IsAvailable(horario))
             {
                 ModelState.AddModelError("docenteId", "El docente no esta dispobile en la franja seleccionada.");
-                return "docenteId";
+                errors.Add("docenteId");
             }
 
-            return string.Empty;
+            return errors.Any() ? string.Join(",", errors) : string.Empty;
         }
-
-
 
 
 
@@ -241,7 +247,7 @@ namespace ProyectoFinalSoft.Controllers
             {
                 return NotFound();
             }
-           obtenerTodos(horario);
+           getAll(horario);
             return View(horario);
         }
 
@@ -262,7 +268,7 @@ namespace ProyectoFinalSoft.Controllers
 
                     if (!string.IsNullOrEmpty(validationResult))
                     {
-                        obtenerTodos(horario);
+                        getAll(horario);
                         return View(horario);
                     }
 
@@ -297,7 +303,7 @@ namespace ProyectoFinalSoft.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            obtenerTodos(horario);
+            getAll(horario);
             return View(horario);
         }
 
@@ -345,27 +351,27 @@ namespace ProyectoFinalSoft.Controllers
         }
 
 
-        public void obtenerTodos()
+        public void getAll()
         {
-            ViewData["competenciaId"] = _competenciaServicio.ObtenerCompetencias();
-            ViewData["docenteId"] = _docenteServicio.ObtenerDocentes();
-            ViewData["periodoAcademicoId"] = _pAServicio.ObtenerPA();
-            ViewData["ambienteId"] = _ambienteServicio.ObtenerAmbientes();
+            ViewData["competenciaId"] = _competenciaServicio.getCompetencias();
+            ViewData["docenteId"] = _docenteServicio.getDocentes();
+            ViewData["periodoAcademicoId"] = _pAServicio.getPA();
+            ViewData["ambienteId"] = _ambienteServicio.getAmbientes();
         }
 
 
-        public void obtenerTodos(Horario horario)
+        public void getAll(Horario horario)
         {
-            ViewData["ambienteId"] = _ambienteServicio.ObtenerAmbientes(horario.ambienteId);
-            ViewData["competenciaId"] = _competenciaServicio.ObtenerCompetencias(horario.CompetenciaId);
-            ViewData["docenteId"] = _docenteServicio.ObtenerDocentes(horario.docenteId);
-            ViewData["periodoAcademicoId"] = _pAServicio.ObtenerPA(horario.periodoAcademicoId);
+            ViewData["ambienteId"] = _ambienteServicio.getAmbientes(horario.ambienteId);
+            ViewData["competenciaId"] = _competenciaServicio.getCompetencias(horario.CompetenciaId);
+            ViewData["docenteId"] = _docenteServicio.getDocentes(horario.docenteId);
+            ViewData["periodoAcademicoId"] = _pAServicio.getPA(horario.periodoAcademicoId);
         }
 
         [Authorize(Roles = "Coordinador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> guardarDatosProgComp()
+        public async Task<IActionResult> saveDataProgComp()
         {
 
             var rutaAlArchivo = "C:\\Users\\ideapad330S\\Documents\\GitHub\\Proyecto-Soft-lll\\ProyectoFinalSoft\\ProyectoFinalSoft\\Json\\Programas.json";

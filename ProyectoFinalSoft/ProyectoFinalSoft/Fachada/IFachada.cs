@@ -5,8 +5,8 @@ namespace ProyectoFinalSoft.Fachada
 {
     public interface IFachada
     {
-        void obtenerTodos();
-        void obtenerTodos(Horario horario);
-        Task<IActionResult> guardarDatosProgComp();
+        void getAll();
+        void getAll(Horario horario);
+        Task<IActionResult> saveDataProgComp();
     }
 }

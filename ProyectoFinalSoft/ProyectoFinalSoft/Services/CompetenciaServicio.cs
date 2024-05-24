@@ -14,13 +14,13 @@ namespace ProyectoFinalSoft.Services
             _context = context;
         }
 
-        public SelectList ObtenerCompetencias()
+        public SelectList getCompetencias()
         {
             var competencias = _context.Competencias.Where(d => d.competenciaEstado == 1);
             return new SelectList(competencias, "competenciaId", "competenciaNombre");
         }
 
-        public SelectList ObtenerCompetencias(int? horarioCompetenciaId)
+        public SelectList getCompetencias(int? horarioCompetenciaId)
         {
             var competencias = _context.Competencias.Where(d => d.competenciaEstado == 1);
             return new SelectList(_context.Competencias, "competenciaId", "competenciaNombre", horarioCompetenciaId);

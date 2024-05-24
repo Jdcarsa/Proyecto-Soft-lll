@@ -3,33 +3,37 @@
 @{
     ViewData["Title"] = "Detalles Periodos académicos";
 }
-
-<h1>Detalles Periodo académico</h1>
-
-<div>
-    <h4>Periodo Académico</h4>
+<div class="container mt-5 text-center">
+    <h1>Información del Periodo académico</h1>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.periodoFechaInicio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.periodoFechaInicio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.periodoFechaFin)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.periodoFechaFin)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.periodoNombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.periodoNombre)
-        </dd>
-    </dl>
+    <div class ="mb-6 d-flex justify-content-center">
+        <dl class="row col-6">
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.periodoFechaInicio)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.periodoFechaInicio)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.periodoFechaFin)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.periodoFechaFin)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.periodoNombre)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.periodoNombre)
+            </dd>
+            <br />
+            <br />
+
+        </dl>
+    </div>
+    <div class="row mb-3">
+        <a asp-action="Index" class="btn btn-primary" style="height: 35px; width: 180px">Volver</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-</div>
+<br />
+<br />

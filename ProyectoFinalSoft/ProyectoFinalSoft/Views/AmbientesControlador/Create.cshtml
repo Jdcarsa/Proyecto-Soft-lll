@@ -4,12 +4,11 @@
     ViewData["Title"] = "Crear Ambientes de aprendizaje";
 }
 
-<h1>Crear Ambiente de aprendizaje</h1>
-
-<hr />
 <div class="container mt-5">
+    <h1 class="text-center mb-6">Crear Ambiente de aprendizaje</h1>
+    <hr />
     <div class="col-md-6 mx-auto">
-        <form asp-action="Create" class="row g-3">
+        <form asp-action="Create" class="row mb-3 d-grid gap-2">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="col-md-12">
                 <label asp-for="ambienteCodigo" class="form-label"></label>
@@ -50,12 +49,11 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-</div>
+
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
 }

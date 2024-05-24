@@ -5,13 +5,19 @@
     Layout = null;
 }
 
-<html>
-    <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/ProyectoFinalSoft.styles.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.css" />
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-md navbar-dark bg-success border-bottom box-shadow mb-3">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -19,27 +25,9 @@
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
+                            
                             <li class="nav-item text-light d-flex align-items-center justify-content-start">
-                                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="IndexDocente">Horario Academico</a>
-                            </li>
-                            <li class="nav-item text-light d-flex align-items-center justify-content-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar2-week" viewBox="0 0 16 16">
-                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z" />
-                                <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
-                            </svg>
-                            @if (User.Identity!.IsAuthenticated)
-                            {
-                                var userRole = User.Claims.Where(c => c.Type == ClaimTypes.Role)
-                                .Select(c => c.Value).SingleOrDefault();
-                                
-                                if (userRole == "Docente")
-                                {
-                                    var userId = User.Claims.Where(c => c.Type == ClaimTypes.Name)
-                                    .Select(c => c.Value).SingleOrDefault();
-                                    <a class="nav-link nav-hover" asp-area="" asp-route-id="@userId"
-                                       asp-controller="HorariosControlador" asp-action="DocenteHorario">Consultar Horario</a>
-                                }
-                            }
+                                <a class="navbar-brand nav-hover" asp-area="" asp-controller="Home" asp-action="IndexDocente">Horario Academico</a>
                             </li>
                             <li class="nav-item text-light d-flex align-items-center justify-content-start">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -60,6 +48,28 @@
                                     }
                                 }
                             </li>
+                            <li class="nav-item text-light d-flex align-items-center justify-content-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar2-week" viewBox="0 0 16 16">
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z" />
+                                <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
+                            </svg>
+                            
+                            @if (User.Identity!.IsAuthenticated)
+                            {
+                                var userRole = User.Claims.Where(c => c.Type == ClaimTypes.Role)
+                                .Select(c => c.Value).SingleOrDefault();
+                                
+                                if (userRole == "Docente")
+                                {
+                                    var userId = User.Claims.Where(c => c.Type == ClaimTypes.Name)
+                                    .Select(c => c.Value).SingleOrDefault();
+                                    <a class="nav-link nav-hover" asp-area="" asp-route-id="@userId"
+                                       asp-controller="HorariosControlador" asp-action="DocenteHorario">Consultar Horario</a>
+                                }
+                            }
+
+                            </li>
+                            
                             <li class="nav-item text-light d-flex align-items-center justify-content-start mx-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
@@ -73,18 +83,30 @@
             </nav>
         </header>
         <section class="container">
-            <div class="text-center">
-                <h1 class="display-4">Bienvenido Docente</h1>
-            <section>
-                <img src="https://img.freepik.com/vector-gratis/gente-pequena-enfocada-leyendo-libros_74855-5836.jpg?t=st=1715978545~exp=1715982145~hmac=4f4f633d8b5860483ab0fab03798067d0f3e6946739204a90a519b3776188259&w=740" alt="image" />
-            </section>
+            <div class="row align-items-center justify-content-center text-center">
+                <div class="col-12 col-md-7 col-lg-6 order-md-1 aos-init aos-animate" data-aos="fade-up">
+                    <h1 class="display-3">
+                        Bienvenido Docente
+                        <span class="text-success span-center"><br />del SENA</span></p>
+                    </h1>
+                    <p class="lead text-center text-md-start text-body-secondary mb-6 mb-lg-8">
+                        Aquí puedes mirar tu horario correspondiente.
+                    </p>
+                </div>
+                <div class="col-12 col-md-5 col-lg-6 order-md-2">
+                <img src="https://img.freepik.com/vector-premium/profesor-dibujos-animados-amigable-accesible-pie-confianza-frente-pizarra_851674-43572.jpg?size=338&ext=jpg&ga=GA1.1.44546679.1716336000&semt=ais_user" class="img-fluid mw-md-150 mw-lg-130 mb-6 mb-md-0 aos-init aos-animate" style="max-width: 75%;" alt="image">
+                </div>
             </div>
         </section>
-    <footer class="border-top footer text-muted text-center foot">
-        <div class="container">
-            &copy; 2024 - Todos los derechos reservados
-        </div>
-    </footer>
+        
+        <footer class="border-top footer text-muted text-center foot">
+            <div class="container">
+                &copy; 2024 - Todos los derechos reservados
+            </div>
+        </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     </body>
 </html>
 

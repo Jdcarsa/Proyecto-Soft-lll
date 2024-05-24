@@ -82,10 +82,9 @@ namespace ProyectoFinalSoft.Controllers
                 _context.Docentes.Add(docente);
                 await _context.SaveChangesAsync();
                 await CreateUser(docente);
-                //await CreateUser();
-                return Json(new { success = true });
+                return RedirectToAction(nameof(Index));
             }
-            return Json(new { success = false });
+            return View(docente);
         }
 
 
@@ -99,10 +98,10 @@ namespace ProyectoFinalSoft.Controllers
                 user.docenteId = docente.docenteId;
                 user.docente = docente;
                 user.usuarioEstado = 1;
-                user.usuarioLogin = GenerarNombreUsuario(docente.docenteNombre, docente.docenteApellido);
+                user.usuarioLogin = CreateUser(docente.docenteNombre, docente.docenteApellido);
                 user.usuarioRol = 1;
                 
-                string contrasenaGenerada = GenerarContrasena();
+                string contrasenaGenerada = CreatePassword();
 
                 string path = "C:\\Users\\ideapad330S\\Documents\\U\\usercontra.txt";
                 using (StreamWriter sw = System.IO.File.AppendText(path))
@@ -123,43 +122,7 @@ namespace ProyectoFinalSoft.Controllers
             }
         }
 
-
-        public async Task<IActionResult> CreateUser()
-        {
-            try
-            {
-                var passwordHasher = new PasswordHasher<object>();
-
-                Usuario user = new Usuario();
-                user.coordinadorId = 1;
-                user.usuarioEstado = 1;
-                user.usuarioLogin = GenerarNombreUsuario("Jose", "coor");
-                user.usuarioRol = 0;
-
-                string contrasenaGenerada = GenerarContrasena();
-
-                string path = "C:\\Users\\ideapad330S\\Documents\\U\\usercontra.txt";
-                using (StreamWriter sw = System.IO.File.AppendText(path))
-                {
-                    sw.WriteLine($"Usuario: {user.usuarioLogin}, Contraseña: {contrasenaGenerada}");
-                }
-
-                user.usuarioPassword = passwordHasher.HashPassword(null, contrasenaGenerada);
-                _context.Usuarios.Add(user);
-
-                await _context.SaveChangesAsync();
-
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = "Hubo un error al crear el usuario", error = ex.Message });
-            }
-        }
-
-
-        private string GenerarNombreUsuario(string? nombre, string? apellido)
+        private string CreateUser(string? nombre, string? apellido)
         {
             int i = 1;
             string nombreUsuarioBase = nombre?.Substring(0, 3) + apellido?.Substring(0, 3);
@@ -172,7 +135,7 @@ namespace ProyectoFinalSoft.Controllers
             return nombreUsuario;
         }
 
-        private string GenerarContrasena()
+        private string CreatePassword()
         {
             Random random = new Random();
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -235,9 +198,9 @@ namespace ProyectoFinalSoft.Controllers
                         throw;
                     }
                 }
-                return Json(new { success = true });
+                return RedirectToAction(nameof(Index));
             }
-            return Json(new { success = false });
+            return View(docente);
         }
 
         [Authorize(Roles = "Coordinador")]

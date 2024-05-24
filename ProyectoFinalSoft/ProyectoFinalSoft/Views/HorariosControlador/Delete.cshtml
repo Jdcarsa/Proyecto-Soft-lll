@@ -6,13 +6,13 @@
     String horarioHoraInicioString = horarioHoraInicioInt.ToString();
 }
 
-<div class ="container mt-5 text-center mb-6">
+<div class="container mt-5 text-center">
     <h3 class="text-center mb-6">
         ¿Esta seguro que desea eliminar la franja horaria?
     </h3>
     <hr />
-    <div class="container-fluid">
-        <dl class="row mb-3">
+    <div class="mb-6 d-flex justify-content-center">
+        <dl class="row col-6">
             <dt class="col-sm-5">
                 @Html.DisplayNameFor(model => model.horarioDia)
             </dt>
@@ -63,9 +63,12 @@
             </dd>
         </dl>
     </div>
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="horarioId" />
-        <a asp-action="List" asp-route-dia="@Model.horarioDia" asp-route-hora="@horarioHoraInicioString" class="col-md-4 btn btn-secondary me-2">Cancelar</a>
-        <input type="submit" value="Delete" class="col-md-4 btn btn-danger" /> 
-    </form>
+    <div class="row mb-3">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="horarioId" />
+            <a asp-action="List" asp-route-dia="@Model.horarioDia" asp-route-hora="@horarioHoraInicioString" class="col-md-4 btn btn-secondary me-2" style="height: 38px; width: 200px">Cancelar</a>
+            <input type="submit" value="Delete" class="col-md-4 btn btn-danger" style="height: 38px; width: 200px"/>
+        </form>
+    </div>
+    
 </div>

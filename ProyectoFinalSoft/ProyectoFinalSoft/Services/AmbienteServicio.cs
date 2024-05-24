@@ -14,13 +14,13 @@ namespace ProyectoFinalSoft.Services
             _context = context;
         }
 
-        public SelectList ObtenerAmbientes()
+        public SelectList getAmbientes()
         {
             var ambientes = _context.Ambientes.Where(d => d.ambienteEstado == 1);
             return new SelectList(ambientes, "ambienteId", "infoCompleta");
         }
 
-        public bool EstaDisponibleMismaHora(Horario horario)
+        public bool IsAvailableSameTime(Horario horario)
         {
             var ambientesDisponibles = _context.Ambientes
                 .Where(a => a.ambienteEstado == 1 && a.ambienteId == horario.ambienteId)
@@ -28,13 +28,13 @@ namespace ProyectoFinalSoft.Services
                     h.horarioId != horario.horarioId &&
                     h.horarioHoraInicio == horario.horarioHoraInicio
                     && h.horarioHoraFin == horario.horarioHoraFin
-                    && h.horarioDia == horario.horarioDia))
+                    && h.horarioDia == horario.horarioDia && h.periodoAcademicoId == horario.periodoAcademicoId))
                 .ToList();
 
             return ambientesDisponibles.Any();
         }
 
-        public bool EstaDisponible(Horario horario)
+        public bool IsAvailable(Horario horario)
         {
             var ambientesDisponibles = _context.Ambientes
                 .Where(a => a.ambienteEstado == 1 && a.ambienteId == horario.ambienteId)
@@ -42,14 +42,14 @@ namespace ProyectoFinalSoft.Services
                     h.horarioId != horario.horarioId &&
                     h.horarioHoraInicio < horario.horarioHoraFin
                     && h.horarioHoraFin > horario.horarioHoraInicio
-                    && h.horarioDia == horario.horarioDia))
+                    && h.horarioDia == horario.horarioDia && h.periodoAcademicoId == horario.periodoAcademicoId))
                 .ToList();
 
             return ambientesDisponibles.Any();
         }
 
 
-        public SelectList ObtenerAmbientes(int? horarioAmbienteId)
+        public SelectList getAmbientes(int? horarioAmbienteId)
         {
             var ambientes = _context.Ambientes.Where(d => d.ambienteEstado == 1);
             return new SelectList(ambientes, "ambienteId", "infoCompleta", horarioAmbienteId);

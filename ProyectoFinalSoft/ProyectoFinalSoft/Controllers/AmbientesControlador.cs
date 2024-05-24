@@ -21,28 +21,25 @@ namespace ProyectoFinalSoft.Controllers
             _context = context;
         }
 
-        // GET: AmbientesControlador
+
         public async Task<IActionResult> Index(string ambienteBusqueda)
         {
-            // Obtener todos los ambientes
+
             var ambientes = from ambiente in _context.Ambientes select ambiente;
 
-            // Verificar si se proporcionó un término de búsqueda
+
             if (!String.IsNullOrEmpty(ambienteBusqueda))
             {
-                // Filtrar los ambientes cuyo nombre o ubicación contengan el término de búsqueda
-                ambientes = ambientes.Where(amb => (amb.ambienteNombre + " " + amb.ambienteUbicacion).Contains(ambienteBusqueda));
+                ambientes = ambientes.Where(amb => (amb.ambienteNombre + " " + amb.ambienteUbicacion)
+                .Contains(ambienteBusqueda));
             }
 
-            // Ordenar los ambientes por codigo
             ambientes = ambientes.OrderBy(ambientes => ambientes.ambienteCodigo);
 
-            // Devolver la vista con los resultados filtrados
             return View(await ambientes.ToListAsync());
         }
 
 
-        // GET: AmbientesControlador/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -60,15 +57,11 @@ namespace ProyectoFinalSoft.Controllers
             return View(ambiente);
         }
 
-        // GET: AmbientesControlador/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: AmbientesControlador/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ambienteId,ambienteCodigo,ambienteNombre,ambienteUbicacion,ambienteTipo,ambienteCapacidad,ambienteEstado")] Ambiente ambiente)
@@ -90,7 +83,6 @@ namespace ProyectoFinalSoft.Controllers
             return View(ambiente);
         }
 
-        // GET: AmbientesControlador/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -106,9 +98,6 @@ namespace ProyectoFinalSoft.Controllers
             return View(ambiente);
         }
 
-        // POST: AmbientesControlador/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ambienteId,ambienteCodigo,ambienteNombre,ambienteUbicacion,ambienteTipo,ambienteCapacidad,ambienteEstado")] Ambiente ambiente)
@@ -120,7 +109,6 @@ namespace ProyectoFinalSoft.Controllers
 
             if (ModelState.IsValid)
             {
-                // Verificar si el código ya existe en otros ambientes (excluyendo el actual)
                 var existeAmbiente = await _context.Ambientes.AnyAsync(amb => amb.ambienteCodigo == ambiente.ambienteCodigo && amb.ambienteId != ambiente.ambienteId);
                 if (existeAmbiente)
                 {
@@ -150,7 +138,6 @@ namespace ProyectoFinalSoft.Controllers
             return View(ambiente);
         }
 
-        // GET: AmbientesControlador/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -168,7 +155,6 @@ namespace ProyectoFinalSoft.Controllers
             return View(ambiente);
         }
 
-        // POST: AmbientesControlador/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

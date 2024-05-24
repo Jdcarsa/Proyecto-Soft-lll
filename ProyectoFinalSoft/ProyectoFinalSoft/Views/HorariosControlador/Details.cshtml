@@ -46,25 +46,6 @@
                                     asp-controller="HorariosControlador" asp-action="DocenteHorario">Consultar Horario</a>
                                 }
                             </li>
-                            <li class="nav-item text-light d-flex align-items-center justify-content-start">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
-                                </svg>
-                                @if (User.Identity!.IsAuthenticated)
-                                {
-                                    var userRole = User.Claims.Where(c => c.Type == ClaimTypes.Role)
-                                    .Select(c => c.Value).SingleOrDefault();
-
-                                    if (userRole == "Docente")
-                                    {
-                                        var userId = User.Claims.Where(c => c.Type == ClaimTypes.Name)
-                                        .Select(c => c.Value).SingleOrDefault();
-                                        <a class="nav-link nav-hover" asp-area="" asp-route-id="@userId"
-                                           asp-controller="DocenteControlador" asp-action="Details">Perfil</a>
-                                    }
-                                }
-                            </li>
                             <li class="nav-item text-light d-flex align-items-center justify-content-start mx-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
@@ -79,7 +60,7 @@
         </header>
             <main role="main" class="pb-3 mx-5">
             <div class="container mt-5 text-center mb-6">
-                <h1>Información Detallada de la Franja Horaria</h1>
+                <h1>Información de la Franja Horaria</h1>
                 <hr />
                 <dl class="row mb-3 ">
                     <dt class="col-sm-5">
@@ -131,7 +112,7 @@
                             .Select(c => c.Value).SingleOrDefault();
                             <div class="col text-center">
                                 <a asp-controller="HorariosControlador" asp-action="DocenteHorario" asp-route-id="@userDocente"
-                                class="btn btn-secondary" style="width: 300px">Volver</a>
+                                class="btn btn-primary" style="width: 300px">Volver</a>
                             </div>
                         }
                     </div>
@@ -143,63 +124,65 @@
 }
 else
 {
-    <div class="container mt-5 text-center mb-6">
-        <h1>Información Detallada de la Franja Horaria</h1>
+    <div class="container mt-5 text-center">
+        <h1>Información de la Franja Horaria</h1>
         <hr />
-        <dl class="row mb-3 ">
-            <dt class="col-sm-5">
-                @Html.DisplayNameFor(model => model.horarioDia)
-            </dt>
-            <dd class="col-sm-7">
-                @Html.DisplayFor(model => model.horarioDia)
-            </dd>
-            <dt class="col-sm-5">
-                @Html.DisplayNameFor(model => model.horarioHoraInicio)
-            </dt>
-            <dd class="col-sm-7">
-                @Html.DisplayFor(model => model.horarioHoraInicio)
-            </dd>
-            <dt class="col-sm-5">
-                @Html.DisplayNameFor(model => model.horarioHoraFin)
-            </dt>
-            <dd class="col-sm-7">
-                @Html.DisplayFor(model => model.horarioHoraFin)
-            </dd>
-            <dt class="col-sm-5">
-                @Html.DisplayNameFor(model => model.horarioDuracion)
-            </dt>
-            <dd class="col-sm-7">
-                @Html.DisplayFor(model => model.horarioDuracion)
-            </dd>
-            <dt class="col-sm-5">
-                @Html.DisplayNameFor(model => model.ambiente)
-            </dt>
-            <dd class="col-sm-7">
-                @Html.DisplayFor(model => model.ambiente.ambienteCodigo)
-            </dd>
-            <dt class="col-sm-5">
-                @Html.DisplayNameFor(model => model.docente)
-            </dt>
-            <dd class="col-sm-7">
-                @Html.DisplayFor(model => model.docente.docenteNombre)@Html.DisplayFor(model => model.docente.docenteApellido)
-            </dd>
-            <dt class="col-sm-5">
-                @Html.DisplayNameFor(model => model.periodoAcademico)
-            </dt>
-            <dd class="col-sm-7">
-                @Html.DisplayFor(model => model.periodoAcademico.periodoNombre)
-            </dd>
-            <dt class="col-sm-5">
-                @Html.DisplayNameFor(model => model.competencia)
-            </dt>
-            <dd class="col-sm-7">
-                @Html.DisplayFor(model => model.competencia.competenciaNombre)
-            </dd>
-            <div class="row">
-                <div class="col text-center">
-                    <a asp-action="List" asp-route-dia="@Model.horarioDia" asp-route-hora="@horarioHoraInicioString" class="btn btn-secondary" style="width: 300px">Volver</a>
-                </div>
-            </div>
-        </dl>
+        <div class="mb-6 d-flex justify-content-center">
+            <dl class="row col-6 ">
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.horarioDia)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.horarioDia)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.horarioHoraInicio)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.horarioHoraInicio)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.horarioHoraFin)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.horarioHoraFin)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.horarioDuracion)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.horarioDuracion)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.ambiente)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.ambiente.ambienteCodigo)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.docente)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.docente.docenteNombre)@Html.DisplayFor(model => model.docente.docenteApellido)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.periodoAcademico)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.periodoAcademico.periodoNombre)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.competencia)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.competencia.competenciaNombre)
+                </dd>
+            </dl>
+        </div>
+        <div class="row mb-3">
+            <a asp-action="List" asp-route-dia="@Model.horarioDia" asp-route-hora="@horarioHoraInicioString" class="btn btn-primary" style="height: 35px; width: 180px">Volver</a>
+        </div>
     </div>
+    <br />
+    <br />
 }
