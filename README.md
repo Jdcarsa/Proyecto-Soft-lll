@@ -1,4 +1,3 @@
-```markdown
 # Proyecto-Soft-lll
 
 **Proyecto-Soft-lll** es una aplicación de escritorio desarrollada en C#, utilizando páginas Blazor (HTML/C#) y ASP.NET Core 8 para la interfaz de usuario, con MySQL como base de datos. El sistema permite la gestión eficiente de información y operaciones clave para el usuario o administrador.
